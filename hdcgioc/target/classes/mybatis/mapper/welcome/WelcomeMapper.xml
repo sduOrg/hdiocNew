@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.telchina.hdcgioc.welcome.mapper.WelcomeMapper">
+
+<!--    <update id="saveData">-->
+<!--        <![CDATA[-->
+<!--			update hdioc.welcome  set chinese = #{chinese},engish = #{engish},imgsave = #{imgsave},imgnum = #{imgnum}-->
+<!--        ]]>-->
+
+<!--    </update>-->
+    
+    <select id="readingData" resultType="com.telchina.hdcgioc.welcome.entity.WelcomeData">
+        <![CDATA[
+			SELECT * FROM hdioc.welcome
+        ]]>
+
+    </select>
+
+  
+</mapper>

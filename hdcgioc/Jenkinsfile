@@ -1,0 +1,73 @@
+def label = "mypod-${UUID.randomUUID().toString()}"
+def project = 'pubinfo'
+def appName = 'hdcgioc'
+def appVersion='1'
+def imagePre = "10.10.51.115/${project}/${appName}:${appVersion}"
+podTemplate(label: label, yaml: """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+  containers:
+  - name: jnlp
+    image: '10.10.51.115/library/jenkins/jnlp-slave:3.10-1-alpine'
+    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+  - name: maven
+    image: 10.10.51.115/base/ionic-maven:1.4
+    imagePullPolicy: Always
+    command:
+     - cat
+    tty: true
+    resources:
+      requests:
+        memory: "4096Mi"
+        cpu: "400m"
+      limits:
+        memory: "6096Mi"
+        cpu: "800m"  
+    volumeMounts:
+      - mountPath: /var/run/docker.sock
+        name: docker-sock    
+      - mountPath: /usr/bin/docker
+        name: docker               
+  volumes:
+   - name: docker-sock
+     hostPath:
+       path: /var/run/docker.sock         
+   - name: docker
+     hostPath:
+       path: /usr/bin/docker
+"""
+){node(label) {
+        stage('Get a Maven project') {
+        def svnVars=checkout([$class: 'GitSCM', branches: [[name: '*/dev']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '4ee0aca4-0a26-4b47-8024-d602c69a90ee', url: 'http://10.10.70.200/PublicInformationPlatform/YFCD2019-029SmartCityManagementPlatform-HanDan/hdcgioc.git']]])
+           def svnversionnumber = svnVars.GIT_COMMIT
+            def imageName="${imagePre}-${svnversionnumber}"
+            container('maven') {
+			    //stage('Ng build') {
+                   // sh 'chmod 750 bps.web/src/main/webview -R && cd bps.web/src/main/webview && ng build --prod --base-href /bps/'
+                //}
+                stage('Build a Maven project') {
+                    sh 'mvn clean'
+                    sh 'mvn package'
+                }
+                //stage('SonarQube analysis') {
+                    //withSonarQubeEnv('SonarqubeServer') {
+                      // requires SonarQube Scanner for Maven 3.2+
+                      //sh 'mvn sonar:sonar'
+                    //}
+                // }
+              stage('Build Docker Image') {
+                    sh 'mv target/*.jar docker/'
+                    sh( "cd docker/ && docker build . -t ${imageName}")
+                }
+             stage('Push Docker Image') {
+                    sh ("docker login -u admin -p Harbor12345 10.10.51.115 && docker push ${imageName}")
+                }
+        }
+
+    }
+}
+}
