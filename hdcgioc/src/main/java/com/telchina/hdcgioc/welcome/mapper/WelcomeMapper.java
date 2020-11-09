@@ -15,5 +15,6 @@ public interface WelcomeMapper {
     List<String> get_penalty_definite(String penalty_class);
     int get_definite_num(String penalty_definite);
     List<wenshu_info> get_wenshu_ByDefinite(String penalty_definite, int page_start, int page_size);
+    List<wenshu_info> get_wenshu_Byclass(String penalty_class, int page_start, int page_size);
 
 }

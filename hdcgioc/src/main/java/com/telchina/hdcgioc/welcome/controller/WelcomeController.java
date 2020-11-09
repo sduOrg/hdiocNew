@@ -50,6 +50,12 @@ public class WelcomeController {
         return welcomeService.wenshu_ByPenalty_definite(penalty_definite,page_no,page_size);
 
     }
+    //获取类罪对应的文书记录 输入为 (类罪名，第几页(从1开始),页面大小)
+    @RequestMapping(value = "/get_wenshuBy_class", method = RequestMethod.GET)
+    public Map get_wenshuBy_class(@RequestParam(value = "penalty_class",required = false,defaultValue ="")String penalty_class,@RequestParam(value = "page_no",required = false,defaultValue ="1") int page_no,@RequestParam(value = "page_size",required = false,defaultValue ="20") int page_size){
+        return welcomeService.wenshu_ByPenalty_class(penalty_class,page_no,page_size);
+
+    }
 
 
 }
