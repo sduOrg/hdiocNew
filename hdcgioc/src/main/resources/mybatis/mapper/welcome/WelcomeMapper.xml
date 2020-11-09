@@ -38,9 +38,15 @@
 			SELECT * FROM wenshu_info WHERE penalty_name = #{penalty_definite} ORDER BY id limit #{page_start},#{page_size}
         ]]>
     </select>
+    <select id="get_class_num" resultType="int">
+    <![CDATA[
+			SELECT number FROM penalty_class_num WHERE penalty_class = #{penalty_class}
+        ]]>
+    </select>
+
     <select id="get_wenshu_Byclass" resultType="com.telchina.hdcgioc.welcome.entity.wenshu_info">
          <![CDATA[
-			select wenshu_info.* from wenshu_info right join penalty_map on wenshu_info.penalty_name = penalty_map.penalty_name_definite where penalty_map.penalty_class = {penalty_class} LIMIT #{page_start},#{page_size}
+			select distinct wenshu_info.* from wenshu_info right join penalty_map on wenshu_info.penalty_name = penalty_map.penalty_name_definite where penalty_map.penalty_class = #{penalty_class} LIMIT #{page_start},#{page_size}
         ]]>
     </select>
 
