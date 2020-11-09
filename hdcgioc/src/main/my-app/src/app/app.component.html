@@ -1,10 +1,42 @@
-<!--
- * @Description: 
- * @Version: 2.0
- * @Autor: Seven
- * @Date: 2020-08-21 10:50:08
- * @LastEditors: Seven
- * @LastEditTime: 2020-08-21 11:06:56
--->
+<nz-layout>
+    <nz-header>
+      <div class="logo">  <i nz-icon nzType="file"></i>法律案件情况应用平台</div>
+      <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+      </ul>
+    </nz-header>
+    <nz-layout>
+      <nz-sider nzWidth="200px" nzTheme="light">
+        <ul nz-menu nzMode="inline" class="sider-menu">
+            <li nz-menu-item nzSelected  nzMatchRouter>
+                <a routerLink="/index">
+                    <i nz-icon nzType="file"></i>
+                    <span>总览</span>
+                </a>
+              </li>
+          <li nz-submenu nzOpen  [nzTitle]="titleTpl">
+            <ng-template #titleTpl><i nz-icon nzType="file"></i><span>案件分类</span></ng-template>
+            <ul>
+              <li nz-menu-item nzMatchRouter><a routerLink="/type">刑法种类</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/sentence">有期徒刑刑期分布</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/education">文化程度</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/agecase">年龄</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/province">省份</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/period">羁押周期</a></li>
+            </ul>
+          </li>
+        </ul>
+       
+      </nz-sider>
+      <nz-layout class="inner-layout">
+        <!-- <nz-breadcrumb>
+          <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+          <nz-breadcrumb-item>List</nz-breadcrumb-item>
+          <nz-breadcrumb-item>App</nz-breadcrumb-item>
+        </nz-breadcrumb> -->
+        <nz-content>
+            <router-outlet></router-outlet>
+        </nz-content>
+      </nz-layout>
+    </nz-layout>
+  </nz-layout>
 
-<router-outlet></router-outlet>

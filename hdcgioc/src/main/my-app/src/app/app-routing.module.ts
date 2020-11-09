@@ -9,11 +9,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HeroesComponent } from './page/index/heroes/heroes.component';
+import { AgeClassComponent } from './page/law/age-class/age-class.component';
+import { DetailComponent } from './page/law/detail/detail.component';
+import { EducationComponent } from './page/law/education/education.component';
+import { PeriodComponent } from './page/law/period/period.component';
+import { ProvinceComponent } from './page/law/province/province.component';
+import { SentenceComponent } from './page/law/sentence/sentence.component';
+import { TypeCaseComponent } from './page/law/type-case/type-case.component';
 
 
 const routes: Routes = [
   {path:'',redirectTo:'index',pathMatch:'full'},
-  {path:'index',component:HeroesComponent}
+  {path:'index',component:HeroesComponent},
+  {path:'type',component:TypeCaseComponent},
+  {path:'sentence',component:SentenceComponent},
+  {path:'education',component:EducationComponent},
+  {path:'agecase',component:AgeClassComponent},
+  {path:'province',component:ProvinceComponent},
+  {path:'period',component:PeriodComponent},
+  {path:'type/detail',component:DetailComponent},
+
 ];
 
 @NgModule({

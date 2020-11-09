@@ -1,0 +1,56 @@
+{
+  "records": [
+    {
+      "number": "6229",
+      "person_edu_level": ""
+    },
+    {
+      "number": "176591",
+      "person_edu_level": "中专"
+    },
+    {
+      "number": "619",
+      "person_edu_level": "其他"
+    },
+    {
+      "number": "1631866",
+      "person_edu_level": "初中"
+    },
+    {
+      "number": "175",
+      "person_edu_level": "半文盲"
+    },
+    {
+      "number": "258",
+      "person_edu_level": "博士"
+    },
+    {
+      "number": "166005",
+      "person_edu_level": "大专"
+    },
+    {
+      "number": "893813",
+      "person_edu_level": "小学"
+    },
+    {
+      "number": "112209",
+      "person_edu_level": "文盲"
+    },
+    {
+      "number": "95992",
+      "person_edu_level": "本科"
+    },
+    {
+      "number": "4573",
+      "person_edu_level": "硕士"
+    },
+    {
+      "number": "310116",
+      "person_edu_level": "高中"
+    },
+    {
+      "number": "156",
+      "person_edu_level": "高职"
+    }
+  ]
+}
