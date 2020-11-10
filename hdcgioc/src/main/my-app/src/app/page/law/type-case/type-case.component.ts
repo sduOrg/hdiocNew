@@ -8,19 +8,12 @@ declare var echarts
   templateUrl: './type-case.component.html',
   styleUrls: ['./type-case.component.scss']
 })
+
+
 export class TypeCaseComponent implements OnInit {
 
   searchTagNames = [];
-  codeValueList = [{code:"1",value:"妨害社会管理秩序罪"},
-  {code:"2",value:"侵犯财产罪"},
-  {code:"3",value:"贪污贿赂罪"},
-  {code:"4",value:"渎职罪"},
-  {code:"5",value:"军人违反职责罪"},
-  {code:"6",value:"侵犯公民人身权利、民主权利罪"},
-  {code:"7",value:"危害国防利益罪"},
-  {code:"8",value:"破坏社会主义市场经济秩序罪"},
-  {code:"9",value:"危害国家安全罪"},
-  {code:"10",value:"侵犯财产罪"},]
+  classValueList = [];
   // tagTops =[ {key:"1",name:"类最名称"},{key:"2",name:"类最名称"}]
   selectPersonal:number;
   selectType:number = 0;
@@ -51,8 +44,20 @@ export class TypeCaseComponent implements OnInit {
               private router:Router) { }
 
   ngOnInit() {
-    this.selectTitle = this.codeValueList[this.selectType].value
-    this.loadCateCharts();
+    this.getClassList();
+  }
+  private getClassList(){
+    this.lawSerivce.getPenaltyClass().subscribe(
+      data => {
+        data.penalty_class.forEach((element,index) => {
+          if(!!element && element != null){
+            this.classValueList.push({code:String(index+1),value:element})
+          }
+        });
+        this.selectTitle = this.classValueList[this.selectType].value;
+        this.loadCateCharts();
+      }
+    )
   }
   searchData(index:number){
       console.log("page",index);

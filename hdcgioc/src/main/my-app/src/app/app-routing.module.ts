@@ -28,6 +28,7 @@ const routes: Routes = [
   {path:'province',component:ProvinceComponent},
   {path:'period',component:PeriodComponent},
   {path:'type/detail',component:DetailComponent},
+  {path:'agecase/detail',component:DetailComponent},
 
 ];
 

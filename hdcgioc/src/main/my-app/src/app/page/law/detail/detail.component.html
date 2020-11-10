@@ -2,53 +2,63 @@
     <div class="back" (click)="goBack()"><i nz-icon nzType="left" nzTheme="outline"></i>返回</div>
     <div class="content">
         <div nz-row [nzGutter]="8">
-          <div nz-col [nzSpan]="8">
-            <nz-card nzTitle="Card title">
-              <p>Card content</p>
-            </nz-card>
-          </div>
-          <div nz-col [nzSpan]="8">
-            <nz-card nzTitle="Card title">
-              <p>Card content</p>
-            </nz-card>
-          </div>
-          <div nz-col [nzSpan]="8">
-            <nz-card nzTitle="Card title">
-              <p>Card content</p>
+          <div nz-col [nzSpan]="24">
+            <nz-card nzTitle="案件基本情况">
+              <div nz-row [nzGutter]="8">
+                <div nz-col [nzSpan]="8">
+                   <p>案件编号: {{itemDetail.case_no}}</p>
+                </div>
+                <div nz-col [nzSpan]="8">
+                  <p>姓名: {{itemDetail.person_name}}</p>
+                </div>
+                <div nz-col [nzSpan]="8">
+                  <p>年龄: {{itemDetail.person_age}}</p>
+                </div>
+              </div>
+
+              <div nz-row [nzGutter]="8">
+                <div nz-col [nzSpan]="8">
+                   <p>学历: {{itemDetail.person_edu}}</p>
+                </div>
+                <div nz-col [nzSpan]="8">
+                  <p>从事职业: {{itemDetail.person_job}}</p>
+                </div>
+                <div nz-col [nzSpan]="8">
+                  <p>居住地址: {{itemDetail.person_address}}</p>
+                </div>
+              </div>
+              
+              <div nz-row [nzGutter]="8">
+                <div nz-col [nzSpan]="8">
+                   <p>犯罪类型: {{itemDetail.penalty_name}}</p>
+                </div>
+                <div nz-col [nzSpan]="8">
+                  <p>罪刑: {{itemDetail.penalty_prison_type}}</p>
+                </div>
+                <div nz-col [nzSpan]="8">
+                  <p>刑期: {{itemDetail.penalty_prison_length}}月</p>
+                </div>
+              </div>
+                
+              <div nz-row [nzGutter]="8">
+                <div nz-col [nzSpan]="8">
+                   <p>检察单位: {{itemDetail.public_prosecutor}}</p>
+                </div>
+                <div nz-col [nzSpan]="8">
+                  <p>案件结果: {{itemDetail.result_type}}</p>
+                </div>
+                <div nz-col [nzSpan]="8">
+                  <p>检察日期: {{itemDetail.prosecutors_date}}</p>
+                </div>
+              </div>
+
             </nz-card>
           </div>
         </div>
         <div nz-row [nzGutter]="8">
-            <div nz-col [nzSpan]="8">
-              <nz-card nzTitle="Card title">
-                <p>Card content</p>
-              </nz-card>
-            </div>
-            <div nz-col [nzSpan]="8">
-              <nz-card nzTitle="Card title">
-                <p>Card content</p>
-              </nz-card>
-            </div>
-            <div nz-col [nzSpan]="8">
-              <nz-card nzTitle="Card title">
-                <p>Card content</p>
-              </nz-card>
-            </div>
-          </div>
-          <div nz-row [nzGutter]="8">
-            <div nz-col [nzSpan]="8">
-              <nz-card nzTitle="Card title">
-                <p>Card content</p>
-              </nz-card>
-            </div>
-            <div nz-col [nzSpan]="8">
-              <nz-card nzTitle="Card title">
-                <p>Card content</p>
-              </nz-card>
-            </div>
-            <div nz-col [nzSpan]="8">
-              <nz-card nzTitle="Card title">
-                <p>Card content</p>
+            <div nz-col [nzSpan]="24">
+              <nz-card nzTitle="案件内容" style="margin-top: 12px;">
+                <pre style="white-space: pre-wrap;">{{itemDetail.case_content}}</pre>
               </nz-card>
             </div>
           </div>

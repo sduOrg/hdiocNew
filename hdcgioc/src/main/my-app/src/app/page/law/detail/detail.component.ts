@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DetailComponent implements OnInit {
 
   private backurl:string;
-
+  itemDetail:{"case_no":""};
   constructor(private acrouter:ActivatedRoute,
               private router:Router) { }
 
@@ -17,7 +17,9 @@ export class DetailComponent implements OnInit {
     this.acrouter.queryParams.subscribe(
       params =>{
         console.log("params222",params);
-        this.backurl = params["from"]
+        this.backurl = params["from"];
+        this.itemDetail = JSON.parse(params["item"]);
+        console.log("this.itemDetail",this.itemDetail);
       }
     )
   }
