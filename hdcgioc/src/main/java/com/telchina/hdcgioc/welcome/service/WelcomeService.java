@@ -53,4 +53,17 @@ public class WelcomeService {
         resultMap.put("wenshu_list",wenshu_list);
         return resultMap;
     }
+    public Map  get_class_num(String penalty_class) {
+        int class_num = welcomeMapper.get_class_num(penalty_class);
+        Map m = new HashMap();
+        m.put("class_num",class_num);
+        return m;
+    }
+    public Map<String,Object> wenshu_ByPenalty_class(String penalty_class, int page_no,int page_size){
+        Map<String,Object> resultMap = new HashMap<>();
+        int page_start = (page_no-1)*page_size;
+        List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_Byclass(penalty_class,page_start,page_size);
+        resultMap.put("wenshu_list",wenshu_list);
+        return resultMap;
+    }
 }
