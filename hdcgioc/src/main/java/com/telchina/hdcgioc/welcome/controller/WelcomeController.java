@@ -62,6 +62,18 @@ public class WelcomeController {
         return welcomeService.wenshu_ByPenalty_class(penalty_class,page_no,page_size);
 
     }
+    //获取学历列表
+    @RequestMapping("/get_all_edu")
+    public Map<String,Object> get_all_edu(){
+        return welcomeService.get_edu();
+
+    }
+    //获取刑罚类型列表
+    @RequestMapping("/get_prision_type")
+    public Map<String,Object> get_prison_type(){
+        return welcomeService.get_prision_type();
+
+    }
 
 
 }

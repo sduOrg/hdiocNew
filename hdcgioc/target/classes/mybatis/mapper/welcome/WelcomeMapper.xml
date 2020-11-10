@@ -21,6 +21,18 @@
         ]]>
 
     </select>
+    <select id="get_edu" resultType="java.lang.String">
+        <![CDATA[
+			SELECT distinct person_edu from wenshu_info
+        ]]>
+
+    </select>
+    <select id="get_prision_type" resultType="java.lang.String">
+        <![CDATA[
+			select  distinct penalty_prison_type from wenshu_info
+        ]]>
+
+    </select>
     <select id="get_penalty_definite" resultType="java.lang.String">
         <![CDATA[
 			SELECT distinct penalty_name_definite FROM penalty_map WHERE penalty_class = #{penalty_class}

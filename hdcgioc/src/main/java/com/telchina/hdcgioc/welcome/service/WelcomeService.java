@@ -33,7 +33,18 @@ public class WelcomeService {
         resultMap.put("penalty_class", penalty_class);
         return resultMap;
     }
-
+    public Map<String, Object> get_edu() {
+        Map<String, Object> resultMap = new HashMap<>();
+        List<String> penalty_class = welcomeMapper.get_edu();
+        resultMap.put("edu_list", penalty_class);
+        return resultMap;
+    }
+    public Map<String, Object> get_prision_type() {
+        Map<String, Object> resultMap = new HashMap<>();
+        List<String> penalty_class = welcomeMapper.get_prision_type();
+        resultMap.put("prison_type_list", penalty_class);
+        return resultMap;
+    }
     public Map<String, Object> get_difinite_by_class(String penalty_class) {
         Map<String, Object> resultMap = new HashMap<>();
         List<String> model = welcomeMapper.get_penalty_definite(penalty_class);
