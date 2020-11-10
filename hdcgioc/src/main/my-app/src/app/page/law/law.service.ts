@@ -28,4 +28,18 @@ export class LawService {
   getTypeloadCateNumb(){
     return this.http.get("assets/data/penalty_prison_type_num_0913.json").pipe(map((res:[any]) =>res))
   }
+
+  //获取类最列表
+  getPenaltyClass(){
+    return this.http.get("assets/data/service/get_penalty_class.json").pipe(map((res:{"penalty_class":[string]})=>res))
+  }
+  //获取类最对应的个罪
+  getPenaltyByClass(className:string){
+    return this.http.get("assets/data/service/get_penalty_byClass.json").pipe(map((res:{"penalty_definite":[string]})=>res))
+  }
+
+  //获取类最对应的文书列表
+  getWenshuByClass(className:string){
+    return this.http.get("assets/data/service/get_wenshuBy_class.json").pipe(map((res:{"wenshu_list":[any]})=>res))
+  }
 }

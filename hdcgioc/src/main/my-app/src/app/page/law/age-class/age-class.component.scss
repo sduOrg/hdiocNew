@@ -1,0 +1,35 @@
+.screens{
+    border-bottom: 1px dashed #ccc;
+}
+.temp-kinds-main{
+    display: flex;
+}
+.temp-kinds-title{
+    min-width: 60px;
+}
+.temp-kinds-list{
+    display: flex;
+    list-style: none;
+    padding-left: 12px;
+    flex-flow: row wrap;
+    max-height: 200px;
+    overflow: auto;
+}
+.temp-kinds-list li{
+    padding-left: 8px;
+    padding-right: 8px;
+    cursor: pointer;
+    margin: 0 4px 6px;
+    border: 1px solid #ccc;
+}
+
+.temp-kinds-list li.active{
+    color:  #3895FF;
+    border: 1px solid #3895FF;
+}
+.age-chart-width{
+    width: 100%;
+    margin-top: 24px;
+    border-bottom: 1px dashed #ccc;
+    margin-bottom: 24px;
+}

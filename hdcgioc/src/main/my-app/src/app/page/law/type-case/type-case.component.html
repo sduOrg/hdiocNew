@@ -1,6 +1,6 @@
 <div class="container-wraper">
     <div class="screens">
-			<div class="temp-kinds-main">
+			     <div class="temp-kinds-main">
 				<!-- <span class="temp-kinds-name" *ngIf="searchTagNames.length>0" style="margin-top: 0px;">筛选条件</span>
 				<ul class="temp-kinds-list searchUI" style="margin: 0 8px" *ngIf="searchTagNames.length>0">
 					<li class="searchspan" *ngFor="let tag of searchTagNames;let i = index">{{tag}}
@@ -10,18 +10,26 @@
 					</li>
 				</ul> -->
 				<div class="temp-kinds-title">类罪名称:</div>
-				<ul class="temp-kinds-list">
-					<li *ngFor="let item of codeValueList;let i = index" [ngClass]="{'active':i== selectType}" (click)="searchSelectType(i,item)"
-					 id="{{item.code}}">{{item.value}}</li>
-					<!-- <li class="searchLi scroll" (click)="quotaClassSearchSelectClick()" *ngIf="quotaSearchClass">
-						<span></span>
-						<p>{{quotaSearch_class}}</p>
-						<ul class="searchClass scroll" *ngIf="quotaSearchClassFlag">
-							<li *ngFor="let quotaClass of quotaSearchClassList;let i = index" [ngClass]="{'kinds-active':i==itemFlag}" (click)="quotaClassSearchSelectEva(i)">{{quotaClass.value}}</li>
-						</ul>
-					</li> -->
-				</ul>
+              <ul class="temp-kinds-list">
+                <li *ngFor="let item of classValueList;let i = index" [ngClass]="{'active':i== selectType}" (click)="searchSelectType(i,item)"
+                id="{{item.code}}">{{item.value}}</li>
+                <!-- <li class="searchLi scroll" (click)="quotaClassSearchSelectClick()" *ngIf="quotaSearchClass">
+                  <span></span>
+                  <p>{{quotaSearch_class}}</p>
+                  <ul class="searchClass scroll" *ngIf="quotaSearchClassFlag">
+                    <li *ngFor="let quotaClass of quotaSearchClassList;let i = index" [ngClass]="{'kinds-active':i==itemFlag}" (click)="quotaClassSearchSelectEva(i)">{{quotaClass.value}}</li>
+                  </ul>
+                </li> -->
+              </ul>
             </div>
+
+            <!-- <div class="temp-kinds-main">
+              <div class="temp-kinds-title">个罪名称:</div>
+                <ul class="temp-kinds-list">
+                  <li *ngFor="let item of codeValueList;let i = index" [ngClass]="{'active':i== selectType}" (click)="searchSelectType(i,item)"
+                   id="{{item.code}}">{{item.value}}</li>
+                </ul>
+            </div> -->
             <!-- <div class="temp-kinds-main">
 				<div class="temp-kinds-name">各项</div>
 				<ul class="temp-kinds-list">
