@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p>age-class works!</p>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-wraper\">\n    <div class=\"screens\">\n\t\t    <div class=\"temp-kinds-main\">\n\t\t\t\t<div class=\"temp-kinds-title\">类罪名称:</div>\n              <ul class=\"temp-kinds-list\">\n                <li *ngFor=\"let item of classValueList;let i = index\" [ngClass]=\"{'active':i== selectType}\" (click)=\"searchSelectType(i,item)\"\n                id=\"{{item.code}}\">{{item.value}}</li>\n              </ul>\n            </div>\n\n            <div class=\"temp-kinds-main\">\n              <div class=\"temp-kinds-title\">个罪名称:</div>\n                <ul class=\"temp-kinds-list\">\n                  <li *ngFor=\"let item of penaltyValueList;let i = index\" [ngClass]=\"{'active':i== selectPenalty}\" (click)=\"searchPenaltyType(i,item)\"\n                   id=\"{{item.code}}\">{{item.value}}</li>\n                </ul>\n            </div>\n    </div> \n    \n    <div>\n         <div style=\"display: flex;\">\n            <div class=\"age-chart-width\">\n                <h2 class=\"cont-title\">\n                    {{selectTitle}}\n                </h2>\n                <div id=\"type-echart\" style=\"width: 90%;height: 300px;\"></div>\n            </div>\n         </div>\n    </div>\n    <div class=\"type-table\">\n        <h2 class=\"cont-title\">\n            类罪中的刑罚种类分布\n        </h2>\n        <nz-table #basicTable \n        [nzFrontPagination]=\"false\"\n        [nzData]=\"listOfData\"\n        [nzTotal]=\"total\"\n        [(nzPageIndex)]=\"pageIndex\"\n        (nzPageIndexChange)=\"searchPageIndexData($event)\"\n       >\n            <thead>\n              <tr>\n                <th>案件编号</th>\n                <th nzWidth=\"80px\">姓名</th>\n                <th>罪刑类别</th>\n                <th>住址</th>\n                <th>检察单位</th>\n                <th>审理结果</th>\n                <th nzWidth=\"60px\">操作</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let data of basicTable.data\">\n                <td>{{ data.case_no }}</td>\n                <td>{{ data.person_name }}</td>\n                <td>{{ data.penalty_name }}</td>\n                <td>{{ data.person_address }}</td>\n                <td>{{ data.public_prosecutor}}</td>\n                <td>{{ data.result_type }}</td>\n                <td>\n                  <!-- <a>Action 一 {{ data.name }}</a>\n                  <nz-divider nzType=\"vertical\"></nz-divider> -->\n                  <a (click)=\"gotoDetail(data)\">详情</a>\n                </td>\n              </tr>\n            </tbody>\n          </nz-table>\n    </div>\n</div>\n");
 
 /***/ }),
 
@@ -71,7 +71,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-wrap\">\n    <div class=\"back\" (click)=\"goBack()\"><i nz-icon nzType=\"left\" nzTheme=\"outline\"></i>返回</div>\n    <div class=\"content\">\n        <div nz-row [nzGutter]=\"8\">\n          <div nz-col [nzSpan]=\"8\">\n            <nz-card nzTitle=\"Card title\">\n              <p>Card content</p>\n            </nz-card>\n          </div>\n          <div nz-col [nzSpan]=\"8\">\n            <nz-card nzTitle=\"Card title\">\n              <p>Card content</p>\n            </nz-card>\n          </div>\n          <div nz-col [nzSpan]=\"8\">\n            <nz-card nzTitle=\"Card title\">\n              <p>Card content</p>\n            </nz-card>\n          </div>\n        </div>\n        <div nz-row [nzGutter]=\"8\">\n            <div nz-col [nzSpan]=\"8\">\n              <nz-card nzTitle=\"Card title\">\n                <p>Card content</p>\n              </nz-card>\n            </div>\n            <div nz-col [nzSpan]=\"8\">\n              <nz-card nzTitle=\"Card title\">\n                <p>Card content</p>\n              </nz-card>\n            </div>\n            <div nz-col [nzSpan]=\"8\">\n              <nz-card nzTitle=\"Card title\">\n                <p>Card content</p>\n              </nz-card>\n            </div>\n          </div>\n          <div nz-row [nzGutter]=\"8\">\n            <div nz-col [nzSpan]=\"8\">\n              <nz-card nzTitle=\"Card title\">\n                <p>Card content</p>\n              </nz-card>\n            </div>\n            <div nz-col [nzSpan]=\"8\">\n              <nz-card nzTitle=\"Card title\">\n                <p>Card content</p>\n              </nz-card>\n            </div>\n            <div nz-col [nzSpan]=\"8\">\n              <nz-card nzTitle=\"Card title\">\n                <p>Card content</p>\n              </nz-card>\n            </div>\n          </div>\n      </div>\n</div>\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-wrap\">\n    <div class=\"back\" (click)=\"goBack()\"><i nz-icon nzType=\"left\" nzTheme=\"outline\"></i>返回</div>\n    <div class=\"content\">\n        <div nz-row [nzGutter]=\"8\">\n          <div nz-col [nzSpan]=\"24\">\n            <nz-card nzTitle=\"案件基本情况\">\n              <div nz-row [nzGutter]=\"8\">\n                <div nz-col [nzSpan]=\"8\">\n                   <p>案件编号: {{itemDetail.case_no}}</p>\n                </div>\n                <div nz-col [nzSpan]=\"8\">\n                  <p>姓名: {{itemDetail.person_name}}</p>\n                </div>\n                <div nz-col [nzSpan]=\"8\">\n                  <p>年龄: {{itemDetail.person_age}}</p>\n                </div>\n              </div>\n\n              <div nz-row [nzGutter]=\"8\">\n                <div nz-col [nzSpan]=\"8\">\n                   <p>学历: {{itemDetail.person_edu}}</p>\n                </div>\n                <div nz-col [nzSpan]=\"8\">\n                  <p>从事职业: {{itemDetail.person_job}}</p>\n                </div>\n                <div nz-col [nzSpan]=\"8\">\n                  <p>居住地址: {{itemDetail.person_address}}</p>\n                </div>\n              </div>\n              \n              <div nz-row [nzGutter]=\"8\">\n                <div nz-col [nzSpan]=\"8\">\n                   <p>犯罪类型: {{itemDetail.penalty_name}}</p>\n                </div>\n                <div nz-col [nzSpan]=\"8\">\n                  <p>罪刑: {{itemDetail.penalty_prison_type}}</p>\n                </div>\n                <div nz-col [nzSpan]=\"8\">\n                  <p>刑期: {{itemDetail.penalty_prison_length}}月</p>\n                </div>\n              </div>\n                \n              <div nz-row [nzGutter]=\"8\">\n                <div nz-col [nzSpan]=\"8\">\n                   <p>检察单位: {{itemDetail.public_prosecutor}}</p>\n                </div>\n                <div nz-col [nzSpan]=\"8\">\n                  <p>案件结果: {{itemDetail.result_type}}</p>\n                </div>\n                <div nz-col [nzSpan]=\"8\">\n                  <p>检察日期: {{itemDetail.prosecutors_date}}</p>\n                </div>\n              </div>\n\n            </nz-card>\n          </div>\n        </div>\n        <div nz-row [nzGutter]=\"8\">\n            <div nz-col [nzSpan]=\"24\">\n              <nz-card nzTitle=\"案件内容\" style=\"margin-top: 12px;\">\n                <pre style=\"white-space: pre-wrap;\">{{itemDetail.case_content}}</pre>\n              </nz-card>\n            </div>\n          </div>\n      </div>\n</div>\n\n");
 
 /***/ }),
 
@@ -136,7 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-wraper\">\n    <div class=\"screens\">\n\t\t\t<div class=\"temp-kinds-main\">\n\t\t\t\t<!-- <span class=\"temp-kinds-name\" *ngIf=\"searchTagNames.length>0\" style=\"margin-top: 0px;\">筛选条件</span>\n\t\t\t\t<ul class=\"temp-kinds-list searchUI\" style=\"margin: 0 8px\" *ngIf=\"searchTagNames.length>0\">\n\t\t\t\t\t<li class=\"searchspan\" *ngFor=\"let tag of searchTagNames;let i = index\">{{tag}}\n\t\t\t\t\t\t<span class=\"imgspan\">\n\t\t\t\t\t\t\t<img src=\"assets/images/delTagHaver.png\" (click)=\"delSearch(tag,i)\">\n\t\t\t\t\t\t</span>\n\t\t\t\t\t</li>\n\t\t\t\t</ul> -->\n\t\t\t\t<div class=\"temp-kinds-title\">类罪名称:</div>\n\t\t\t\t<ul class=\"temp-kinds-list\">\n\t\t\t\t\t<li *ngFor=\"let item of codeValueList;let i = index\" [ngClass]=\"{'active':i== selectType}\" (click)=\"searchSelectType(i,item)\"\n\t\t\t\t\t id=\"{{item.code}}\">{{item.value}}</li>\n\t\t\t\t\t<!-- <li class=\"searchLi scroll\" (click)=\"quotaClassSearchSelectClick()\" *ngIf=\"quotaSearchClass\">\n\t\t\t\t\t\t<span></span>\n\t\t\t\t\t\t<p>{{quotaSearch_class}}</p>\n\t\t\t\t\t\t<ul class=\"searchClass scroll\" *ngIf=\"quotaSearchClassFlag\">\n\t\t\t\t\t\t\t<li *ngFor=\"let quotaClass of quotaSearchClassList;let i = index\" [ngClass]=\"{'kinds-active':i==itemFlag}\" (click)=\"quotaClassSearchSelectEva(i)\">{{quotaClass.value}}</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</li> -->\n\t\t\t\t</ul>\n            </div>\n            <!-- <div class=\"temp-kinds-main\">\n\t\t\t\t<div class=\"temp-kinds-name\">各项</div>\n\t\t\t\t<ul class=\"temp-kinds-list\">\n\t\t\t\t\t<li *ngFor=\"let tag of tagTops;let i = index\" [ngClass]=\"{'active':i == selectPersonal}\" (click)=\"searchPersonal(i,item)\"\n\t\t\t\t\t id=\"{{tag.key}}\">{{tag.name}}</li>\n\t\t\t\t</ul> -->\n\t\t\t\t<!-- <span class=\"temp-kinds-name\">标签搜索</span> -->\n\t\t\t\t<!-- <div class=\"temp-search-box\" style=\"float:left;margin:0 8px;height:27px;width:274px;margin-top: 5px;\" id=\"searchDiv\">\n\t\t\t\t\t<div class=\"temp-set-select-box-tag\" style=\"width:100%;height:27px; background: unset; border: 0px solid #444444;\">\n\t\t\t\t\t\t<input [(ngModel)]=\"tag_name\" id=\"tagSearch\" (ngModelChange)=\"modelChange($event)\" placeholder=\" 请输入标签名称搜索\" class=\"temp-search-input\"\n\t\t\t\t\t\t (keyup.enter)=\"searchTags()\" />\n\t\t\t\t\t\t<button type=\"button\" class=\"temp-search-btn\" (click)=\"searchTags()\" style=\"width: 26px;height: 26px;\"></button>\n\t\t\t\t\t\t<ul class=\"scroll\" *ngIf=\"tag_search\">\n\t\t\t\t\t\t\t<li *ngFor=\"let tag of tagList;let i = index\" [ngClass]=\"{'kinds-active':i==itemFlag}\" [title]='tag.value' (click)=\"tagSearchEva(i)\">{{tag.value}}</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div> -->\n\t\t\t\n\t\t<!-- </div> -->\n    </div> \n    \n    <div>\n        <!-- <h2 class=\"cont-title\">\n            类罪中的刑罚种类分布\n        </h2> -->\n         <div style=\"display: flex;\">\n            <div class=\"age-chart-width\">\n                <h2 class=\"cont-title\">\n                    {{selectTitle}}\n                </h2>\n                <div id=\"type-echart\" style=\"width: 90%;height: 300px;\"></div>\n            </div>\n         </div>\n    </div>\n    <div class=\"type-table\">\n        <h2 class=\"cont-title\">\n            类罪中的刑罚种类分布\n        </h2>\n        <nz-table #basicTable \n        [nzFrontPagination]=\"false\"\n        [nzData]=\"listOfData\"\n        [nzTotal]=\"total\"\n        [(nzPageIndex)]=\"pageIndex\"\n        (nzPageIndexChange)=\"searchData($event)\"\n       >\n            <thead>\n              <tr>\n                <th>名称</th>\n                <th>年龄</th>\n                <th>地址</th>\n                <th>操作</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let data of basicTable.data\">\n                <td>{{ data.name }}</td>\n                <td>{{ data.age }}</td>\n                <td>{{ data.address }}</td>\n                <td>\n                  <!-- <a>Action 一 {{ data.name }}</a>\n                  <nz-divider nzType=\"vertical\"></nz-divider> -->\n                  <a (click)=\"gotoDetail(data)\">详情</a>\n                </td>\n              </tr>\n            </tbody>\n          </nz-table>\n    </div>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-wraper\">\n    <div class=\"screens\">\n\t\t\t     <div class=\"temp-kinds-main\">\n\t\t\t\t<!-- <span class=\"temp-kinds-name\" *ngIf=\"searchTagNames.length>0\" style=\"margin-top: 0px;\">筛选条件</span>\n\t\t\t\t<ul class=\"temp-kinds-list searchUI\" style=\"margin: 0 8px\" *ngIf=\"searchTagNames.length>0\">\n\t\t\t\t\t<li class=\"searchspan\" *ngFor=\"let tag of searchTagNames;let i = index\">{{tag}}\n\t\t\t\t\t\t<span class=\"imgspan\">\n\t\t\t\t\t\t\t<img src=\"assets/images/delTagHaver.png\" (click)=\"delSearch(tag,i)\">\n\t\t\t\t\t\t</span>\n\t\t\t\t\t</li>\n\t\t\t\t</ul> -->\n\t\t\t\t<div class=\"temp-kinds-title\">类罪名称:</div>\n              <ul class=\"temp-kinds-list\">\n                <li *ngFor=\"let item of classValueList;let i = index\" [ngClass]=\"{'active':i== selectType}\" (click)=\"searchSelectType(i,item)\"\n                id=\"{{item.code}}\">{{item.value}}</li>\n                <!-- <li class=\"searchLi scroll\" (click)=\"quotaClassSearchSelectClick()\" *ngIf=\"quotaSearchClass\">\n                  <span></span>\n                  <p>{{quotaSearch_class}}</p>\n                  <ul class=\"searchClass scroll\" *ngIf=\"quotaSearchClassFlag\">\n                    <li *ngFor=\"let quotaClass of quotaSearchClassList;let i = index\" [ngClass]=\"{'kinds-active':i==itemFlag}\" (click)=\"quotaClassSearchSelectEva(i)\">{{quotaClass.value}}</li>\n                  </ul>\n                </li> -->\n              </ul>\n            </div>\n\n            <!-- <div class=\"temp-kinds-main\">\n              <div class=\"temp-kinds-title\">个罪名称:</div>\n                <ul class=\"temp-kinds-list\">\n                  <li *ngFor=\"let item of codeValueList;let i = index\" [ngClass]=\"{'active':i== selectType}\" (click)=\"searchSelectType(i,item)\"\n                   id=\"{{item.code}}\">{{item.value}}</li>\n                </ul>\n            </div> -->\n            <!-- <div class=\"temp-kinds-main\">\n\t\t\t\t<div class=\"temp-kinds-name\">各项</div>\n\t\t\t\t<ul class=\"temp-kinds-list\">\n\t\t\t\t\t<li *ngFor=\"let tag of tagTops;let i = index\" [ngClass]=\"{'active':i == selectPersonal}\" (click)=\"searchPersonal(i,item)\"\n\t\t\t\t\t id=\"{{tag.key}}\">{{tag.name}}</li>\n\t\t\t\t</ul> -->\n\t\t\t\t<!-- <span class=\"temp-kinds-name\">标签搜索</span> -->\n\t\t\t\t<!-- <div class=\"temp-search-box\" style=\"float:left;margin:0 8px;height:27px;width:274px;margin-top: 5px;\" id=\"searchDiv\">\n\t\t\t\t\t<div class=\"temp-set-select-box-tag\" style=\"width:100%;height:27px; background: unset; border: 0px solid #444444;\">\n\t\t\t\t\t\t<input [(ngModel)]=\"tag_name\" id=\"tagSearch\" (ngModelChange)=\"modelChange($event)\" placeholder=\" 请输入标签名称搜索\" class=\"temp-search-input\"\n\t\t\t\t\t\t (keyup.enter)=\"searchTags()\" />\n\t\t\t\t\t\t<button type=\"button\" class=\"temp-search-btn\" (click)=\"searchTags()\" style=\"width: 26px;height: 26px;\"></button>\n\t\t\t\t\t\t<ul class=\"scroll\" *ngIf=\"tag_search\">\n\t\t\t\t\t\t\t<li *ngFor=\"let tag of tagList;let i = index\" [ngClass]=\"{'kinds-active':i==itemFlag}\" [title]='tag.value' (click)=\"tagSearchEva(i)\">{{tag.value}}</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div> -->\n\t\t\t\n\t\t<!-- </div> -->\n    </div> \n    \n    <div>\n        <!-- <h2 class=\"cont-title\">\n            类罪中的刑罚种类分布\n        </h2> -->\n         <div style=\"display: flex;\">\n            <div class=\"age-chart-width\">\n                <h2 class=\"cont-title\">\n                    {{selectTitle}}\n                </h2>\n                <div id=\"type-echart\" style=\"width: 90%;height: 300px;\"></div>\n            </div>\n         </div>\n    </div>\n    <div class=\"type-table\">\n        <h2 class=\"cont-title\">\n            类罪中的刑罚种类分布\n        </h2>\n        <nz-table #basicTable \n        [nzFrontPagination]=\"false\"\n        [nzData]=\"listOfData\"\n        [nzTotal]=\"total\"\n        [(nzPageIndex)]=\"pageIndex\"\n        (nzPageIndexChange)=\"searchData($event)\"\n       >\n            <thead>\n              <tr>\n                <th>名称</th>\n                <th>年龄</th>\n                <th>地址</th>\n                <th>操作</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let data of basicTable.data\">\n                <td>{{ data.name }}</td>\n                <td>{{ data.age }}</td>\n                <td>{{ data.address }}</td>\n                <td>\n                  <!-- <a>Action 一 {{ data.name }}</a>\n                  <nz-divider nzType=\"vertical\"></nz-divider> -->\n                  <a (click)=\"gotoDetail(data)\">详情</a>\n                </td>\n              </tr>\n            </tbody>\n          </nz-table>\n    </div>\n</div>");
 
 /***/ }),
 
@@ -444,6 +444,7 @@ const routes = [
     { path: 'province', component: _page_law_province_province_component__WEBPACK_IMPORTED_MODULE_8__["ProvinceComponent"] },
     { path: 'period', component: _page_law_period_period_component__WEBPACK_IMPORTED_MODULE_7__["PeriodComponent"] },
     { path: 'type/detail', component: _page_law_detail_detail_component__WEBPACK_IMPORTED_MODULE_5__["DetailComponent"] },
+    { path: 'agecase/detail', component: _page_law_detail_detail_component__WEBPACK_IMPORTED_MODULE_5__["DetailComponent"] },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -927,7 +928,7 @@ HeroesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2UvbGF3L2FnZS1jbGFzcy9hZ2UtY2xhc3MuY29tcG9uZW50LnNjc3MifQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".screens {\n  border-bottom: 1px dashed #ccc;\n}\n\n.temp-kinds-main {\n  display: flex;\n}\n\n.temp-kinds-title {\n  min-width: 60px;\n}\n\n.temp-kinds-list {\n  display: flex;\n  list-style: none;\n  padding-left: 12px;\n  flex-flow: row wrap;\n  max-height: 200px;\n  overflow: auto;\n}\n\n.temp-kinds-list li {\n  padding-left: 8px;\n  padding-right: 8px;\n  cursor: pointer;\n  margin: 0 4px 6px;\n  border: 1px solid #ccc;\n}\n\n.temp-kinds-list li.active {\n  color: #3895FF;\n  border: 1px solid #3895FF;\n}\n\n.age-chart-width {\n  width: 100%;\n  margin-top: 24px;\n  border-bottom: 1px dashed #ccc;\n  margin-bottom: 24px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hcHBsZS9EZXNrdG9wL3dvcms0L2hkaW9jTmV3L2hkY2dpb2Mvc3JjL21haW4vbXktYXBwL3NyYy9hcHAvcGFnZS9sYXcvYWdlLWNsYXNzL2FnZS1jbGFzcy5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvcGFnZS9sYXcvYWdlLWNsYXNzL2FnZS1jbGFzcy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLDhCQUFBO0FDQ0o7O0FEQ0E7RUFDSSxhQUFBO0FDRUo7O0FEQUE7RUFDSSxlQUFBO0FDR0o7O0FEREE7RUFDSSxhQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtFQUNBLG1CQUFBO0VBQ0EsaUJBQUE7RUFDQSxjQUFBO0FDSUo7O0FERkE7RUFDSSxpQkFBQTtFQUNBLGtCQUFBO0VBQ0EsZUFBQTtFQUNBLGlCQUFBO0VBQ0Esc0JBQUE7QUNLSjs7QURGQTtFQUNJLGNBQUE7RUFDQSx5QkFBQTtBQ0tKOztBREhBO0VBQ0ksV0FBQTtFQUNBLGdCQUFBO0VBQ0EsOEJBQUE7RUFDQSxtQkFBQTtBQ01KIiwiZmlsZSI6InNyYy9hcHAvcGFnZS9sYXcvYWdlLWNsYXNzL2FnZS1jbGFzcy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zY3JlZW5ze1xuICAgIGJvcmRlci1ib3R0b206IDFweCBkYXNoZWQgI2NjYztcbn1cbi50ZW1wLWtpbmRzLW1haW57XG4gICAgZGlzcGxheTogZmxleDtcbn1cbi50ZW1wLWtpbmRzLXRpdGxle1xuICAgIG1pbi13aWR0aDogNjBweDtcbn1cbi50ZW1wLWtpbmRzLWxpc3R7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBsaXN0LXN0eWxlOiBub25lO1xuICAgIHBhZGRpbmctbGVmdDogMTJweDtcbiAgICBmbGV4LWZsb3c6IHJvdyB3cmFwO1xuICAgIG1heC1oZWlnaHQ6IDIwMHB4O1xuICAgIG92ZXJmbG93OiBhdXRvO1xufVxuLnRlbXAta2luZHMtbGlzdCBsaXtcbiAgICBwYWRkaW5nLWxlZnQ6IDhweDtcbiAgICBwYWRkaW5nLXJpZ2h0OiA4cHg7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIG1hcmdpbjogMCA0cHggNnB4O1xuICAgIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XG59XG5cbi50ZW1wLWtpbmRzLWxpc3QgbGkuYWN0aXZle1xuICAgIGNvbG9yOiAgIzM4OTVGRjtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjMzg5NUZGO1xufVxuLmFnZS1jaGFydC13aWR0aHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBtYXJnaW4tdG9wOiAyNHB4O1xuICAgIGJvcmRlci1ib3R0b206IDFweCBkYXNoZWQgI2NjYztcbiAgICBtYXJnaW4tYm90dG9tOiAyNHB4O1xufSIsIi5zY3JlZW5zIHtcbiAgYm9yZGVyLWJvdHRvbTogMXB4IGRhc2hlZCAjY2NjO1xufVxuXG4udGVtcC1raW5kcy1tYWluIHtcbiAgZGlzcGxheTogZmxleDtcbn1cblxuLnRlbXAta2luZHMtdGl0bGUge1xuICBtaW4td2lkdGg6IDYwcHg7XG59XG5cbi50ZW1wLWtpbmRzLWxpc3Qge1xuICBkaXNwbGF5OiBmbGV4O1xuICBsaXN0LXN0eWxlOiBub25lO1xuICBwYWRkaW5nLWxlZnQ6IDEycHg7XG4gIGZsZXgtZmxvdzogcm93IHdyYXA7XG4gIG1heC1oZWlnaHQ6IDIwMHB4O1xuICBvdmVyZmxvdzogYXV0bztcbn1cblxuLnRlbXAta2luZHMtbGlzdCBsaSB7XG4gIHBhZGRpbmctbGVmdDogOHB4O1xuICBwYWRkaW5nLXJpZ2h0OiA4cHg7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgbWFyZ2luOiAwIDRweCA2cHg7XG4gIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XG59XG5cbi50ZW1wLWtpbmRzLWxpc3QgbGkuYWN0aXZlIHtcbiAgY29sb3I6ICMzODk1RkY7XG4gIGJvcmRlcjogMXB4IHNvbGlkICMzODk1RkY7XG59XG5cbi5hZ2UtY2hhcnQtd2lkdGgge1xuICB3aWR0aDogMTAwJTtcbiAgbWFyZ2luLXRvcDogMjRweDtcbiAgYm9yZGVyLWJvdHRvbTogMXB4IGRhc2hlZCAjY2NjO1xuICBtYXJnaW4tYm90dG9tOiAyNHB4O1xufSJdfQ== */");
 
 /***/ }),
 
@@ -943,24 +944,210 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AgeClassComponent", function() { return AgeClassComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _law_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../law.service */ "./src/app/page/law/law.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _law_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../law.service */ "./src/app/page/law/law.service.ts");
+
 
 
 
 let AgeClassComponent = class AgeClassComponent {
-    constructor(lawService) {
-        this.lawService = lawService;
+    constructor(lawSerivce, router) {
+        this.lawSerivce = lawSerivce;
+        this.router = router;
+        this.classValueList = []; //类最
+        this.penaltyValueList = []; //个罪
+        this.selectType = 0;
+        this.pageIndex = 1;
+        this.total = 100;
+        this.listOfData = [];
     }
     ngOnInit() {
-        // this.lawService.getAllAgeData().subscribe(
-        //     data =>{
-        //       console.log("-------------data",data);
-        //     }
-        // )
+        this.getWenshuByClass();
+        this.getClassList();
+        this.getPenaltyList();
+    }
+    getClassList() {
+        this.lawSerivce.getPenaltyClass().subscribe(data => {
+            data.penalty_class.forEach((element, index) => {
+                this.classValueList.push({ code: String(index + 1), value: element });
+            });
+            this.selectTitle = this.classValueList[this.selectType].value;
+            this.loadCateCharts();
+        });
+    }
+    getPenaltyList() {
+        this.lawSerivce.getPenaltyByClass('').subscribe(data => {
+            data.penalty_definite.forEach((element, index) => {
+                this.penaltyValueList.push({ code: String(index + 1), value: element });
+            });
+        });
+    }
+    getWenshuByClass() {
+        this.lawSerivce.getWenshuByClass('').subscribe(data => {
+            var list = [];
+            data.wenshu_list.forEach(element => {
+                list.push(element);
+            });
+            this.listOfData = list;
+            console.log("listOfData", this.listOfData);
+        });
+    }
+    searchPageIndexData(index) {
+        console.log("page", index);
+    }
+    //详情页面
+    gotoDetail(item) {
+        this.router.navigate(["/agecase/detail"], {
+            skipLocationChange: true,
+            queryParams: {
+                "item": JSON.stringify(item),
+                "from": "/agecase"
+            }
+        });
+    }
+    searchSelectType(index, item) {
+        this.selectType = index;
+        this.selectTitle = item.value;
+        this.loadCateCharts();
+    }
+    searchPenaltyType(index, item) {
+        console.log("page", index);
+        this.selectPenalty = index;
+    }
+    loadCateCharts() {
+        this.lawSerivce.getTypeloadCateNumb().subscribe(data => {
+            data.forEach((element, index) => {
+                if (!!element.penalty_class && element.penalty_class == this.selectTitle) {
+                    this.loadDataForChart(element.penalty_prison_type_list);
+                }
+            });
+        });
+    }
+    loadDataForChart(list) {
+        var yList = [];
+        var xList = [];
+        list.forEach(element => {
+            xList.push(element.name);
+            yList.push(element.number);
+        });
+        console.log("xList", xList, "yList", yList);
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                },
+            },
+            grid: {
+                top: '10%',
+                right: '3%',
+                left: '15%',
+                bottom: '15%'
+            },
+            xAxis: [{
+                    type: 'category',
+                    name: '',
+                    nameTextStyle: {
+                        color: "#333"
+                    },
+                    data: xList,
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(255,255,255,0.52)'
+                        }
+                    },
+                    axisLabel: {
+                        margin: 10,
+                        interval: 0,
+                        color: '#000',
+                        textStyle: {
+                            fontSize: 11
+                        },
+                    },
+                }],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '（个）',
+                    nameTextStyle: {
+                        color: "#333"
+                    },
+                    axisLabel: {
+                        formatter: '{value}',
+                        color: '#333',
+                    },
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgba(196,224,245,1)'
+                        }
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            type: 'dashed',
+                            color: 'rgba(196,224,245,1)'
+                        }
+                    }
+                }
+            ],
+            series: [{
+                    type: 'bar',
+                    data: yList,
+                    name: '数量',
+                    barWidth: '16px',
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: '#4DDEFE' // 0% 处的颜色
+                                }, {
+                                    offset: 0.5,
+                                    color: '#57FBFA' // 50% 处的颜色
+                                }, {
+                                    offset: 1,
+                                    color: '#3D8BFF' // 100% 处的颜色
+                                }], false),
+                            barBorderRadius: [2, 2, 0.1, 0.1],
+                            shadowColor: 'rgba(0,0,0,0)',
+                            shadowBlur: 4,
+                            label: {
+                                show: true,
+                                position: 'top',
+                                textStyle: {
+                                    color: '#111',
+                                    fontSize: 14
+                                }
+                            },
+                        }
+                    },
+                }]
+        };
+        var mychart1 = echarts.init(document.getElementById("type-echart"));
+        mychart1.clear();
+        mychart1.setOption(option);
+        mychart1.getZr().on('click', params => {
+            let pointInPixel = [params.offsetX, params.offsetY];
+            console.log("params", params);
+            if (mychart1.containPixel('grid', pointInPixel)) {
+                let xIndex = mychart1.convertFromPixel({ seriesIndex: 0 }, [params.offsetX, params.offsetY])[0];
+                console.log("xIndex", xIndex);
+            }
+        });
+        window.onresize = mychart1.resize();
+    }
+    searchPersonal(index, item) {
+        if (index == this.selectPersonal) {
+            this.selectPersonal = null;
+        }
+        else {
+            this.selectPersonal = index;
+        }
     }
 };
 AgeClassComponent.ctorParameters = () => [
-    { type: _law_service__WEBPACK_IMPORTED_MODULE_2__["LawService"] }
+    { type: _law_service__WEBPACK_IMPORTED_MODULE_3__["LawService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
 ];
 AgeClassComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -983,7 +1170,7 @@ AgeClassComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".back {\n  position: absolute;\n  right: 16px;\n  top: 4px;\n  color: #1890ff;\n  cursor: pointer;\n  font-size: 16px;\n}\n\n.container-wrap {\n  position: relative;\n}\n\n.content {\n  background: #ECECEC;\n  padding: 8px;\n  padding-top: 32px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hcHBsZS9EZXNrdG9wL3dvcms0L2hkaW9jTmV3L2hkY2dpb2Mvc3JjL21haW4vbXktYXBwL3NyYy9hcHAvcGFnZS9sYXcvZGV0YWlsL2RldGFpbC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvcGFnZS9sYXcvZGV0YWlsL2RldGFpbC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsV0FBQTtFQUNBLFFBQUE7RUFDQSxjQUFBO0VBQ0EsZUFBQTtFQUNBLGVBQUE7QUNDSjs7QURDQTtFQUNJLGtCQUFBO0FDRUo7O0FEQUE7RUFDSSxtQkFBQTtFQUNBLFlBQUE7RUFDQSxpQkFBQTtBQ0dKIiwiZmlsZSI6InNyYy9hcHAvcGFnZS9sYXcvZGV0YWlsL2RldGFpbC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5iYWNre1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICByaWdodDogMTZweDtcbiAgICB0b3A6IDRweDtcbiAgICBjb2xvcjogIzE4OTBmZjtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgZm9udC1zaXplOiAxNnB4O1xufVxuLmNvbnRhaW5lci13cmFwe1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cbi5jb250ZW50IHtcbiAgICBiYWNrZ3JvdW5kOiAjRUNFQ0VDO1xuICAgIHBhZGRpbmc6OHB4O1xuICAgIHBhZGRpbmctdG9wOiAzMnB4O1xufSIsIi5iYWNrIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICByaWdodDogMTZweDtcbiAgdG9wOiA0cHg7XG4gIGNvbG9yOiAjMTg5MGZmO1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIGZvbnQtc2l6ZTogMTZweDtcbn1cblxuLmNvbnRhaW5lci13cmFwIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuXG4uY29udGVudCB7XG4gIGJhY2tncm91bmQ6ICNFQ0VDRUM7XG4gIHBhZGRpbmc6IDhweDtcbiAgcGFkZGluZy10b3A6IDMycHg7XG59Il19 */");
+/* harmony default export */ __webpack_exports__["default"] = (".back {\n  position: absolute;\n  right: 16px;\n  top: 4px;\n  color: #1890ff;\n  cursor: pointer;\n  font-size: 16px;\n}\n\n.container-wrap {\n  position: relative;\n}\n\n.content {\n  padding: 8px;\n  padding-top: 32px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hcHBsZS9EZXNrdG9wL3dvcms0L2hkaW9jTmV3L2hkY2dpb2Mvc3JjL21haW4vbXktYXBwL3NyYy9hcHAvcGFnZS9sYXcvZGV0YWlsL2RldGFpbC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvcGFnZS9sYXcvZGV0YWlsL2RldGFpbC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsV0FBQTtFQUNBLFFBQUE7RUFDQSxjQUFBO0VBQ0EsZUFBQTtFQUNBLGVBQUE7QUNDSjs7QURDQTtFQUNJLGtCQUFBO0FDRUo7O0FEQUE7RUFFSSxZQUFBO0VBQ0EsaUJBQUE7QUNFSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2UvbGF3L2RldGFpbC9kZXRhaWwuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYmFja3tcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgcmlnaHQ6IDE2cHg7XG4gICAgdG9wOiA0cHg7XG4gICAgY29sb3I6ICMxODkwZmY7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGZvbnQtc2l6ZTogMTZweDtcbn1cbi5jb250YWluZXItd3JhcHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG4uY29udGVudCB7XG4gICAgLy8gYmFja2dyb3VuZDogI0VDRUNFQztcbiAgICBwYWRkaW5nOjhweDtcbiAgICBwYWRkaW5nLXRvcDogMzJweDtcbn0iLCIuYmFjayB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgcmlnaHQ6IDE2cHg7XG4gIHRvcDogNHB4O1xuICBjb2xvcjogIzE4OTBmZjtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICBmb250LXNpemU6IDE2cHg7XG59XG5cbi5jb250YWluZXItd3JhcCB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cblxuLmNvbnRlbnQge1xuICBwYWRkaW5nOiA4cHg7XG4gIHBhZGRpbmctdG9wOiAzMnB4O1xufSJdfQ== */");
 
 /***/ }),
 
@@ -1012,6 +1199,8 @@ let DetailComponent = class DetailComponent {
         this.acrouter.queryParams.subscribe(params => {
             console.log("params222", params);
             this.backurl = params["from"];
+            this.itemDetail = JSON.parse(params["item"]);
+            console.log("this.itemDetail", this.itemDetail);
         });
     }
     goBack() {
@@ -1173,6 +1362,18 @@ let LawService = class LawService {
     //类最 及其判决数量
     getTypeloadCateNumb() {
         return this.http.get("assets/data/penalty_prison_type_num_0913.json").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
+    }
+    //获取类最列表
+    getPenaltyClass() {
+        return this.http.get("assets/data/service/get_penalty_class.json").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
+    }
+    //获取类最对应的个罪
+    getPenaltyByClass(className) {
+        return this.http.get("assets/data/service/get_penalty_byClass.json").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
+    }
+    //获取类最对应的文书列表
+    getWenshuByClass(className) {
+        return this.http.get("assets/data/service/get_wenshuBy_class.json").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
     }
 };
 LawService.ctorParameters = () => [
@@ -1356,16 +1557,7 @@ let TypeCaseComponent = class TypeCaseComponent {
         this.lawSerivce = lawSerivce;
         this.router = router;
         this.searchTagNames = [];
-        this.codeValueList = [{ code: "1", value: "妨害社会管理秩序罪" },
-            { code: "2", value: "侵犯财产罪" },
-            { code: "3", value: "贪污贿赂罪" },
-            { code: "4", value: "渎职罪" },
-            { code: "5", value: "军人违反职责罪" },
-            { code: "6", value: "侵犯公民人身权利、民主权利罪" },
-            { code: "7", value: "危害国防利益罪" },
-            { code: "8", value: "破坏社会主义市场经济秩序罪" },
-            { code: "9", value: "危害国家安全罪" },
-            { code: "10", value: "侵犯财产罪" },];
+        this.classValueList = [];
         this.selectType = 0;
         this.pageIndex = 1;
         this.total = 100;
@@ -1391,8 +1583,18 @@ let TypeCaseComponent = class TypeCaseComponent {
         ];
     }
     ngOnInit() {
-        this.selectTitle = this.codeValueList[this.selectType].value;
-        this.loadCateCharts();
+        this.getClassList();
+    }
+    getClassList() {
+        this.lawSerivce.getPenaltyClass().subscribe(data => {
+            data.penalty_class.forEach((element, index) => {
+                if (!!element && element != null) {
+                    this.classValueList.push({ code: String(index + 1), value: element });
+                }
+            });
+            this.selectTitle = this.classValueList[this.selectType].value;
+            this.loadCateCharts();
+        });
     }
     searchData(index) {
         console.log("page", index);

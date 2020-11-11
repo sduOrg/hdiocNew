@@ -77,4 +77,32 @@ public class WelcomeService {
         resultMap.put("wenshu_list",wenshu_list);
         return resultMap;
     }
+    public Map<String,Object> wenshuBy_edu_prisionType(String penalty_class,String penalty_definite,String prison_type, String edu_level,int page_no,int page_size){
+        Map<String,Object> resultMap = new HashMap<>();
+        int page_start = (page_no-1)*page_size;
+        List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_filter_prison_edu(penalty_class,penalty_definite,prison_type,edu_level,page_start,  page_size);
+        resultMap.put("wenshu_list",wenshu_list);
+        return resultMap;
+    }
+    public Map<String,Object> wenshuBy_age(String penalty_class,String penalty_definite,int age_start, int  age_end,int page_no,int page_size){
+        Map<String,Object> resultMap = new HashMap<>();
+        int page_start = (page_no-1)*page_size;
+        List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_filter_age(penalty_class,penalty_definite,age_start,age_end,page_start,  page_size);
+        resultMap.put("wenshu_list",wenshu_list);
+        return resultMap;
+    }
+    public Map<String,Object> wenshuBy_province(String penalty_class,String province_address,String province_residence,int page_no,int page_size){
+        Map<String,Object> resultMap = new HashMap<>();
+        int page_start = (page_no-1)*page_size;
+        List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_filter_province(penalty_class,province_address,province_residence,page_start,  page_size);
+        resultMap.put("wenshu_list",wenshu_list);
+        return resultMap;
+    }
+    public Map<String,Object> wenshuBy_prisonLength(String penalty_class,String penalty_definite,double length_start,double length_end,int page_no,int page_size){
+        Map<String,Object> resultMap = new HashMap<>();
+        int page_start = (page_no-1)*page_size;
+        List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_filter_prisonLength(penalty_class,penalty_definite,length_start, length_end,page_start,  page_size);
+        resultMap.put("wenshu_list",wenshu_list);
+        return resultMap;
+    }
 }

@@ -22,7 +22,12 @@ public interface WelcomeMapper {
     List<wenshu_info> get_wenshu_Byclass(String penalty_class, int page_start, int page_size);
     //刑罚种类 文化程度 年龄 类罪 个罪
 
-    List<wenshu_info> get_wenshu_filter(String penalty_class,String penalty_definite,String prison_type,String edu_level,int page_start, int page_size);
+    List<wenshu_info> get_wenshu_filter_prison_edu(String penalty_class,String penalty_definite,String prison_type,String edu_level,int page_start, int page_size);
+    List<wenshu_info> get_wenshu_filter_age(String penalty_class,String penalty_definite,int age_start,int age_end,int page_start, int page_size);
+    List<wenshu_info> get_wenshu_filter_province(String penalty_class,String province_address,String province_residence,int page_start, int page_size);
+    List<wenshu_info> get_wenshu_filter_prisonLength(String penalty_class,String penalty_definite,double length_start,double length_end,int page_start,int page_size);
+
+
 
 
 }

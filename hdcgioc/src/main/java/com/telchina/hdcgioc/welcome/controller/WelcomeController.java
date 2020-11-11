@@ -58,7 +58,7 @@ public class WelcomeController {
     }
     //获取类罪对应的文书记录 输入为 (类罪名，第几页(从1开始),页面大小)
     @RequestMapping(value = "/get_wenshuBy_class", method = RequestMethod.GET)
-    public Map get_wenshuBy_class(@RequestParam(value = "penalty_class",required = false,defaultValue ="")String penalty_class,@RequestParam(value = "page_no",required = false,defaultValue ="1") int page_no,@RequestParam(value = "page_size",required = false,defaultValue ="20") int page_size){
+    public Map get_wenshuBy_class(@RequestParam(value = "penalty_class",required = false)String penalty_class,@RequestParam(value = "page_no",required = false,defaultValue ="1") int page_no,@RequestParam(value = "page_size",required = false,defaultValue ="20") int page_size){
         return welcomeService.wenshu_ByPenalty_class(penalty_class,page_no,page_size);
 
     }
@@ -74,6 +74,32 @@ public class WelcomeController {
         return welcomeService.get_prision_type();
 
     }
+    //过滤教育程度
+    @RequestMapping(value = "/get_wenshu_prisonTypeEdu",method = RequestMethod.GET)
+    public Map<String,Object> get_wenshu_prisonTypeEdu(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "penalty_definite",required = false) String penalty_definite,@RequestParam(value = "prison_type",required = false) String prison_type,@RequestParam(value = "edu_level",required = false) String edu_level,@RequestParam(value = "page_no",required = false ) int page_no,@RequestParam(value = "page_size",required = false) int page_size){
+        return welcomeService.wenshuBy_edu_prisionType(penalty_class,penalty_definite,prison_type,edu_level,page_no,page_size);
+
+    }
+    //过滤 年龄 类罪 个罪
+    @RequestMapping(value = "/get_wenshu_age",method = RequestMethod.GET)
+    public Map<String,Object> get_wenshu_age(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "penalty_definite",required = false) String penalty_definite,@RequestParam(value = "age_start",defaultValue = "14") int  age_start,@RequestParam(value = "age_end",defaultValue = "70") int  age_end,@RequestParam(value = "page_no",required = false ) int page_no,@RequestParam(value = "page_size",required = false) int page_size){
+        return welcomeService.wenshuBy_age(penalty_class,penalty_definite,age_start,age_end,page_no,page_size);
+
+    }
+    //省份过滤
+    @RequestMapping(value = "/get_wenshu_province",method = RequestMethod.GET)
+    public Map<String,Object> get_wenshu_wenshu(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "province_address",required = false) String province_address,@RequestParam(value = "province_residence",required = false) String province_residence,@RequestParam(value = "page_no",required = false ) int page_no,@RequestParam(value = "page_size",required = false) int page_size){
+        return welcomeService.wenshuBy_province(penalty_class,province_address,province_residence,page_no,page_size);
+
+    }
+
+
+
+
+
+
+
+
 
 
 }

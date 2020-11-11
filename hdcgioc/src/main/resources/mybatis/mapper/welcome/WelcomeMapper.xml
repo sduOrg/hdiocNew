@@ -56,14 +56,81 @@
         ]]>
     </select>
 
-<!--    <select id="get_wenshu_filter" resultType="com.telchina.hdcgioc.welcome.entity.wenshu_info">-->
-<!--         <![CDATA[-->
-<!--			select distinct wenshu_info.* from wenshu_info right join penalty_map on wenshu_info.penalty_name = penalty_map.penalty_name_definite where penalty_map.penalty_class = #{penalty_class}-->
+    <select id="get_wenshu_filter_prison_edu" resultType="com.telchina.hdcgioc.welcome.entity.wenshu_info">
 
-<!--			 LIMIT #{page_start},#{page_size}-->
-<!--        ]]>-->
-<!--    </select>-->
+			select distinct wenshu_info.* from wenshu_info right join penalty_map on wenshu_info.penalty_name = penalty_map.penalty_name_definite
+			<where>
+			<if test="penalty_class != null">
+                penalty_map.penalty_class = #{penalty_class}
+            </if>
+            <if test="penalty_definite != null">
 
+            AND    penalty_map.penalty_name_definite = #{penalty_definite}
+
+            </if>
+            <if test="prison_type != null">
+            AND wenshu_info.penalty_prison_type = #{prison_type}
+            </if>
+            <if test=" edu_level != null">
+            AND wenshu_info.person_edu = #{edu_level}
+            </if>
+            </where>
+			 LIMIT #{page_start},#{page_size}
+    </select>
+    <select id = "get_wenshu_filter_age" resultType="com.telchina.hdcgioc.welcome.entity.wenshu_info" >
+        <![CDATA[select distinct wenshu_info.* from wenshu_info right join penalty_map on wenshu_info.penalty_name = penalty_map.penalty_name_definite where wenshu_info.person_age >= #{age_start} and wenshu_info.person_age < #{age_end} ]]>
+        <where>
+        <if test="penalty_class != null">
+            penalty_map.penalty_class = #{penalty_class}
+        </if>
+        <if test="penalty_definite != null">
+
+           AND penalty_map.penalty_name_definite = #{penalty_definite}
+        </if>
+
+        </where>
+        LIMIT #{page_start},#{page_size}
+    </select>
+    <select id = "get_wenshu_filter_province" resultType="com.telchina.hdcgioc.welcome.entity.wenshu_info" >
+        <![CDATA[select distinct wenshu_info.* from wenshu_info ]]>
+        <where>
+            <if test="penalty_class != null">
+                <![CDATA[wenshu_info.penalty_name in (select penalty_map.penalty_name_definite from penalty_map where penalty_map.penalty_class = #{penalty_class})]]>
+            </if>
+
+            <if test="province_address!= null">
+             AND   <![CDATA[wenshu_info.id in (select province.id from province where province.province_address = #{province_address})]]>
+
+            </if>
+            <if test="province_residence!= null">
+              AND  <![CDATA[wenshu_info.id in (select province.id from province where province.province_residence = #{province_residence})]]>
+            </if>
+
+        </where>
+        LIMIT #{page_start},#{page_size}
+    </select>
+    <select id = "get_wenshu_filter_prisonLength" resultType="com.telchina.hdcgioc.welcome.entity.wenshu_info" >
+        <![CDATA[select distinct wenshu_info.* from wenshu_info ]]>
+
+        <where>
+            <![CDATA[wenshu_info.penalty_prison_type = '有期徒刑' ]]>
+            <choose>
+                <when test="penalty_definite != null">
+                    AND wenshu_info.penalty_name = #{penalty_definite}
+                </when>
+                <when test="length_start != null ">
+                    <![CDATA[wenshu_info.penalty_prison_length >= length_start]]>
+                </when>
+            </choose>
+            <if test="length_end != null">
+                AND   <![wenshu_info.penalty_prison_length >= length_start]]>
+
+            </if>
+
+
+        </where>
+        LIMIT #{page_start},#{page_size}
+    </select>
 
   
 </mapper>
