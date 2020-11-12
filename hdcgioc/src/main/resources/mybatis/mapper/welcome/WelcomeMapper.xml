@@ -58,16 +58,16 @@
 
     <select id="get_wenshu_filter_prison_edu" resultType="com.telchina.hdcgioc.welcome.entity.wenshu_info">
 
-			select distinct wenshu_info.* from wenshu_info right join penalty_map on wenshu_info.penalty_name = penalty_map.penalty_name_definite
+			select distinct wenshu_info.* from wenshu_info
 			<where>
-			<if test="penalty_class != null">
-                penalty_map.penalty_class = #{penalty_class}
-            </if>
-            <if test="penalty_definite != null">
-
-            AND    penalty_map.penalty_name_definite = #{penalty_definite}
-
-            </if>
+                <choose>
+                    <when test="penalty_definite != null">
+                        AND wenshu_info.penalty_name = #{penalty_definite}
+                    </when>
+                    <when test="penalty_class != null ">
+                        <![CDATA[ AND wenshu_info.penalty_name in (select penalty_map.penalty_name_definite from penalty_map where penalty_map.penalty_class = #{penalty_class})]]>
+                    </when>
+                </choose>
             <if test="prison_type != null">
             AND wenshu_info.penalty_prison_type = #{prison_type}
             </if>
@@ -77,26 +77,67 @@
             </where>
 			 LIMIT #{page_start},#{page_size}
     </select>
-    <select id = "get_wenshu_filter_age" resultType="com.telchina.hdcgioc.welcome.entity.wenshu_info" >
-        <![CDATA[select distinct wenshu_info.* from wenshu_info right join penalty_map on wenshu_info.penalty_name = penalty_map.penalty_name_definite where wenshu_info.person_age >= #{age_start} and wenshu_info.person_age < #{age_end} ]]>
+    <select id="get_wenshu_filter_prison_eduNum" resultType="int">
+
+        select SUM(prison_edu_PenaltyDefinite.number) from prison_edu_PenaltyDefinite
         <where>
-        <if test="penalty_class != null">
-            penalty_map.penalty_class = #{penalty_class}
-        </if>
-        <if test="penalty_definite != null">
+            <choose>
+                <when test="penalty_definite != null">
+                    AND prison_edu_PenaltyDefinite.penalty_name = #{penalty_definite}
+                </when>
+                <when test="penalty_class != null ">
+                    <![CDATA[ AND prison_edu_PenaltyDefinite.penalty_name in (select penalty_map.penalty_name_definite from penalty_map where penalty_map.penalty_class = #{penalty_class})]]>
+                </when>
+            </choose>
+            <if test="prison_type != null">
+                AND prison_edu_PenaltyDefinite.penalty_prison_type = #{prison_type}
+            </if>
 
-           AND penalty_map.penalty_name_definite = #{penalty_definite}
-        </if>
-
+            <if test=" edu_level != null">
+                AND prison_edu_PenaltyDefinite.person_edu = #{edu_level}
+            </if>
         </where>
-        LIMIT #{page_start},#{page_size}
+    </select>
+    <select id = "get_wenshu_filter_age" resultType="com.telchina.hdcgioc.welcome.entity.wenshu_info" >
+    <![CDATA[select distinct wenshu_info.* from wenshu_info   ]]>
+    <where>
+        <![CDATA[wenshu_info.person_age >= #{age_start} and wenshu_info.person_age < #{age_end}]]>
+        <choose>
+            <when test="penalty_definite != null">
+                AND wenshu_info.penalty_name = #{penalty_definite}
+            </when>
+            <when test="penalty_class != null ">
+                <![CDATA[ AND wenshu_info.penalty_name in (select penalty_map.penalty_name_definite from penalty_map where penalty_map.penalty_class = #{penalty_class})]]>
+            </when>
+        </choose>
+    </where>
+    LIMIT #{page_start},#{page_size}
+</select>
+    <select id = "get_wenshu_filter_ageNum" resultType="int" >
+        <![CDATA[select SUM(age_penaltyDefinite.number) from age_penaltyDefinite   ]]>
+        <where>
+            <![CDATA[age_penaltyDefinite.person_age >= #{age_start} and age_penaltyDefinite.person_age < #{age_end}]]>
+            <choose>
+                <when test="penalty_definite != null">
+                    AND age_penaltyDefinite.penalty_name = #{penalty_definite}
+                </when>
+                <when test="penalty_class != null ">
+                    <![CDATA[ AND age_penaltyDefinite.penalty_name in (select penalty_map.penalty_name_definite from penalty_map where penalty_map.penalty_class = #{penalty_class})]]>
+                </when>
+            </choose>
+        </where>
     </select>
     <select id = "get_wenshu_filter_province" resultType="com.telchina.hdcgioc.welcome.entity.wenshu_info" >
         <![CDATA[select distinct wenshu_info.* from wenshu_info ]]>
         <where>
-            <if test="penalty_class != null">
-                <![CDATA[wenshu_info.penalty_name in (select penalty_map.penalty_name_definite from penalty_map where penalty_map.penalty_class = #{penalty_class})]]>
-            </if>
+            <choose>
+                <when test="penalty_definite != null">
+                    AND wenshu_info.penalty_name = #{penalty_definite}
+                </when>
+                <when test="penalty_class != null ">
+                    <![CDATA[ AND wenshu_info.penalty_name in (select penalty_map.penalty_name_definite from penalty_map where penalty_map.penalty_class = #{penalty_class})]]>
+                </when>
+            </choose>
 
             <if test="province_address!= null">
              AND   <![CDATA[wenshu_info.id in (select province.id from province where province.province_address = #{province_address})]]>
@@ -109,6 +150,28 @@
         </where>
         LIMIT #{page_start},#{page_size}
     </select>
+    <select id = "get_wenshu_filter_provinceNum" resultType="int" >
+        <![CDATA[select SUM(province_penaltyDefinite.number) from province_penaltyDefinite ]]>
+        <where>
+            <choose>
+                <when test="penalty_definite != null">
+                    AND province_penaltyDefinite.penalty_name = #{penalty_definite}
+                </when>
+                <when test="penalty_class != null ">
+                    <![CDATA[ AND province_penaltyDefinite.penalty_name in (select penalty_map.penalty_name_definite from penalty_map where penalty_map.penalty_class = #{penalty_class})]]>
+                </when>
+            </choose>
+
+            <if test="province_address!= null">
+                AND   <![CDATA[province_penaltyDefinite.province_address = #{province_address}]]>
+
+            </if>
+            <if test="province_residence!= null">
+                AND  <![CDATA[province_penaltyDefinite.province_residence = #{province_residence}]]>
+            </if>
+
+        </where>
+    </select>
     <select id = "get_wenshu_filter_prisonLength" resultType="com.telchina.hdcgioc.welcome.entity.wenshu_info" >
         <![CDATA[select distinct wenshu_info.* from wenshu_info ]]>
 
@@ -118,12 +181,16 @@
                 <when test="penalty_definite != null">
                     AND wenshu_info.penalty_name = #{penalty_definite}
                 </when>
-                <when test="length_start != null ">
-                    <![CDATA[wenshu_info.penalty_prison_length >= length_start]]>
+                <when test="penalty_class != null ">
+                    <![CDATA[ AND wenshu_info.penalty_name in (select penalty_map.penalty_name_definite from penalty_map where penalty_map.penalty_class = #{penalty_class})]]>
                 </when>
             </choose>
+            <if test="length_start!=null">
+               AND <![CDATA[wenshu_info.penalty_prison_length >= #{length_start}]]>
+            </if>
             <if test="length_end != null">
-                AND   <![wenshu_info.penalty_prison_length >= length_start]]>
+
+                    <![CDATA[AND wenshu_info.penalty_prison_length < #{length_end}]]>
 
             </if>
 
@@ -131,6 +198,29 @@
         </where>
         LIMIT #{page_start},#{page_size}
     </select>
+    <select id = "get_wenshu_filter_prisonLengthNum" resultType="int" >
+        <![CDATA[select SUM(prison_length_num.number) from prison_length_num ]]>
+
+        <where>
+            <choose>
+                <when test="penalty_definite != null">
+                    AND prison_length_num.penalty_name = #{penalty_definite}
+                </when>
+                <when test="penalty_class != null ">
+                    <![CDATA[ AND prison_length_num.penalty_name in (select penalty_map.penalty_name_definite from penalty_map where penalty_map.penalty_class = #{penalty_class})]]>
+                </when>
+            </choose>
+            <if test="length_start!=null">
+                AND <![CDATA[prison_length_num.penalty_prison_length >= #{length_start}]]>
+            </if>
+            <if test="length_end != null">
+
+                <![CDATA[AND prison_length_num.penalty_prison_length < #{length_end}]]>
+
+            </if>
+        </where>
+    </select>
+
 
   
 </mapper>

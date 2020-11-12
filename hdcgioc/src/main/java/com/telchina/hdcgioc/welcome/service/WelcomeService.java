@@ -59,9 +59,11 @@ public class WelcomeService {
     }
     public Map<String,Object> wenshu_ByPenalty_definite(String penalty_definite, int page_no,int page_size){
         Map<String,Object> resultMap = new HashMap<>();
+        int definite_num = welcomeMapper.get_definite_num(penalty_definite);
         int page_start = (page_no-1)*page_size;
         List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_ByDefinite(penalty_definite,page_start,page_size);
         resultMap.put("wenshu_list",wenshu_list);
+        resultMap.put("count",definite_num);
         return resultMap;
     }
     public Map  get_class_num(String penalty_class) {
@@ -74,34 +76,44 @@ public class WelcomeService {
         Map<String,Object> resultMap = new HashMap<>();
         int page_start = (page_no-1)*page_size;
         List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_Byclass(penalty_class,page_start,page_size);
+        int class_num = welcomeMapper.get_class_num(penalty_class);
         resultMap.put("wenshu_list",wenshu_list);
+        resultMap.put("count",class_num);
         return resultMap;
     }
     public Map<String,Object> wenshuBy_edu_prisionType(String penalty_class,String penalty_definite,String prison_type, String edu_level,int page_no,int page_size){
         Map<String,Object> resultMap = new HashMap<>();
         int page_start = (page_no-1)*page_size;
         List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_filter_prison_edu(penalty_class,penalty_definite,prison_type,edu_level,page_start,  page_size);
+        int count = welcomeMapper.get_wenshu_filter_prison_eduNum(penalty_class,penalty_definite,prison_type,edu_level);
         resultMap.put("wenshu_list",wenshu_list);
+        resultMap.put("count",count);
         return resultMap;
     }
     public Map<String,Object> wenshuBy_age(String penalty_class,String penalty_definite,int age_start, int  age_end,int page_no,int page_size){
         Map<String,Object> resultMap = new HashMap<>();
         int page_start = (page_no-1)*page_size;
         List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_filter_age(penalty_class,penalty_definite,age_start,age_end,page_start,  page_size);
+        int count = welcomeMapper.get_wenshu_filter_ageNum(penalty_class,penalty_definite,age_start,age_end);
+        resultMap.put("count",count);
         resultMap.put("wenshu_list",wenshu_list);
         return resultMap;
     }
-    public Map<String,Object> wenshuBy_province(String penalty_class,String province_address,String province_residence,int page_no,int page_size){
+    public Map<String,Object> wenshuBy_province(String penalty_class,String penalty_definite,String province_address,String province_residence,int page_no,int page_size){
         Map<String,Object> resultMap = new HashMap<>();
         int page_start = (page_no-1)*page_size;
-        List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_filter_province(penalty_class,province_address,province_residence,page_start,  page_size);
+        List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_filter_province(penalty_class,penalty_definite,province_address,province_residence,page_start,  page_size);
+        int count = welcomeMapper.get_wenshu_filter_provinceNum(penalty_class,penalty_definite,province_address,province_residence);
         resultMap.put("wenshu_list",wenshu_list);
+        resultMap.put("count",count);
         return resultMap;
     }
     public Map<String,Object> wenshuBy_prisonLength(String penalty_class,String penalty_definite,double length_start,double length_end,int page_no,int page_size){
         Map<String,Object> resultMap = new HashMap<>();
         int page_start = (page_no-1)*page_size;
         List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_filter_prisonLength(penalty_class,penalty_definite,length_start, length_end,page_start,  page_size);
+        int count = welcomeMapper.get_wenshu_filter_prisonLengthNum(penalty_class,penalty_definite,length_start,length_end);
+        resultMap.put("count",count);
         resultMap.put("wenshu_list",wenshu_list);
         return resultMap;
     }

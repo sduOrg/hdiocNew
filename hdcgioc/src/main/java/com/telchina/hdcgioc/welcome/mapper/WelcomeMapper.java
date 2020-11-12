@@ -23,9 +23,13 @@ public interface WelcomeMapper {
     //刑罚种类 文化程度 年龄 类罪 个罪
 
     List<wenshu_info> get_wenshu_filter_prison_edu(String penalty_class,String penalty_definite,String prison_type,String edu_level,int page_start, int page_size);
+    int get_wenshu_filter_prison_eduNum(String penalty_class,String penalty_definite,String prison_type,String edu_level);
     List<wenshu_info> get_wenshu_filter_age(String penalty_class,String penalty_definite,int age_start,int age_end,int page_start, int page_size);
-    List<wenshu_info> get_wenshu_filter_province(String penalty_class,String province_address,String province_residence,int page_start, int page_size);
+    int get_wenshu_filter_ageNum(String penalty_class,String penalty_definite,int age_start,int age_end);
+    List<wenshu_info> get_wenshu_filter_province(String penalty_class,String penalty_definite,String province_address,String province_residence,int page_start, int page_size);
+    int  get_wenshu_filter_provinceNum(String penalty_class,String penalty_definite,String province_address,String province_residence);
     List<wenshu_info> get_wenshu_filter_prisonLength(String penalty_class,String penalty_definite,double length_start,double length_end,int page_start,int page_size);
+    int  get_wenshu_filter_prisonLengthNum(String penalty_class,String penalty_definite,double length_start,double length_end);
 
 
 
