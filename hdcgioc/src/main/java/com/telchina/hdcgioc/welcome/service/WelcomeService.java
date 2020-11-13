@@ -117,4 +117,13 @@ public class WelcomeService {
         resultMap.put("wenshu_list",wenshu_list);
         return resultMap;
     }
+    public Map<String,Object> wenshuBy_interMonth(String penalty_class,String penalty_definite,int  start, int  end,int page_no,int page_size){
+        Map<String,Object> resultMap = new HashMap<>();
+        int page_start = (page_no-1)*page_size;
+        List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_filter_interMonth(penalty_class,penalty_definite,start, end,page_start,  page_size);
+        int count = welcomeMapper.get_wenshu_filter_interMonthNum(penalty_class,penalty_definite,start,end);
+        resultMap.put("count",count);
+        resultMap.put("wenshu_list",wenshu_list);
+        return resultMap;
+    }
 }

@@ -92,9 +92,16 @@ public class WelcomeController {
         return welcomeService.wenshuBy_province(penalty_class,penalty_definite,province_address,province_residence,page_no,page_size);
 
     }
+    //有期徒刑 刑期过滤
     @RequestMapping(value = "/get_wenshuPrisonLength",method = RequestMethod.GET)
     public Map<String,Object> wenshuBy_prisonLength(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "penalty_definite",required = false) String penalty_definite,@RequestParam(value = "length_start",defaultValue = "0") double length_start,@RequestParam(value = "length_end",defaultValue = "240") double length_end,@RequestParam(value = "page_no",required = false,defaultValue = "1" ) int page_no,@RequestParam(value = "page_size",required = false,defaultValue = "20") int page_size){
         return welcomeService.wenshuBy_prisonLength( penalty_class, penalty_definite,length_start, length_end, page_no, page_size);
+
+    }
+    //羁押周期过滤
+    @RequestMapping(value = "/get_wenshuInterMonth",method = RequestMethod.GET)
+    public Map<String,Object> wenshuBy_interMonth(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "penalty_definite",required = false) String penalty_definite,@RequestParam(value = "start",defaultValue = "0") int start,@RequestParam(value = "end",defaultValue = "36") int end,@RequestParam(value = "page_no",required = false,defaultValue = "1" ) int page_no,@RequestParam(value = "page_size",required = false,defaultValue = "20") int page_size){
+        return welcomeService.wenshuBy_interMonth( penalty_class, penalty_definite,start, end, page_no, page_size);
 
     }
 
