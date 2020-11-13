@@ -79,7 +79,7 @@
     </select>
     <select id="get_wenshu_filter_prison_eduNum" resultType="int">
 
-        select SUM(prison_edu_PenaltyDefinite.number) from prison_edu_PenaltyDefinite
+        select IFNULL(SUM(prison_edu_PenaltyDefinite.number),0) from prison_edu_PenaltyDefinite
         <where>
             <choose>
                 <when test="penalty_definite != null">
@@ -114,7 +114,7 @@
     LIMIT #{page_start},#{page_size}
 </select>
     <select id = "get_wenshu_filter_ageNum" resultType="int" >
-        <![CDATA[select SUM(age_penaltyDefinite.number) from age_penaltyDefinite   ]]>
+        <![CDATA[select IFNULL(SUM(age_penaltyDefinite.number),0) from age_penaltyDefinite   ]]>
         <where>
             <![CDATA[age_penaltyDefinite.person_age >= #{age_start} and age_penaltyDefinite.person_age < #{age_end}]]>
             <choose>

@@ -76,24 +76,24 @@ public class WelcomeController {
     }
     //过滤教育程度 刑罚
     @RequestMapping(value = "/get_wenshu_prisonTypeEdu",method = RequestMethod.GET)
-    public Map<String,Object> get_wenshu_prisonTypeEdu(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "penalty_definite",required = false) String penalty_definite,@RequestParam(value = "prison_type",required = false) String prison_type,@RequestParam(value = "edu_level",required = false) String edu_level,@RequestParam(value = "page_no",required = false ) int page_no,@RequestParam(value = "page_size",required = false) int page_size){
+    public Map<String,Object> get_wenshu_prisonTypeEdu(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "penalty_definite",required = false) String penalty_definite,@RequestParam(value = "prison_type",required = false) String prison_type,@RequestParam(value = "edu_level",required = false) String edu_level,@RequestParam(value = "page_no",defaultValue = "1") int page_no,@RequestParam(value = "page_size",defaultValue = "20") int page_size){
         return welcomeService.wenshuBy_edu_prisionType(penalty_class,penalty_definite,prison_type,edu_level,page_no,page_size);
 
     }
     //过滤 年龄 类罪 个罪
     @RequestMapping(value = "/get_wenshu_age",method = RequestMethod.GET)
-    public Map<String,Object> get_wenshu_age(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "penalty_definite",required = false) String penalty_definite,@RequestParam(value = "age_start",defaultValue = "14") int  age_start,@RequestParam(value = "age_end",defaultValue = "70") int  age_end,@RequestParam(value = "page_no",required = false ) int page_no,@RequestParam(value = "page_size",required = false) int page_size){
+    public Map<String,Object> get_wenshu_age(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "penalty_definite",required = false) String penalty_definite,@RequestParam(value = "age_start",defaultValue = "14") int  age_start,@RequestParam(value = "age_end",defaultValue = "70") int  age_end,@RequestParam(value = "page_no",required = false,defaultValue = "1" ) int page_no,@RequestParam(value = "page_size",required = false,defaultValue = "20") int page_size){
         return welcomeService.wenshuBy_age(penalty_class,penalty_definite,age_start,age_end,page_no,page_size);
 
     }
     //省份过滤
     @RequestMapping(value = "/get_wenshu_province",method = RequestMethod.GET)
-    public Map<String,Object> get_wenshu_wenshu(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "penalty_definite",required = false)String penalty_definite,@RequestParam(value = "province_address",required = false) String province_address,@RequestParam(value = "province_residence",required = false) String province_residence,@RequestParam(value = "page_no",required = false ) int page_no,@RequestParam(value = "page_size",required = false) int page_size){
+    public Map<String,Object> get_wenshu_wenshu(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "penalty_definite",required = false)String penalty_definite,@RequestParam(value = "province_address",required = false) String province_address,@RequestParam(value = "province_residence",required = false) String province_residence,@RequestParam(value = "page_no",required = false,defaultValue = "1" ) int page_no,@RequestParam(value = "page_size",required = false,defaultValue = "20") int page_size){
         return welcomeService.wenshuBy_province(penalty_class,penalty_definite,province_address,province_residence,page_no,page_size);
 
     }
     @RequestMapping(value = "/get_wenshuPrisonLength",method = RequestMethod.GET)
-    public Map<String,Object> wenshuBy_prisonLength(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "penalty_definite",required = false) String penalty_definite,@RequestParam(value = "length_start",defaultValue = "0") double length_start,@RequestParam(value = "length_end",defaultValue = "240") double length_end,@RequestParam(value = "page_no",required = false ) int page_no,@RequestParam(value = "page_size",required = false) int page_size){
+    public Map<String,Object> wenshuBy_prisonLength(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "penalty_definite",required = false) String penalty_definite,@RequestParam(value = "length_start",defaultValue = "0") double length_start,@RequestParam(value = "length_end",defaultValue = "240") double length_end,@RequestParam(value = "page_no",required = false,defaultValue = "1" ) int page_no,@RequestParam(value = "page_size",required = false,defaultValue = "20") int page_size){
         return welcomeService.wenshuBy_prisonLength( penalty_class, penalty_definite,length_start, length_end, page_no, page_size);
 
     }
