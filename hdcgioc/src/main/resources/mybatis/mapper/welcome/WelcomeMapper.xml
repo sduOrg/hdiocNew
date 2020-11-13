@@ -151,7 +151,7 @@
         LIMIT #{page_start},#{page_size}
     </select>
     <select id = "get_wenshu_filter_provinceNum" resultType="int" >
-        <![CDATA[select SUM(province_penaltyDefinite.number) from province_penaltyDefinite ]]>
+        <![CDATA[select IFNULL(SUM(province_penaltyDefinite.number),0)from province_penaltyDefinite ]]>
         <where>
             <choose>
                 <when test="penalty_definite != null">
@@ -199,7 +199,7 @@
         LIMIT #{page_start},#{page_size}
     </select>
     <select id = "get_wenshu_filter_prisonLengthNum" resultType="int" >
-        <![CDATA[select SUM(prison_length_num.number) from prison_length_num ]]>
+        <![CDATA[select IFNULL(SUM(prison_length_num.number),0) from prison_length_num ]]>
 
         <where>
             <choose>
