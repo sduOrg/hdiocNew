@@ -111,8 +111,8 @@ public class WelcomeService {
     public Map<String,Object> wenshuBy_prisonLength(String penalty_class,String penalty_definite,double length_start,double length_end,int page_no,int page_size){
         Map<String,Object> resultMap = new HashMap<>();
         int page_start = (page_no-1)*page_size;
-        List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_filter_prisonLength(penalty_class,penalty_definite,length_start, length_end,page_start,  page_size);
-        int count = welcomeMapper.get_wenshu_filter_prisonLengthNum(penalty_class,penalty_definite,length_start,length_end);
+        List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_filter_prisonLength(penalty_class,penalty_definite,length_start*12, length_end*12,page_start,  page_size);
+        int count = welcomeMapper.get_wenshu_filter_prisonLengthNum(penalty_class,penalty_definite,length_start*12,length_end*12);
         resultMap.put("count",count);
         resultMap.put("wenshu_list",wenshu_list);
         return resultMap;
