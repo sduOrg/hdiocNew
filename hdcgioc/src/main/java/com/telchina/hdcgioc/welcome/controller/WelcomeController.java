@@ -104,7 +104,18 @@ public class WelcomeController {
         return welcomeService.wenshuBy_interMonth( penalty_class, penalty_definite,start, end, page_no, page_size);
 
     }
+    //法定情节过滤
+    @RequestMapping(value = "/get_wenshu_laws",method = RequestMethod.GET)
+    public Map<String,Object> get_wenshu_wenshu(@RequestParam(value = "penalty_class", required = false) String penalty_class,@RequestParam(value = "penalty_definite",required = false)String penalty_definite,@RequestParam(value = "laws",required = false) String laws,@RequestParam(value = "page_no",required = false,defaultValue = "1" ) int page_no,@RequestParam(value = "page_size",required = false,defaultValue = "20") int page_size){
+        return welcomeService.wenshuBy_laws(penalty_class,penalty_definite,laws,page_no,page_size);
 
+    }
+    //获取全部类罪列表
+    @RequestMapping("/get_laws")
+    public Map<String,Object> get_laws(){
+        return welcomeService.get_laws();
+
+    }
 
 
 

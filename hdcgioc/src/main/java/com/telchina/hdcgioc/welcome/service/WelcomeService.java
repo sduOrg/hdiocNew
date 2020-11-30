@@ -126,4 +126,19 @@ public class WelcomeService {
         resultMap.put("wenshu_list",wenshu_list);
         return resultMap;
     }
+    public Map<String,Object> wenshuBy_laws(String penalty_class,String penalty_definite,String laws,int page_no,int page_size){
+        Map<String,Object> resultMap = new HashMap<>();
+        int page_start = (page_no-1)*page_size;
+        List<wenshu_info> wenshu_list = welcomeMapper.get_wenshu_filter_laws(penalty_class,penalty_definite,laws,page_start,  page_size);
+        int count = welcomeMapper.get_wenshu_filter_lawsNum(penalty_class,penalty_definite,laws);
+        resultMap.put("wenshu_list",wenshu_list);
+        resultMap.put("count",count);
+        return resultMap;
+    }
+    public Map<String, Object> get_laws() {
+        Map<String, Object> resultMap = new HashMap<>();
+        List<String> laws = welcomeMapper.get_laws();
+        resultMap.put("laws", laws);
+        return resultMap;
+    }
 }

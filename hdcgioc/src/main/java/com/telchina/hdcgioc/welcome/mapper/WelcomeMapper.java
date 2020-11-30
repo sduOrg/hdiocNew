@@ -32,6 +32,10 @@ public interface WelcomeMapper {
     int  get_wenshu_filter_prisonLengthNum(String penalty_class,String penalty_definite,double length_start,double length_end);
     List<wenshu_info> get_wenshu_filter_interMonth(String penalty_class,String penalty_definite,double start,double end,int page_start,int page_size);
     int get_wenshu_filter_interMonthNum(String penalty_class,String penalty_definite,int start,int end);
+    int get_wenshu_filter_lawsNum(String penalty_class,String penalty_definite,String laws);
+    List<wenshu_info> get_wenshu_filter_laws(String penalty_class,String penalty_definite,String laws,int page_start,int page_size);
+    List<String> get_laws();
+
 
 
 

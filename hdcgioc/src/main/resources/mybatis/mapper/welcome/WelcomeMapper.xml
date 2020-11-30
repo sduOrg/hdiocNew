@@ -251,7 +251,49 @@
         </if>
         </where>
     </select>
+    <select id = "get_wenshu_filter_lawsNum" resultType="int" >
+        <![CDATA[select IFNULL(SUM(definiteNum_Laws.number),0)from definiteNum_Laws ]]>
+        <where>
+            <choose>
+                <when test="penalty_definite != null">
+                    definiteNum_Laws.penalty_name = #{penalty_definite}
+                </when>
+                <when test="penalty_class != null ">
+                    <![CDATA[ AND definiteNum_Laws.penalty_name in (select penalty_map.penalty_name_definite from penalty_map where penalty_map.penalty_class = #{penalty_class})]]>
+                </when>
+            </choose>
+
+            <if test="laws!= null">
+                AND   <![CDATA[definiteNum_Laws.law_item_content = #{laws}]]>
+            </if>
+        </where>
+    </select>
+    <select id = "get_wenshu_filter_laws" resultType="com.telchina.hdcgioc.welcome.entity.wenshu_info" >
+        <![CDATA[select distinct wenshu_info.* from wenshu_info ]]>
+        <where>
+            <choose>
+                <when test="penalty_definite != null">
+                    AND wenshu_info.penalty_name = #{penalty_definite}
+                </when>
+                <when test="penalty_class != null ">
+                    <![CDATA[ AND wenshu_info.penalty_name in (select penalty_map.penalty_name_definite from penalty_map where penalty_map.penalty_class = #{penalty_class})]]>
+                </when>
+            </choose>
+
+            <if test="laws!= null">
+                AND   <![CDATA[wenshu_info.id in (select wenshu_apply_laws.case_id from wenshu_apply_laws where wenshu_apply_laws.law_item_content = #{laws})]]>
+
+            </if>
 
 
+        </where>
+        LIMIT #{page_start},#{page_size}
+    </select>
+    <select id="get_laws" resultType="java.lang.String">
+        <![CDATA[
+			SELECT distinct law_item_content FROM definiteNum_Laws
+        ]]>
+
+    </select>
   
 </mapper>
