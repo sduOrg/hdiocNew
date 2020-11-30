@@ -110,7 +110,7 @@ public class WelcomeController {
         return welcomeService.wenshuBy_laws(penalty_class,penalty_definite,laws,page_no,page_size);
 
     }
-    //获取全部类罪列表
+    //获取全部法定情节列表
     @RequestMapping("/get_laws")
     public Map<String,Object> get_laws(){
         return welcomeService.get_laws();
