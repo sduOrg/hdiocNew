@@ -15,6 +15,15 @@
                    id="{{item.code}}">{{item.value}}</li>
                 </ul>
             </div>
+
+            <div class="temp-kinds-main">
+                <div class="temp-kinds-title">法定情节:</div>
+                      <ul class="temp-kinds-list">
+                        <li *ngFor="let item of lawStoryList;let i = index" [ngClass]="{'active':i== selectLawStoryIndex}" (click)="searchLawStory(i,item)"
+                        >{{item}}</li>
+                      </ul>
+            </div>
+
             <div class="temp-kinds-main">
               <div class="temp-kinds-title">筛选条件:</div>
                 <ul class="temp-kinds-list">
@@ -23,14 +32,14 @@
                   <li *ngIf = "!!selectPenaltyTitle"  style="cursor: default;">{{selectPenaltyTitle}}
                     <i style="cursor: pointer;color: #1890ff;" (click)="deleteFlagType(1,item)" nz-icon nzType="close" nzTheme="outline"></i>
                    </li>
-                   <li *ngIf = "!!age_rang" style="cursor: default;">{{age_rang}}
+                   <li *ngIf = "!!selectPLawStoryTitle" style="cursor: default;">{{selectPLawStoryTitle}}
                     <i  style="cursor: pointer;color: #1890ff;" (click)="deleteFlagType(2,item)" nz-icon nzType="close" nzTheme="outline"></i>
                    </li>
                 </ul>
             </div>
     </div>
 
-    <div>
+    <!-- <div>
          <div style="display: flex;">
             <div class="age-chart-width">
                 <h2 class="cont-title">
@@ -40,7 +49,7 @@
                 <div id="type-echart" style="width: 90%;height: 260px;"></div>
             </div>
          </div>
-    </div>
+    </div> -->
     <div class="type-table">
         <h2 class="cont-title">
             类罪中的刑罚种类分布
@@ -83,3 +92,4 @@
           </nz-table>
     </div>
 </div>
+

@@ -12,16 +12,20 @@
     list-style: none;
     padding-left: 12px;
     flex-flow: row wrap;
+    max-height: 200px;
+    overflow: auto;
 }
 .temp-kinds-list li{
     padding-left: 8px;
     padding-right: 8px;
-    padding-bottom: 8px;
     cursor: pointer;
+    margin: 0 4px 6px;
+    border: 1px solid #ccc;
 }
 
 .temp-kinds-list li.active{
-	color:  #3895FF;
+    color:  #3895FF;
+    border: 1px solid #3895FF;
 }
 .age-chart-width{
     width: 100%;

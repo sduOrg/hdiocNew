@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -6,13 +7,16 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit,AfterViewInit {
 
   private backurl:string;
   itemDetail:{"case_no":""};
   constructor(private acrouter:ActivatedRoute,
-              private router:Router) { }
-
+              private router:Router,
+              @Inject(DOCUMENT) private doc:Document) { }
+  ngAfterViewInit(): void {
+    window.scroll(0,0);
+  }
   ngOnInit() {
     this.acrouter.queryParams.subscribe(
       params =>{

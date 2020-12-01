@@ -12,57 +12,100 @@ declare var echarts
 
 export class TypeCaseComponent implements OnInit {
 
-  searchTagNames = [];
-  classValueList = [];
-  // tagTops =[ {key:"1",name:"类最名称"},{key:"2",name:"类最名称"}]
-  selectPersonal:number;
-  selectType:number = 0;
-  selectTitle:string;
+  classValueList = []; //类最
+  penaltyValueList = []; //个罪
+
+  selectTypeIndex: number = 0; //类最选择
+  selectTitle: string;
+
+  selectPenaltyIndex: number = null; //个罪选择
+  selectPenaltyTitle: string;
+
+  eduType:string;
+
   pageIndex = 1;
   total = 100;
-  listOfData = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    }
-  ];
-  constructor(private lawSerivce:LawService,
-              private router:Router) { }
+  listOfData = [];
+  echartsXlist = [];
+  constructor(private lawSerivce: LawService, private router: Router) {}
 
   ngOnInit() {
     this.getClassList();
   }
-  private getClassList(){
-    this.lawSerivce.getPenaltyClass().subscribe(
-      data => {
-        data.penalty_class.forEach((element,index) => {
-          if(!!element && element != null){
-            this.classValueList.push({code:String(index+1),value:element})
-          }
-        });
-        this.selectTitle = this.classValueList[this.selectType].value;
-        this.loadCateCharts();
-      }
-    )
+  private getClassList() {
+    this.lawSerivce.getPenaltyClass().subscribe((data) => {
+      data.penalty_class.forEach((element, index) => {
+        if (element != "null" && element != null) {
+          this.classValueList.push({ code: String(index + 1), value: element });
+        }
+      });
+      this.selectTitle = this.classValueList[this.selectTypeIndex].value;
+      this.loadCateCharts();
+      // this.getPenaltyList(this.selectTitle);
+      this.getWenshuByType();
+    });
   }
-  searchData(index:number){
-      console.log("page",index);
+  private getWenshuByType() {
+    this.lawSerivce
+      .getWenshuByEduOrType(
+        this.selectTitle,
+        this.selectPenaltyTitle,
+        this.eduType,
+        '',
+        String(this.pageIndex)
+      )
+      .subscribe((data) => {
+        this.total = data.count;
+        var list = [];
+        data.wenshu_list.forEach((element) => {
+          list.push(element);
+        });
+        this.listOfData = list;
+        console.log("listOfData", this.listOfData);
+      });
   }
 
+  //点击的类最
+  searchSelectType(index: number, item) {
+    this.selectTypeIndex = index;
+    this.selectTitle = item.value;
+
+    //类最切换 条件情况
+    this.selectPenaltyIndex = null;
+    this.selectPenaltyTitle = null;
+    this.eduType = null;
+
+    this.loadCateCharts();
+    //点击类最加载个罪
+    debugger;
+    this.getWenshuByType();
+  }
+
+  //删除选择条件
+  deleteFlagType(index: number, item: string) {
+    if (index == 1) {
+      this.selectPenaltyIndex = null;
+      this.selectPenaltyTitle = null;
+    } else if (index == 2) {
+      this.eduType = null;
+    }
+    this.loadCateCharts();
+    this.getWenshuByType();
+  }
+
+  //控制翻页
+  searchPageIndexData(index: number) {
+    console.log("page", index);
+    this.pageIndex = index;
+    this.getWenshuByType();
+  }
+
+  private echartsClick(index: number) {
+    console.log("index", index);
+    let nums: string = this.echartsXlist[index];
+    this.eduType = nums;
+    this.getWenshuByType();
+  }
   //详情页面
   gotoDetail(item){
     this.router.navigate(
@@ -75,11 +118,7 @@ export class TypeCaseComponent implements OnInit {
       }
     )
   }
-  searchSelectType(index:number,item){
-    this.selectType = index;
-    this.selectTitle = item.value
-    this.loadCateCharts();
-  }
+
 
   loadCateCharts(){
     this.lawSerivce.getTypeloadCateNumb().subscribe(
@@ -106,6 +145,7 @@ export class TypeCaseComponent implements OnInit {
         yList.push(element.number);
     });
     console.log("xList",xList,"yList",yList);
+    this.echartsXlist = xList;
     var option = {
     tooltip: {
     trigger: 'axis',
@@ -208,19 +248,12 @@ export class TypeCaseComponent implements OnInit {
       if (mychart1.containPixel('grid', pointInPixel)) {
         let xIndex = mychart1.convertFromPixel({ seriesIndex: 0 }, [params.offsetX, params.offsetY])[0]
         console.log("xIndex",xIndex)
+        this.echartsClick(xIndex);
       }
     })
     window.onresize = mychart1.resize();
 
-   
 
-}   
 
-  searchPersonal(index:number,item){
-    if (index == this.selectPersonal){
-      this.selectPersonal = null;
-    }else{
-      this.selectPersonal = index;
-    }
-  }
+}
 }

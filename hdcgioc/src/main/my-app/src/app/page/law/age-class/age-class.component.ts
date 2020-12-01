@@ -11,34 +11,48 @@ export class AgeClassComponent implements OnInit {
 
   classValueList = []; //类最
   penaltyValueList = [];//个罪
-  selectPersonal:number;
-  selectType:number = 0;
-  selectPenalty:number;
+
+  selectTypeIndex:number = 0;//类最选择
   selectTitle:string;
+
+  selectPenaltyIndex:number = null;//个罪选择
+  selectPenaltyTitle:string;
+
+
+  selectTagList = [];
+
+  start_age:string;
+  end_age:string;
+  age_rang:string;
+
   pageIndex = 1;
   total = 100;
   listOfData = [];
+  echartsXlist = [];
   constructor(private lawSerivce:LawService,
               private router:Router) { }
 
   ngOnInit() {
-    this.getWenshuByClass();
     this.getClassList();
-    this.getPenaltyList();
   }
   private getClassList(){
     this.lawSerivce.getPenaltyClass().subscribe(
       data => {
         data.penalty_class.forEach((element,index) => {
-          this.classValueList.push({code:String(index+1),value:element})
+          if (element != "null" && element != null){
+            this.classValueList.push({code:String(index+1),value:element})
+          }
         });
-        this.selectTitle = this.classValueList[this.selectType].value;
+        this.selectTitle = this.classValueList[this.selectTypeIndex].value;
         this.loadCateCharts();
+        this.getPenaltyList(this.selectTitle);
+        this.getWenshuByAge();
       }
     )
   }
-  private getPenaltyList(){
-    this.lawSerivce.getPenaltyByClass('').subscribe(
+  private getPenaltyList(classname:string){
+    this.penaltyValueList = [];
+    this.lawSerivce.getPenaltyByClass(classname).subscribe(
       data =>{
         data.penalty_definite.forEach((element,index) => {
           this.penaltyValueList.push({code:String(index+1),value:element})
@@ -47,9 +61,10 @@ export class AgeClassComponent implements OnInit {
     )
   }
 
-  private getWenshuByClass(){
-    this.lawSerivce.getWenshuByClass('').subscribe(
+  private getWenshuByAge(){
+    this.lawSerivce.getWenshuByAge(this.selectTitle,this.selectPenaltyTitle,this.start_age,this.end_age,String(this.pageIndex)).subscribe(
       data =>{
+        this.total = data.count;
         var list = [];
         data.wenshu_list.forEach(element => {
           list.push(element);
@@ -60,11 +75,94 @@ export class AgeClassComponent implements OnInit {
     )
   }
 
-  searchPageIndexData(index:number){
-      console.log("page",index);
+
+  //点击的类最
+  searchSelectType(index:number,item){
+    this.selectTypeIndex = index;
+    this.selectTitle = item.value
+
+    //类最切换 条件情况
+    this.selectPenaltyIndex = null;
+    this.selectPenaltyTitle = null;
+    this.start_age = null;
+    this.end_age = null;
+    this.age_rang = null;
+
+    this.loadCateCharts();
+    //点击类最加载个罪
+    this.getPenaltyList(this.selectTitle);
+    this.getWenshuByAge();
+  }
+  //点击个罪
+  searchPenaltyType(index:number,item){
+    console.log("page",index);
+    if (this.selectPenaltyIndex == index){
+      this.selectPenaltyIndex = null;
+      this.selectPenaltyTitle = null;
+    }else{
+      this.selectPenaltyIndex = index;
+      this.selectPenaltyTitle = item.value
+    }
+    this.loadCateCharts();
+    this.getWenshuByAge();
+
+}
+
+  //删除选择条件
+  deleteFlagType(index:number,item:string){
+    if (index == 1){
+      this.selectPenaltyIndex = null;
+      this.selectPenaltyTitle = null;
+    }else if (index == 2){
+      this.start_age = null;
+      this.end_age = null;
+      this.age_rang = null;
+    }
+    this.loadCateCharts();
+    this.getWenshuByAge();
+  }
+  //加载柱状图
+  loadCateCharts(){
+    debugger;
+    if (this.selectPenaltyIndex != null){ //判断是否点击了个罪
+      this.lawSerivce.getPenaltyAgeList().subscribe(
+        data =>{
+          data.forEach(element => {
+            if (element.penalty_class == this.selectTitle){
+                // for (var key in element.age_num){
+                //     if (key != "unkown"){
+                //         yList.push(element.age_num[key]);
+                //     }
+                // }
+                element.penalty_definite_age.forEach(ele => {
+                    if (ele.penalty_name_definite == this.selectPenaltyTitle){
+                      this.loadDataForChart(ele)
+                    }
+                });
+            }
+         });
+        }
+      )
+    }else{
+      this.lawSerivce.getPenaltyAgeClass().subscribe(
+        data =>{
+          data.forEach((element,index) => {
+            if (!!element.penalty_class && element.penalty_class == this.selectTitle){
+              this.loadDataForChart(element.age_num);
+             }
+          });
+        }
+      )
+    }
+
   }
 
-
+  //控制翻页
+  searchPageIndexData(index:number){
+    console.log("page",index);
+    this.pageIndex = index;
+    this.getWenshuByAge();
+}
   //详情页面
   gotoDetail(item){
     this.router.navigate(
@@ -77,34 +175,37 @@ export class AgeClassComponent implements OnInit {
       }
     )
   }
-  searchSelectType(index:number,item){
-    this.selectType = index;
-    this.selectTitle = item.value
-    this.loadCateCharts();
-  }
-  searchPenaltyType(index:number,item){
-    console.log("page",index);
-    this.selectPenalty = index;
-}
-  loadCateCharts(){
-    this.lawSerivce.getTypeloadCateNumb().subscribe(
-      data =>{
-        data.forEach((element,index) => {
-          if (!!element.penalty_class && element.penalty_class == this.selectTitle){
-              this.loadDataForChart(element.penalty_prison_type_list);
-           }
-        });
+  private echartsClick(index:number){
+    console.log("index",index);
+    let nums:string = this.echartsXlist[index];
+    this.age_rang = nums;
+    var age_start = "0";
+    var age_end = "120"
+    if (nums.indexOf("-") != -1){
+     const arr =  nums.split("-");
+     age_start = arr[0];
+     age_end = arr[1];
+    }else{
+      if (index == 0){
+        age_end = nums;
+      }else{
+        age_start = nums;
       }
-    )
+    }
+    this.start_age = age_start;
+    this.end_age = age_end;
+    this.getWenshuByAge();
+    console.log("age_start",age_start,"age_end",age_end);
   }
-
-  private loadDataForChart(list){
+  private loadDataForChart(map){
     var yList = [];
-    var xList = [];
-    list.forEach(element => {
-        xList.push(element.name);
-        yList.push(element.number);
-    });
+    var xList = ["<14","14-18","18-30","30-40","40-50","50-60","60-70","70-75",">75"]
+           for (var key in map){
+               if (key != "unkown" && key != "unkonwn" && key != "penalty_name_definite"){
+                   yList.push(map[key]);
+               }
+    }
+    this.echartsXlist  = ["14","14-18","18-30","30-40","40-50","50-60","60-70","70-75","75"];
     console.log("xList",xList,"yList",yList);
     var option = {
     tooltip: {
@@ -208,20 +309,13 @@ export class AgeClassComponent implements OnInit {
       if (mychart1.containPixel('grid', pointInPixel)) {
         let xIndex = mychart1.convertFromPixel({ seriesIndex: 0 }, [params.offsetX, params.offsetY])[0]
         console.log("xIndex",xIndex)
+        this.echartsClick(xIndex);
       }
     })
     window.onresize = mychart1.resize();
 
-   
 
-}   
 
-  searchPersonal(index:number,item){
-    if (index == this.selectPersonal){
-      this.selectPersonal = null;
-    }else{
-      this.selectPersonal = index;
-    }
-  }
+}
 
 }

@@ -1,100 +1,88 @@
-<div class="container-wraper">
-    <div class="screens">
-			     <div class="temp-kinds-main">
-				<!-- <span class="temp-kinds-name" *ngIf="searchTagNames.length>0" style="margin-top: 0px;">筛选条件</span>
-				<ul class="temp-kinds-list searchUI" style="margin: 0 8px" *ngIf="searchTagNames.length>0">
-					<li class="searchspan" *ngFor="let tag of searchTagNames;let i = index">{{tag}}
-						<span class="imgspan">
-							<img src="assets/images/delTagHaver.png" (click)="delSearch(tag,i)">
-						</span>
-					</li>
-				</ul> -->
-				<div class="temp-kinds-title">类罪名称:</div>
-              <ul class="temp-kinds-list">
-                <li *ngFor="let item of classValueList;let i = index" [ngClass]="{'active':i== selectType}" (click)="searchSelectType(i,item)"
-                id="{{item.code}}">{{item.value}}</li>
-                <!-- <li class="searchLi scroll" (click)="quotaClassSearchSelectClick()" *ngIf="quotaSearchClass">
-                  <span></span>
-                  <p>{{quotaSearch_class}}</p>
-                  <ul class="searchClass scroll" *ngIf="quotaSearchClassFlag">
-                    <li *ngFor="let quotaClass of quotaSearchClassList;let i = index" [ngClass]="{'kinds-active':i==itemFlag}" (click)="quotaClassSearchSelectEva(i)">{{quotaClass.value}}</li>
-                  </ul>
-                </li> -->
-              </ul>
-            </div>
 
-            <!-- <div class="temp-kinds-main">
-              <div class="temp-kinds-title">个罪名称:</div>
-                <ul class="temp-kinds-list">
-                  <li *ngFor="let item of codeValueList;let i = index" [ngClass]="{'active':i== selectType}" (click)="searchSelectType(i,item)"
-                   id="{{item.code}}">{{item.value}}</li>
-                </ul>
-            </div> -->
-            <!-- <div class="temp-kinds-main">
-				<div class="temp-kinds-name">各项</div>
-				<ul class="temp-kinds-list">
-					<li *ngFor="let tag of tagTops;let i = index" [ngClass]="{'active':i == selectPersonal}" (click)="searchPersonal(i,item)"
-					 id="{{tag.key}}">{{tag.name}}</li>
-				</ul> -->
-				<!-- <span class="temp-kinds-name">标签搜索</span> -->
-				<!-- <div class="temp-search-box" style="float:left;margin:0 8px;height:27px;width:274px;margin-top: 5px;" id="searchDiv">
-					<div class="temp-set-select-box-tag" style="width:100%;height:27px; background: unset; border: 0px solid #444444;">
-						<input [(ngModel)]="tag_name" id="tagSearch" (ngModelChange)="modelChange($event)" placeholder=" 请输入标签名称搜索" class="temp-search-input"
-						 (keyup.enter)="searchTags()" />
-						<button type="button" class="temp-search-btn" (click)="searchTags()" style="width: 26px;height: 26px;"></button>
-						<ul class="scroll" *ngIf="tag_search">
-							<li *ngFor="let tag of tagList;let i = index" [ngClass]="{'kinds-active':i==itemFlag}" [title]='tag.value' (click)="tagSearchEva(i)">{{tag.value}}</li>
-						</ul>
-					</div>
-				</div> -->
-			
-		<!-- </div> -->
-    </div> 
-    
-    <div>
-        <!-- <h2 class="cont-title">
-            类罪中的刑罚种类分布
-        </h2> -->
-         <div style="display: flex;">
-            <div class="age-chart-width">
-                <h2 class="cont-title">
-                    {{selectTitle}}
-                </h2>
-                <div id="type-echart" style="width: 90%;height: 300px;"></div>
-            </div>
-         </div>
-    </div>
-    <div class="type-table">
-        <h2 class="cont-title">
-            类罪中的刑罚种类分布
-        </h2>
-        <nz-table #basicTable 
-        [nzFrontPagination]="false"
-        [nzData]="listOfData"
-        [nzTotal]="total"
-        [(nzPageIndex)]="pageIndex"
-        (nzPageIndexChange)="searchData($event)"
-       >
-            <thead>
-              <tr>
-                <th>名称</th>
-                <th>年龄</th>
-                <th>地址</th>
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let data of basicTable.data">
-                <td>{{ data.name }}</td>
-                <td>{{ data.age }}</td>
-                <td>{{ data.address }}</td>
-                <td>
-                  <!-- <a>Action 一 {{ data.name }}</a>
-                  <nz-divider nzType="vertical"></nz-divider> -->
-                  <a (click)="gotoDetail(data)">详情</a>
-                </td>
-              </tr>
-            </tbody>
-          </nz-table>
-    </div>
+
+
+<div class="container-wraper">
+  <div class="screens">
+      <div class="temp-kinds-main">
+      <div class="temp-kinds-title">类罪名称:</div>
+            <ul class="temp-kinds-list">
+              <li *ngFor="let item of classValueList;let i = index" [ngClass]="{'active':i== selectTypeIndex}" (click)="searchSelectType(i,item)"
+              id="{{item.code}}">{{item.value}}</li>
+            </ul>
+          </div>
+
+          <!-- <div class="temp-kinds-main">
+            <div class="temp-kinds-title">个罪名称:</div>
+              <ul class="temp-kinds-list">
+                <li *ngFor="let item of penaltyValueList;let i = index" [ngClass]="{'active':i== selectPenaltyIndex}" (click)="searchPenaltyType(i,item)"
+                 id="{{item.code}}">{{item.value}}</li>
+              </ul>
+          </div> -->
+          <div class="temp-kinds-main">
+            <div class="temp-kinds-title">筛选条件:</div>
+              <ul class="temp-kinds-list">
+                <li  style="cursor: default;">{{selectTitle}}
+                </li>
+                <li *ngIf = "!!selectPenaltyTitle"  style="cursor: default;">{{selectPenaltyTitle}}
+                  <i style="cursor: pointer;color: #1890ff;" (click)="deleteFlagType(1,item)" nz-icon nzType="close" nzTheme="outline"></i>
+                 </li>
+                 <li *ngIf = "!!eduType" style="cursor: default;">{{eduType}}
+                  <i  style="cursor: pointer;color: #1890ff;" (click)="deleteFlagType(2,item)" nz-icon nzType="close" nzTheme="outline"></i>
+                 </li>
+              </ul>
+          </div>
+  </div>
+
+  <div>
+       <div style="display: flex;">
+          <div class="age-chart-width">
+              <h2 class="cont-title">
+                  <span *ngIf="!selectPenaltyTitle">类罪：{{selectTitle}} 分布</span>
+                  <span *ngIf="!!selectPenaltyTitle">个罪：{{selectPenaltyTitle}} 分布</span>
+              </h2>
+              <div id="type-echart" style="width: 90%;height: 260px;"></div>
+          </div>
+       </div>
+  </div>
+  <div class="type-table">
+      <h2 class="cont-title">
+          类罪中的刑罚种类分布
+      </h2>
+      <nz-table #basicTable
+      [nzFrontPagination]="false"
+      [nzData]="listOfData"
+      [nzTotal]="total"
+      [(nzPageIndex)]="pageIndex"
+      (nzPageIndexChange)="searchPageIndexData($event)"
+     >
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>案件编号</th>
+              <th nzWidth="80px">姓名</th>
+              <th>罪刑类别</th>
+              <th>住址</th>
+              <th>检察单位</th>
+              <th>审理结果</th>
+              <th nzWidth="60px">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable.data;let i = index">
+              <td>{{ i+1 }}</td>
+              <td>{{ data.case_no }}</td>
+              <td>{{ data.person_name }}</td>
+              <td>{{ data.penalty_name }}</td>
+              <td>{{ data.person_address }}</td>
+              <td>{{ data.public_prosecutor}}</td>
+              <td>{{ data.result_type }}</td>
+              <td>
+                <!-- <a>Action 一 {{ data.name }}</a>
+                <nz-divider nzType="vertical"></nz-divider> -->
+                <a (click)="gotoDetail(data)">详情</a>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+  </div>
 </div>

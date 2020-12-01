@@ -1,5 +1,5 @@
 /*
- * @Description: 
+ * @Description:
  * @Version: 2.0
  * @Autor: Seven
  * @Date: 2020-08-21 10:50:08
@@ -12,6 +12,7 @@ import { HeroesComponent } from './page/index/heroes/heroes.component';
 import { AgeClassComponent } from './page/law/age-class/age-class.component';
 import { DetailComponent } from './page/law/detail/detail.component';
 import { EducationComponent } from './page/law/education/education.component';
+import { LawStoryComponent } from './page/law/law-story/law-story.component';
 import { PeriodComponent } from './page/law/period/period.component';
 import { ProvinceComponent } from './page/law/province/province.component';
 import { SentenceComponent } from './page/law/sentence/sentence.component';
@@ -27,8 +28,14 @@ const routes: Routes = [
   {path:'agecase',component:AgeClassComponent},
   {path:'province',component:ProvinceComponent},
   {path:'period',component:PeriodComponent},
+  {path:'story',component:LawStoryComponent},
   {path:'type/detail',component:DetailComponent},
   {path:'agecase/detail',component:DetailComponent},
+  {path:'sentence/detail',component:DetailComponent},
+  {path:'education/detail',component:DetailComponent},
+  {path:'province/detail',component:DetailComponent},
+  {path:'period/detail',component:DetailComponent},
+  {path:'story/detail',component:DetailComponent},
 
 ];
 

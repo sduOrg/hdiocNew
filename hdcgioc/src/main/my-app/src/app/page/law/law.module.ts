@@ -9,6 +9,7 @@ import { TypeCaseComponent } from './type-case/type-case.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule, NzDividerModule, NzTableModule } from 'ng-zorro-antd';
 import { DetailComponent } from './detail/detail.component';
+import { LawStoryComponent } from './law-story/law-story.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DetailComponent } from './detail/detail.component';
     PeriodComponent,
     SentenceComponent,
     TypeCaseComponent,
-    DetailComponent
+    DetailComponent,
+    LawStoryComponent
   ],
   imports: [
     CommonModule,
