@@ -2,6 +2,7 @@ package com.telchina.hdcgioc.welcome.service;
 
 import com.telchina.hdcgioc.welcome.entity.WelcomeData;
 import com.telchina.hdcgioc.welcome.entity.wenshu_info;
+import com.telchina.hdcgioc.welcome.entity.NoPenaltyWenshuInfo;
 import com.telchina.hdcgioc.welcome.mapper.WelcomeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -139,6 +140,27 @@ public class WelcomeService {
         Map<String, Object> resultMap = new HashMap<>();
         List<String> laws = welcomeMapper.get_laws();
         resultMap.put("laws", laws);
+        return resultMap;
+    }
+    public Map<String, Object> get_noPenalty_law() {
+        Map<String, Object> resultMap = new HashMap<>();
+        List<String> laws = welcomeMapper.get_noPenalty_laws();
+        resultMap.put("laws", laws);
+        return resultMap;
+    }
+    public Map<String, Object> get_noPenalty_keyword() {
+        Map<String, Object> resultMap = new HashMap<>();
+        List<String> keyword = welcomeMapper.get_noPenalty_key_word();
+        resultMap.put("keyword", keyword);
+        return resultMap;
+    }
+    public Map<String,Object> noPenalty_wenshu(String keyword,String law,int page_no,int page_size){
+        Map<String,Object> resultMap = new HashMap<>();
+        int page_start = (page_no-1)*page_size;
+        List<NoPenaltyWenshuInfo> wenshu_list = welcomeMapper.get_noPenaltyFilter(keyword,law,page_start,  page_size);
+        int count = welcomeMapper.get_noPenaltyFilterCount(keyword,law);
+        resultMap.put("count",count);
+        resultMap.put("wenshu_list",wenshu_list);
         return resultMap;
     }
 }

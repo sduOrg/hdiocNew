@@ -3,6 +3,7 @@ package com.telchina.hdcgioc.welcome.mapper;
 
 import com.telchina.hdcgioc.welcome.entity.WelcomeData;
 import com.telchina.hdcgioc.welcome.entity.wenshu_info;
+import com.telchina.hdcgioc.welcome.entity.NoPenaltyWenshuInfo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -35,9 +36,12 @@ public interface WelcomeMapper {
     int get_wenshu_filter_lawsNum(String penalty_class,String penalty_definite,String laws);
     List<wenshu_info> get_wenshu_filter_laws(String penalty_class,String penalty_definite,String laws,int page_start,int page_size);
     List<String> get_laws();
+    //无罪判决相关
 
-
-
+    List<String> get_noPenalty_key_word();
+    List<String> get_noPenalty_laws();
+    List<NoPenaltyWenshuInfo> get_noPenaltyFilter(String keyword,String law,int page_start,int page_size);
+    int get_noPenaltyFilterCount(String keyword,String law);
 
 
 }

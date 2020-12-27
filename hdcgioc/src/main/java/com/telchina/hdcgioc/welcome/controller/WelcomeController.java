@@ -116,6 +116,24 @@ public class WelcomeController {
         return welcomeService.get_laws();
 
     }
+    //获取全部无罪审判关键词
+    @RequestMapping("/getNoPenaltyKeyword")
+    public Map<String,Object> getNoPenaltyKeyword(){
+        return welcomeService.get_noPenalty_keyword();
+
+    }
+    //获取全部无罪审判关键词发条
+    @RequestMapping("/getNoPenaltyLaws")
+    public Map<String,Object> getNoPenaltyLaw(){
+        return welcomeService.get_noPenalty_law();
+
+    }
+    //法定情节过滤
+    @RequestMapping(value = "/getNoPenaltyWenshu")
+    public Map<String,Object> getNoPenaltyWenshu(@RequestParam(value = "law", required = false) String law,@RequestParam(value = "keyword",required = false) String keyword,@RequestParam(value = "page_no",required = false,defaultValue = "1" ) int page_no,@RequestParam(value = "page_size",required = false,defaultValue = "10") int page_size){
+        return welcomeService.noPenalty_wenshu(keyword, law,page_no,page_size);
+
+    }
 
 
 
