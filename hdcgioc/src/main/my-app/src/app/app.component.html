@@ -1,4 +1,4 @@
-<nz-layout>
+<nz-layout *ngIf = "isLogin">
     <nz-header>
       <div class="logo">  <i nz-icon nzType="file"></i>法律案件情况应用平台</div>
       <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
@@ -16,17 +16,18 @@
           <li nz-submenu nzOpen  [nzTitle]="titleTpl">
             <ng-template #titleTpl><i nz-icon nzType="file"></i><span>案件分类</span></ng-template>
             <ul>
-              <li nz-menu-item nzMatchRouter><a routerLink="/type">刑法种类</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/type">刑罚种类</a></li>
               <li nz-menu-item nzMatchRouter><a routerLink="/sentence">有期徒刑刑期分布</a></li>
               <li nz-menu-item nzMatchRouter><a routerLink="/education">文化程度</a></li>
               <li nz-menu-item nzMatchRouter><a routerLink="/agecase">年龄</a></li>
               <li nz-menu-item nzMatchRouter><a routerLink="/province">省份</a></li>
               <li nz-menu-item nzMatchRouter><a routerLink="/period">羁押周期</a></li>
-              <li nz-menu-item nzMatchRouter><a routerLink="/story">法律情节</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/story">法定情节</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/nopenalty">无罪审判</a></li>
             </ul>
           </li>
         </ul>
-       
+
       </nz-sider>
       <nz-layout class="inner-layout">
         <!-- <nz-breadcrumb>
@@ -39,5 +40,11 @@
         </nz-content>
       </nz-layout>
     </nz-layout>
+  </nz-layout>
+
+  <nz-layout *ngIf="!isLogin">
+    <nz-content>
+      <app-login (nzChangeLogin)="nzChangeLogin($event)"></app-login>
+    </nz-content>
   </nz-layout>
 

@@ -27,7 +27,7 @@ export class ProvinceComponent implements OnInit {
   total = 100;
   listOfData = [];
   echartsXlist = [];
-  addressValueList = ["发生地","居住地"];
+  addressValueList = ["籍贯","居住地"];
   constructor(private lawSerivce: LawService, private router: Router) {}
 
   ngOnInit() {
