@@ -17,7 +17,7 @@ export class EducationComponent implements OnInit {
   selectPenaltyIndex: number = null; //个罪选择
   selectPenaltyTitle: string;
 
-  eduType:string;
+  eduType: string;
 
   pageIndex = 1;
   total = 100;
@@ -55,7 +55,7 @@ export class EducationComponent implements OnInit {
       .getWenshuByEduOrType(
         this.selectTitle,
         this.selectPenaltyTitle,
-        '',
+        "",
         this.eduType,
         String(this.pageIndex)
       )
@@ -137,27 +137,26 @@ export class EducationComponent implements OnInit {
     });
   }
   loadCateCharts() {
-    if (this.selectPenaltyIndex != null){ //判断是否点击了个罪
-      this.lawSerivce.getPenaltyEduList().subscribe(
-        data =>{
-          debugger;
-          data.forEach(element => {
-            if (element.penalty_class == this.selectTitle){
-                // for (var key in element.age_num){
-                //     if (key != "unkown"){
-                //         yList.push(element.age_num[key]);
-                //     }
-                // }
-                element.definite.forEach(ele => {
-                    if (ele.name == this.selectPenaltyTitle){
-                      this.loadDataForChart(ele.edu)
-                    }
-                });
-            }
-         });
-        }
-      )
-    }else{
+    if (this.selectPenaltyIndex != null) {
+      //判断是否点击了个罪
+      this.lawSerivce.getPenaltyEduList().subscribe((data) => {
+        debugger;
+        data.forEach((element) => {
+          if (element.penalty_class == this.selectTitle) {
+            // for (var key in element.age_num){
+            //     if (key != "unkown"){
+            //         yList.push(element.age_num[key]);
+            //     }
+            // }
+            element.definite.forEach((ele) => {
+              if (ele.name == this.selectPenaltyTitle) {
+                this.loadDataForChart(ele.edu);
+              }
+            });
+          }
+        });
+      });
+    } else {
       this.lawSerivce.getPenaltyEduClass().subscribe((data) => {
         data.forEach((element, index) => {
           if (
@@ -194,8 +193,9 @@ export class EducationComponent implements OnInit {
           yList.push(ele.number);
         }
       });
-      console.log("flag",flag);
-      if (flag == 0){ //补0
+      console.log("flag", flag);
+      if (flag == 0) {
+        //补0
         yList.push(0);
       }
     });

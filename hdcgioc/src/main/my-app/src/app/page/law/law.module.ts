@@ -6,10 +6,12 @@ import { ProvinceComponent } from './province/province.component';
 import { PeriodComponent } from './period/period.component';
 import { SentenceComponent } from './sentence/sentence.component';
 import { TypeCaseComponent } from './type-case/type-case.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule, NzDividerModule, NzTableModule } from 'ng-zorro-antd';
 import { DetailComponent } from './detail/detail.component';
 import { LawStoryComponent } from './law-story/law-story.component';
+import { LoginComponent } from './login/login.component';
+import { NoPenaltyComponent } from './no-penalty/no-penalty.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,20 @@ import { LawStoryComponent } from './law-story/law-story.component';
     SentenceComponent,
     TypeCaseComponent,
     DetailComponent,
-    LawStoryComponent
+    LawStoryComponent,
+    LoginComponent,
+    NoPenaltyComponent
   ],
   imports: [
     CommonModule,
     NzTableModule,
     NzDividerModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    FormsModule,
+
+  ],
+  exports:[
+    LoginComponent
   ]
 })
 export class LawModule { }

@@ -32,7 +32,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nz-layout>\n    <nz-header>\n      <div class=\"logo\">  <i nz-icon nzType=\"file\"></i>法律案件情况应用平台</div>\n      <ul nz-menu nzTheme=\"dark\" nzMode=\"horizontal\" class=\"header-menu\">\n      </ul>\n    </nz-header>\n    <nz-layout>\n      <nz-sider nzWidth=\"200px\" nzTheme=\"light\">\n        <ul nz-menu nzMode=\"inline\" class=\"sider-menu\">\n            <li nz-menu-item nzSelected  nzMatchRouter>\n                <a routerLink=\"/index\">\n                    <i nz-icon nzType=\"file\"></i>\n                    <span>总览</span>\n                </a>\n              </li>\n          <li nz-submenu nzOpen  [nzTitle]=\"titleTpl\">\n            <ng-template #titleTpl><i nz-icon nzType=\"file\"></i><span>案件分类</span></ng-template>\n            <ul>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/type\">刑法种类</a></li>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/sentence\">有期徒刑刑期分布</a></li>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/education\">文化程度</a></li>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/agecase\">年龄</a></li>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/province\">省份</a></li>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/period\">羁押周期</a></li>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/story\">法律情节</a></li>\n            </ul>\n          </li>\n        </ul>\n       \n      </nz-sider>\n      <nz-layout class=\"inner-layout\">\n        <!-- <nz-breadcrumb>\n          <nz-breadcrumb-item>Home</nz-breadcrumb-item>\n          <nz-breadcrumb-item>List</nz-breadcrumb-item>\n          <nz-breadcrumb-item>App</nz-breadcrumb-item>\n        </nz-breadcrumb> -->\n        <nz-content>\n            <router-outlet></router-outlet>\n        </nz-content>\n      </nz-layout>\n    </nz-layout>\n  </nz-layout>\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nz-layout *ngIf = \"isLogin\">\n    <nz-header>\n      <div class=\"logo\">  <i nz-icon nzType=\"file\"></i>法律案件情况应用平台</div>\n      <ul nz-menu nzTheme=\"dark\" nzMode=\"horizontal\" class=\"header-menu\">\n      </ul>\n    </nz-header>\n    <nz-layout>\n      <nz-sider nzWidth=\"200px\" nzTheme=\"light\">\n        <ul nz-menu nzMode=\"inline\" class=\"sider-menu\">\n            <li nz-menu-item nzSelected  nzMatchRouter>\n                <a routerLink=\"/index\">\n                    <i nz-icon nzType=\"file\"></i>\n                    <span>总览</span>\n                </a>\n              </li>\n          <li nz-submenu nzOpen  [nzTitle]=\"titleTpl\">\n            <ng-template #titleTpl><i nz-icon nzType=\"file\"></i><span>案件分类</span></ng-template>\n            <ul>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/type\">刑罚种类</a></li>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/sentence\">有期徒刑刑期分布</a></li>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/education\">文化程度</a></li>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/agecase\">年龄</a></li>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/province\">省份</a></li>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/period\">羁押周期</a></li>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/story\">法定情节</a></li>\n              <li nz-menu-item nzMatchRouter><a routerLink=\"/nopenalty\">无罪审判</a></li>\n            </ul>\n          </li>\n        </ul>\n\n      </nz-sider>\n      <nz-layout class=\"inner-layout\">\n        <!-- <nz-breadcrumb>\n          <nz-breadcrumb-item>Home</nz-breadcrumb-item>\n          <nz-breadcrumb-item>List</nz-breadcrumb-item>\n          <nz-breadcrumb-item>App</nz-breadcrumb-item>\n        </nz-breadcrumb> -->\n        <nz-content>\n            <router-outlet></router-outlet>\n        </nz-content>\n      </nz-layout>\n    </nz-layout>\n  </nz-layout>\n\n  <nz-layout *ngIf=\"!isLogin\">\n    <nz-content>\n      <app-login (nzChangeLogin)=\"nzChangeLogin($event)\"></app-login>\n    </nz-content>\n  </nz-layout>\n\n");
 
 /***/ }),
 
@@ -98,6 +98,32 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-wraper\">\n    <div class=\"screens\">\n\t\t    <div class=\"temp-kinds-main\">\n\t\t\t\t<div class=\"temp-kinds-title\">类罪名称:</div>\n              <ul class=\"temp-kinds-list\">\n                <li *ngFor=\"let item of classValueList;let i = index\" [ngClass]=\"{'active':i== selectTypeIndex}\" (click)=\"searchSelectType(i,item)\"\n                id=\"{{item.code}}\">{{item.value}}</li>\n              </ul>\n            </div>\n\n            <div class=\"temp-kinds-main\">\n              <div class=\"temp-kinds-title\">个罪名称:</div>\n                <ul class=\"temp-kinds-list\">\n                  <li *ngFor=\"let item of penaltyValueList;let i = index\" [ngClass]=\"{'active':i== selectPenaltyIndex}\" (click)=\"searchPenaltyType(i,item)\"\n                   id=\"{{item.code}}\">{{item.value}}</li>\n                </ul>\n            </div>\n\n            <div class=\"temp-kinds-main\">\n                <div class=\"temp-kinds-title\">法定情节:</div>\n                      <ul class=\"temp-kinds-list\">\n                        <li *ngFor=\"let item of lawStoryList;let i = index\" [ngClass]=\"{'active':i== selectLawStoryIndex}\" (click)=\"searchLawStory(i,item)\"\n                        >{{item}}</li>\n                      </ul>\n            </div>\n\n            <div class=\"temp-kinds-main\">\n              <div class=\"temp-kinds-title\">筛选条件:</div>\n                <ul class=\"temp-kinds-list\">\n                  <li  style=\"cursor: default;\">{{selectTitle}}\n                  </li>\n                  <li *ngIf = \"!!selectPenaltyTitle\"  style=\"cursor: default;\">{{selectPenaltyTitle}}\n                    <i style=\"cursor: pointer;color: #1890ff;\" (click)=\"deleteFlagType(1,item)\" nz-icon nzType=\"close\" nzTheme=\"outline\"></i>\n                   </li>\n                   <li *ngIf = \"!!selectPLawStoryTitle\" style=\"cursor: default;\">{{selectPLawStoryTitle}}\n                    <i  style=\"cursor: pointer;color: #1890ff;\" (click)=\"deleteFlagType(2,item)\" nz-icon nzType=\"close\" nzTheme=\"outline\"></i>\n                   </li>\n                </ul>\n            </div>\n    </div>\n\n    <!-- <div>\n         <div style=\"display: flex;\">\n            <div class=\"age-chart-width\">\n                <h2 class=\"cont-title\">\n                    <span *ngIf=\"!selectPenaltyTitle\">类罪：{{selectTitle}} 分布</span>\n                    <span *ngIf=\"!!selectPenaltyTitle\">个罪：{{selectPenaltyTitle}} 分布</span>\n                </h2>\n                <div id=\"type-echart\" style=\"width: 90%;height: 260px;\"></div>\n            </div>\n         </div>\n    </div> -->\n    <div class=\"type-table\">\n        <h2 class=\"cont-title\">\n            类罪中的刑罚种类分布\n        </h2>\n        <nz-table #basicTable\n        [nzFrontPagination]=\"false\"\n        [nzData]=\"listOfData\"\n        [nzTotal]=\"total\"\n        [(nzPageIndex)]=\"pageIndex\"\n        (nzPageIndexChange)=\"searchPageIndexData($event)\"\n       >\n            <thead>\n              <tr>\n                <th>序号</th>\n                <th>案件编号</th>\n                <th nzWidth=\"80px\">姓名</th>\n                <th>罪刑类别</th>\n                <th>住址</th>\n                <th>检察单位</th>\n                <th>审理结果</th>\n                <th nzWidth=\"60px\">操作</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let data of basicTable.data;let i = index\">\n                <td>{{ i+1 }}</td>\n                <td>{{ data.case_no }}</td>\n                <td>{{ data.person_name }}</td>\n                <td>{{ data.penalty_name }}</td>\n                <td>{{ data.person_address }}</td>\n                <td>{{ data.public_prosecutor}}</td>\n                <td>{{ data.result_type }}</td>\n                <td>\n                  <!-- <a>Action 一 {{ data.name }}</a>\n                  <nz-divider nzType=\"vertical\"></nz-divider> -->\n                  <a (click)=\"gotoDetail(data)\">详情</a>\n                </td>\n              </tr>\n            </tbody>\n          </nz-table>\n    </div>\n</div>\n\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/page/law/login/login.component.html":
+/*!*******************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/page/law/login/login.component.html ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n<div class=\"login-body\" >\n\t<div class=\"loginheader\">\n\t\t<!-- <img src=\"assets/img/pc-logo.png\"> -->\n\t\t<p>法律案件情况应用平台</p>\n\t\t<!--<span>Product Development</span>-->\n\t</div>\n\t<div class=\"login-bg\">\n\t\t<div class=\"login-box\">\n\t\t\t<div class=\"login-box-list\">\n\t\t\t\t<h3>登录</h3>\n\t\t\t\t<div class=\"login-input-box\">\n\t\t\t\t\t<input id=\"username\" type=\"text\" (keyup)=\"myKeyup($event)\" [(ngModel)]=\"login.username\" name=\"username\" #username=\"ngModel\"  placeholder=\"在此输入用户名\">\n\t\t\t\t\t<div class=\"imgbox\">\n\t\t\t\t\t\t<img src=\"assets/image/login_img_user.png\">\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t</div>\n\t\t\t\t<div class=\"login-input-box\">\n\t\t\t\t\t<input type=\"password\" (keyup)=\"myKeyup($event)\" [(ngModel)]=\"login.password\" name=\"password\" type=\"password\" #password=\"ngModel\" placeholder=\"请输入密码\" >\n\t\t\t\t\t<div class=\"imgbox\">\n\t\t\t\t\t\t<img src=\"assets/image/login_img_pwd.png\">\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t</div>\n\t\t\t\t<!--<button class=\"login-submit\" >登录</button>-->\n\t\t\t\t<button class=\"login-submit\" (click)=\"doLogin()\"  type=\"submit\" >登录</button>\n\t\t\t\t<!-- <span  class=\"prod\">(建议使用谷歌浏览器)</span> -->\n\t\t\t\t<!-- <a style=\"color: #51b2ff;margin-left: 40px;\" (click)='download()' >移动端下载地址</a> -->\n\t\t\t\t<!--<div class=\"login-forget\">\n\t\t\t\t\t<span>忘记密码？</span>\n\t\t\t\t</div>--> \n\t\t\t</div>\n\t\t</div>\n\t\t<!-- <div class=\"middle\">\n\t\t\t<div class=\"middle-one\" style=\"margin-bottom:20px;margin-left: 80px\">\n\t\t\t  <div class=\"imgbox1\" style=\"width: 120px;\">\n\t\t\t\t<img src=\"assets/img/ioscode.png\">\n\t\t\t  </div>\n\t\t\t  <div class=\"imgbox2\" style=\"margin-top: 20px;\">\n\t\t\t\t<a class=\"downloada\" (click)='gotodownload(1)'><img src=\"assets/img/iosdownload.png\"></a>\n\t\t\t  </div>\n\t\t\t</div>\n\t\t  <div class=\"middle-two\" style=\"margin-left: 80px\">\n\t\t\t  <div class=\"imgbox1\" style=\"width:120px\">\n\t\t\t\t<img src=\"assets/img/androidcode.png\">\n\t\t\t  </div>\n\t\t\t  <div class=\"imgbox2\" style=\"margin-top: 20px\">\n\t\t\t\t<a class=\"downloada\"  (click)='gotodownload(2)'><img src=\"assets/img/androiddownload.png\"></a>\n\t\t\t  </div>\n\t\t  </div>\n\t\t</div> -->\n\t</div>\n\t<div class=\"login-copyright\">\n\t\t<!-- 泰华智慧产业集团股份有限公司 版权所有 -->\n\t</div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/page/law/no-penalty/no-penalty.component.html":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/page/law/no-penalty/no-penalty.component.html ***!
+  \*****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-wraper\">\n    <div class=\"screens\">\n\t\t    <div class=\"temp-kinds-main\">\n\t\t\t\t<div class=\"temp-kinds-title\">关键词:</div>\n              <ul class=\"temp-kinds-list\">\n                <li *ngFor=\"let item of classValueList;let i = index\" [ngClass]=\"{'active':i== selectTypeIndex}\" (click)=\"searchSelectType(i,item)\"\n                id=\"{{item.code}}\">{{item.value}}</li>\n              </ul>\n            </div>\n\n            <div class=\"temp-kinds-main\">\n              <div class=\"temp-kinds-title\">法条名称:</div>\n                <ul class=\"temp-kinds-list\">\n                  <li *ngFor=\"let item of penaltyValueList;let i = index\" [ngClass]=\"{'active':i== selectPenaltyIndex}\" (click)=\"searchPenaltyType(i,item)\"\n                   id=\"{{item.code}}\">{{item.value}}</li>\n                </ul>\n            </div>\n\n            <!-- <div class=\"temp-kinds-main\">\n                <div class=\"temp-kinds-title\">法定情节:</div>\n                      <ul class=\"temp-kinds-list\">\n                        <li *ngFor=\"let item of lawStoryList;let i = index\" [ngClass]=\"{'active':i== selectLawStoryIndex}\" (click)=\"searchLawStory(i,item)\"\n                        >{{item}}</li>\n                      </ul>\n            </div> -->\n\n            <div class=\"temp-kinds-main\">\n              <div class=\"temp-kinds-title\">筛选条件:</div>\n                <ul class=\"temp-kinds-list\">\n                  <li  style=\"cursor: default;\">{{selectTitle}}\n                  </li>\n                  <li *ngIf = \"!!selectPenaltyTitle\"  style=\"cursor: default;\">{{selectPenaltyTitle}}\n                    <i style=\"cursor: pointer;color: #1890ff;\" (click)=\"deleteFlagType(1,item)\" nz-icon nzType=\"close\" nzTheme=\"outline\"></i>\n                   </li>\n                   <!-- <li *ngIf = \"!!selectPLawStoryTitle\" style=\"cursor: default;\">{{selectPLawStoryTitle}}\n                    <i  style=\"cursor: pointer;color: #1890ff;\" (click)=\"deleteFlagType(2,item)\" nz-icon nzType=\"close\" nzTheme=\"outline\"></i>\n                   </li> -->\n                </ul>\n            </div>\n    </div>\n\n    <!-- <div>\n         <div style=\"display: flex;\">\n            <div class=\"age-chart-width\">\n                <h2 class=\"cont-title\">\n                    <span *ngIf=\"!selectPenaltyTitle\">类罪：{{selectTitle}} 分布</span>\n                    <span *ngIf=\"!!selectPenaltyTitle\">个罪：{{selectPenaltyTitle}} 分布</span>\n                </h2>\n                <div id=\"type-echart\" style=\"width: 90%;height: 260px;\"></div>\n            </div>\n         </div>\n    </div> -->\n    <div class=\"type-table\">\n        <h2 class=\"cont-title\">\n            类罪中的刑罚种类分布\n        </h2>\n        <nz-table #basicTable\n        [nzFrontPagination]=\"false\"\n        [nzData]=\"listOfData\"\n        [nzTotal]=\"total\"\n        [(nzPageIndex)]=\"pageIndex\"\n        (nzPageIndexChange)=\"searchPageIndexData($event)\"\n       >\n            <thead>\n              <tr>\n                <th>序号</th>\n                <th>案件编号</th>\n                <th nzWidth=\"80px\">姓名</th>\n                <th>罪刑类别</th>\n                <th>关键词</th>\n                <th>法条</th>\n                <th>审理结果</th>\n                <th nzWidth=\"60px\">操作</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let data of basicTable.data;let i = index\">\n                <td>{{ i+1 }}</td>\n                <td>{{ data.case_no }}</td>\n                <td>{{ data.person_name }}</td>\n                <td>{{ data.penalty_name }}</td>\n                <td>{{ data.keyword }}</td>\n                <td>{{ data.law}}</td>\n                <td>{{ data.result_type }}</td>\n                <td>\n                  <!-- <a>Action 一 {{ data.name }}</a>\n                  <nz-divider nzType=\"vertical\"></nz-divider> -->\n                  <a (click)=\"gotoDetail(data)\">详情</a>\n                </td>\n              </tr>\n            </tbody>\n          </nz-table>\n    </div>\n</div>\n\n");
 
 /***/ }),
 
@@ -425,10 +451,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _page_law_detail_detail_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./page/law/detail/detail.component */ "./src/app/page/law/detail/detail.component.ts");
 /* harmony import */ var _page_law_education_education_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./page/law/education/education.component */ "./src/app/page/law/education/education.component.ts");
 /* harmony import */ var _page_law_law_story_law_story_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./page/law/law-story/law-story.component */ "./src/app/page/law/law-story/law-story.component.ts");
-/* harmony import */ var _page_law_period_period_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./page/law/period/period.component */ "./src/app/page/law/period/period.component.ts");
-/* harmony import */ var _page_law_province_province_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./page/law/province/province.component */ "./src/app/page/law/province/province.component.ts");
-/* harmony import */ var _page_law_sentence_sentence_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./page/law/sentence/sentence.component */ "./src/app/page/law/sentence/sentence.component.ts");
-/* harmony import */ var _page_law_type_case_type_case_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./page/law/type-case/type-case.component */ "./src/app/page/law/type-case/type-case.component.ts");
+/* harmony import */ var _page_law_login_login_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./page/law/login/login.component */ "./src/app/page/law/login/login.component.ts");
+/* harmony import */ var _page_law_no_penalty_no_penalty_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./page/law/no-penalty/no-penalty.component */ "./src/app/page/law/no-penalty/no-penalty.component.ts");
+/* harmony import */ var _page_law_period_period_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./page/law/period/period.component */ "./src/app/page/law/period/period.component.ts");
+/* harmony import */ var _page_law_province_province_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./page/law/province/province.component */ "./src/app/page/law/province/province.component.ts");
+/* harmony import */ var _page_law_sentence_sentence_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./page/law/sentence/sentence.component */ "./src/app/page/law/sentence/sentence.component.ts");
+/* harmony import */ var _page_law_type_case_type_case_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./page/law/type-case/type-case.component */ "./src/app/page/law/type-case/type-case.component.ts");
 
 /*
  * @Description:
@@ -449,16 +477,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 const routes = [
-    { path: '', redirectTo: 'index', pathMatch: 'full' },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'login', component: _page_law_login_login_component__WEBPACK_IMPORTED_MODULE_8__["LoginComponent"] },
     { path: 'index', component: _page_index_heroes_heroes_component__WEBPACK_IMPORTED_MODULE_3__["HeroesComponent"] },
-    { path: 'type', component: _page_law_type_case_type_case_component__WEBPACK_IMPORTED_MODULE_11__["TypeCaseComponent"] },
-    { path: 'sentence', component: _page_law_sentence_sentence_component__WEBPACK_IMPORTED_MODULE_10__["SentenceComponent"] },
+    { path: 'type', component: _page_law_type_case_type_case_component__WEBPACK_IMPORTED_MODULE_13__["TypeCaseComponent"] },
+    { path: 'sentence', component: _page_law_sentence_sentence_component__WEBPACK_IMPORTED_MODULE_12__["SentenceComponent"] },
     { path: 'education', component: _page_law_education_education_component__WEBPACK_IMPORTED_MODULE_6__["EducationComponent"] },
     { path: 'agecase', component: _page_law_age_class_age_class_component__WEBPACK_IMPORTED_MODULE_4__["AgeClassComponent"] },
-    { path: 'province', component: _page_law_province_province_component__WEBPACK_IMPORTED_MODULE_9__["ProvinceComponent"] },
-    { path: 'period', component: _page_law_period_period_component__WEBPACK_IMPORTED_MODULE_8__["PeriodComponent"] },
+    { path: 'province', component: _page_law_province_province_component__WEBPACK_IMPORTED_MODULE_11__["ProvinceComponent"] },
+    { path: 'period', component: _page_law_period_period_component__WEBPACK_IMPORTED_MODULE_10__["PeriodComponent"] },
     { path: 'story', component: _page_law_law_story_law_story_component__WEBPACK_IMPORTED_MODULE_7__["LawStoryComponent"] },
+    { path: 'nopenalty', component: _page_law_no_penalty_no_penalty_component__WEBPACK_IMPORTED_MODULE_9__["NoPenaltyComponent"] },
     { path: 'type/detail', component: _page_law_detail_detail_component__WEBPACK_IMPORTED_MODULE_5__["DetailComponent"] },
     { path: 'agecase/detail', component: _page_law_detail_detail_component__WEBPACK_IMPORTED_MODULE_5__["DetailComponent"] },
     { path: 'sentence/detail', component: _page_law_detail_detail_component__WEBPACK_IMPORTED_MODULE_5__["DetailComponent"] },
@@ -466,6 +498,7 @@ const routes = [
     { path: 'province/detail', component: _page_law_detail_detail_component__WEBPACK_IMPORTED_MODULE_5__["DetailComponent"] },
     { path: 'period/detail', component: _page_law_detail_detail_component__WEBPACK_IMPORTED_MODULE_5__["DetailComponent"] },
     { path: 'story/detail', component: _page_law_detail_detail_component__WEBPACK_IMPORTED_MODULE_5__["DetailComponent"] },
+    { path: 'nopenalty/detail', component: _page_law_detail_detail_component__WEBPACK_IMPORTED_MODULE_5__["DetailComponent"] },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -505,13 +538,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 let AppComponent = class AppComponent {
-    constructor() {
+    constructor(router) {
+        this.router = router;
+        this.isLogin = false;
         this.title = 'my-app';
     }
+    ngOnInit() {
+        if (sessionStorage.getItem("user") && sessionStorage.getItem("password")) {
+            this.isLogin = true;
+        }
+    }
+    nzChangeLogin(sucess) {
+        this.isLogin = true;
+        this.router.navigate(["/index"]);
+    }
 };
+AppComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-root',
@@ -1407,7 +1456,7 @@ let EducationComponent = class EducationComponent {
     }
     getWenshuByEdu() {
         this.lawSerivce
-            .getWenshuByEduOrType(this.selectTitle, this.selectPenaltyTitle, '', this.eduType, String(this.pageIndex))
+            .getWenshuByEduOrType(this.selectTitle, this.selectPenaltyTitle, "", this.eduType, String(this.pageIndex))
             .subscribe((data) => {
             this.total = data.count;
             var list = [];
@@ -1481,17 +1530,18 @@ let EducationComponent = class EducationComponent {
         });
     }
     loadCateCharts() {
-        if (this.selectPenaltyIndex != null) { //判断是否点击了个罪
-            this.lawSerivce.getPenaltyEduList().subscribe(data => {
+        if (this.selectPenaltyIndex != null) {
+            //判断是否点击了个罪
+            this.lawSerivce.getPenaltyEduList().subscribe((data) => {
                 debugger;
-                data.forEach(element => {
+                data.forEach((element) => {
                     if (element.penalty_class == this.selectTitle) {
                         // for (var key in element.age_num){
                         //     if (key != "unkown"){
                         //         yList.push(element.age_num[key]);
                         //     }
                         // }
-                        element.definite.forEach(ele => {
+                        element.definite.forEach((ele) => {
                             if (ele.name == this.selectPenaltyTitle) {
                                 this.loadDataForChart(ele.edu);
                             }
@@ -1535,7 +1585,8 @@ let EducationComponent = class EducationComponent {
                 }
             });
             console.log("flag", flag);
-            if (flag == 0) { //补0
+            if (flag == 0) {
+                //补0
                 yList.push(0);
             }
         });
@@ -1730,7 +1781,7 @@ let LawStoryComponent = class LawStoryComponent {
         this.getClassList();
     }
     getClassList() {
-        this.lawSerivce.getPenaltyClass().subscribe(data => {
+        this.lawSerivce.getPenaltyClass().subscribe((data) => {
             data.penalty_class.forEach((element, index) => {
                 if (element != "null" && element != null) {
                     this.classValueList.push({ code: String(index + 1), value: element });
@@ -1745,15 +1796,15 @@ let LawStoryComponent = class LawStoryComponent {
     }
     getPenaltyList(classname) {
         this.penaltyValueList = [];
-        this.lawSerivce.getPenaltyByClass(classname).subscribe(data => {
+        this.lawSerivce.getPenaltyByClass(classname).subscribe((data) => {
             data.penalty_definite.forEach((element, index) => {
                 this.penaltyValueList.push({ code: String(index + 1), value: element });
             });
         });
     }
     getLawStroyList() {
-        this.lawSerivce.getLawsStory().subscribe(data => {
-            data.forEach(element => {
+        this.lawSerivce.getLawsStory().subscribe((data) => {
+            data.forEach((element) => {
                 if (element != null) {
                     this.lawStoryList.push(element);
                 }
@@ -1761,10 +1812,12 @@ let LawStoryComponent = class LawStoryComponent {
         });
     }
     getWenshuByLawStory() {
-        this.lawSerivce.getWenshuByStory(this.selectTitle, this.selectPenaltyTitle, this.selectPLawStoryTitle, String(this.pageIndex)).subscribe(data => {
+        this.lawSerivce
+            .getWenshuByStory(this.selectTitle, this.selectPenaltyTitle, this.selectPLawStoryTitle, String(this.pageIndex))
+            .subscribe((data) => {
             this.total = data.count;
             var list = [];
-            data.wenshu_list.forEach(element => {
+            data.wenshu_list.forEach((element) => {
                 list.push(element);
             });
             this.listOfData = list;
@@ -1828,16 +1881,17 @@ let LawStoryComponent = class LawStoryComponent {
     //加载柱状图
     loadCateCharts() {
         debugger;
-        if (this.selectPenaltyIndex != null) { //判断是否点击了个罪
-            this.lawSerivce.getPenaltyAgeList().subscribe(data => {
-                data.forEach(element => {
+        if (this.selectPenaltyIndex != null) {
+            //判断是否点击了个罪
+            this.lawSerivce.getPenaltyAgeList().subscribe((data) => {
+                data.forEach((element) => {
                     if (element.penalty_class == this.selectTitle) {
                         // for (var key in element.age_num){
                         //     if (key != "unkown"){
                         //         yList.push(element.age_num[key]);
                         //     }
                         // }
-                        element.penalty_definite_age.forEach(ele => {
+                        element.penalty_definite_age.forEach((ele) => {
                             if (ele.penalty_name_definite == this.selectPenaltyTitle) {
                                 this.loadDataForChart(ele);
                             }
@@ -1847,9 +1901,10 @@ let LawStoryComponent = class LawStoryComponent {
             });
         }
         else {
-            this.lawSerivce.getPenaltyAgeClass().subscribe(data => {
+            this.lawSerivce.getPenaltyAgeClass().subscribe((data) => {
                 data.forEach((element, index) => {
-                    if (!!element.penalty_class && element.penalty_class == this.selectTitle) {
+                    if (!!element.penalty_class &&
+                        element.penalty_class == this.selectTitle) {
                         this.loadDataForChart(element.age_num);
                     }
                 });
@@ -1867,9 +1922,9 @@ let LawStoryComponent = class LawStoryComponent {
         this.router.navigate(["/story/detail"], {
             skipLocationChange: true,
             queryParams: {
-                "item": JSON.stringify(item),
-                "from": "/story"
-            }
+                item: JSON.stringify(item),
+                from: "/story",
+            },
         });
     }
     // private echartsClick(index:number){
@@ -2017,7 +2072,7 @@ LawStoryComponent.ctorParameters = () => [
 ];
 LawStoryComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-law-story',
+        selector: "app-law-story",
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./law-story.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/page/law/law-story/law-story.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./law-story.component.scss */ "./src/app/page/law/law-story/law-story.component.scss")).default]
     })
@@ -2046,9 +2101,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _period_period_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./period/period.component */ "./src/app/page/law/period/period.component.ts");
 /* harmony import */ var _sentence_sentence_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./sentence/sentence.component */ "./src/app/page/law/sentence/sentence.component.ts");
 /* harmony import */ var _type_case_type_case_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./type-case/type-case.component */ "./src/app/page/law/type-case/type-case.component.ts");
-/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/fesm2015/ng-zorro-antd.js");
-/* harmony import */ var _detail_detail_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./detail/detail.component */ "./src/app/page/law/detail/detail.component.ts");
-/* harmony import */ var _law_story_law_story_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./law-story/law-story.component */ "./src/app/page/law/law-story/law-story.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/fesm2015/ng-zorro-antd.js");
+/* harmony import */ var _detail_detail_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./detail/detail.component */ "./src/app/page/law/detail/detail.component.ts");
+/* harmony import */ var _law_story_law_story_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./law-story/law-story.component */ "./src/app/page/law/law-story/law-story.component.ts");
+/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./login/login.component */ "./src/app/page/law/login/login.component.ts");
+/* harmony import */ var _no_penalty_no_penalty_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./no-penalty/no-penalty.component */ "./src/app/page/law/no-penalty/no-penalty.component.ts");
+
+
+
 
 
 
@@ -2072,14 +2133,20 @@ LawModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _period_period_component__WEBPACK_IMPORTED_MODULE_6__["PeriodComponent"],
             _sentence_sentence_component__WEBPACK_IMPORTED_MODULE_7__["SentenceComponent"],
             _type_case_type_case_component__WEBPACK_IMPORTED_MODULE_8__["TypeCaseComponent"],
-            _detail_detail_component__WEBPACK_IMPORTED_MODULE_10__["DetailComponent"],
-            _law_story_law_story_component__WEBPACK_IMPORTED_MODULE_11__["LawStoryComponent"]
+            _detail_detail_component__WEBPACK_IMPORTED_MODULE_11__["DetailComponent"],
+            _law_story_law_story_component__WEBPACK_IMPORTED_MODULE_12__["LawStoryComponent"],
+            _login_login_component__WEBPACK_IMPORTED_MODULE_13__["LoginComponent"],
+            _no_penalty_no_penalty_component__WEBPACK_IMPORTED_MODULE_14__["NoPenaltyComponent"]
         ],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
-            ng_zorro_antd__WEBPACK_IMPORTED_MODULE_9__["NzTableModule"],
-            ng_zorro_antd__WEBPACK_IMPORTED_MODULE_9__["NzDividerModule"],
-            ng_zorro_antd__WEBPACK_IMPORTED_MODULE_9__["NgZorroAntdModule"]
+            ng_zorro_antd__WEBPACK_IMPORTED_MODULE_10__["NzTableModule"],
+            ng_zorro_antd__WEBPACK_IMPORTED_MODULE_10__["NzDividerModule"],
+            ng_zorro_antd__WEBPACK_IMPORTED_MODULE_10__["NgZorroAntdModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"],
+        ],
+        exports: [
+            _login_login_component__WEBPACK_IMPORTED_MODULE_13__["LoginComponent"]
         ]
     })
 ], LawModule);
@@ -2166,6 +2233,12 @@ let LawService = class LawService {
     }
     getLawsStory() {
         return this.http.get(this.url + "get_laws").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res.laws));
+    }
+    getNoPenaltyKeyword() {
+        return this.http.get(this.url + "getNoPenaltyKeyword").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res.keyword));
+    }
+    getNoPenaltyLaws() {
+        return this.http.get(this.url + "getNoPenaltyLaws").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res.laws));
     }
     getWenshuByStory(penalty_class, penalty_definite, laws, page_no) {
         let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -2284,6 +2357,21 @@ let LawService = class LawService {
     getWenshuByClass(className) {
         return this.http.get("assets/data/service/get_wenshuBy_class.json").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
     }
+    //羁押周期文书
+    getNoPenaltyWenshu(keyword, law, page_no) {
+        let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let options = { headers: headers };
+        let params = new URLSearchParams();
+        if (keyword)
+            params.append("keyword", keyword);
+        if (law)
+            params.append("law", law);
+        if (page_no)
+            params.append("page_no", page_no);
+        let body = params.toString();
+        return this.http.post(this.url + "getNoPenaltyWenshu", body, options).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res));
+        // return this.http.get("assets/data/service/get_wenshuBy_class.json").pipe(map((res:{"wenshu_list":[any]})=>res))
+    }
 };
 LawService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
@@ -2293,6 +2381,452 @@ LawService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         providedIn: 'root'
     })
 ], LawService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/page/law/login/login.component.scss":
+/*!*****************************************************!*\
+  !*** ./src/app/page/law/login/login.component.scss ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("@charset \"UTF-8\";\nbody, ol, ul, li, h1, h2, h3, h4, h5, h6, p, th, td, dl, dd, form, fieldset, legend, input, textarea, select {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-weight: normal;\n}\nbody {\n  font: 16px \"微软雅黑\";\n  background: #fff;\n  -webkit-text-size-adjust: 100%;\n}\na {\n  color: #444444;\n  text-decoration: none;\n}\na:hover {\n  color: #444444;\n}\na:link {\n  color: #444444;\n}\nem {\n  font-style: normal;\n}\nli {\n  list-style: none;\n}\nimg {\n  border: 0;\n  vertical-align: middle;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\np {\n  word-wrap: break-word;\n  padding: 0;\n  margin: 0;\n}\ninput::input-placeholder, textarea::input-placeholder {\n  color: #999;\n}\ninput::-webkit-input-placeholder, textarea::-webkit-input-placeholder {\n  color: #999;\n}\ninput:-moz-placeholder, textarea:-moz-placeholder {\n  color: #999;\n}\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  color: #999;\n}\ninput:-ms-input-placeholder, textarea:-ms-input-placeholder {\n  color: #999;\n}\nbutton {\n  border: 0;\n  padding: 0;\n  margin: 0;\n  background: none;\n  outline: none;\n}\ni, a {\n  cursor: pointer;\n}\n.loginheader, .footer {\n  width: 1024px;\n  margin: 0 auto;\n  height: 100px;\n  text-align: center;\n  background-color: #fff;\n  left: 50%;\n  margin-left: -512px;\n}\n.loginheader {\n  position: relative;\n  top: 0;\n}\n.loginheader img {\n  float: left;\n  margin: 10px 50px 0 10px;\n}\n.loginheader p {\n  float: left;\n  font-size: 30px;\n  color: #444;\n  height: 25px;\n  border-left: 2px solid #444;\n  margin-top: 35px;\n  line-height: 22px;\n  padding-left: 40px;\n  margin-right: 20px;\n}\n.login-body {\n  height: 100%;\n  width: 100%;\n  overflow: auto;\n}\n.login-top {\n  height: 99px;\n  width: 1112px;\n  padding: 0;\n  margin: 0 auto;\n  position: relative;\n}\n.login-top > img {\n  position: absolute;\n  left: 0px;\n  top: 50%;\n  transform: translateY(-50%);\n  -ms-transform: translateY(-50%);\n  -moz-transform: translateY(-50%);\n  -webkit-transform: translateY(-50%);\n  -o-transform: translateY(-50%);\n}\n.login-bg {\n  position: relative;\n  height: 536px;\n  width: 100%;\n  background: url('bg-3.png') center no-repeat;\n  min-width: 1112px;\n}\n.login-box {\n  width: 1112px;\n  margin: 0 auto;\n  height: 389px;\n  padding-top: 74px;\n  box-sizing: content-box;\n  position: absolute;\n  right: 100px;\n}\n.login-box-list {\n  margin-right: 54px;\n  width: 380px;\n  height: 100%;\n  float: right;\n  background-color: rgba(255, 255, 255, 0.8);\n}\n.login-copyright {\n  height: 17px;\n  line-height: 17px;\n  margin: 36px auto;\n  width: 1112px;\n  text-align: center;\n  font-size: 16px;\n  color: rgba(0, 0, 0, 0.54);\n  word-spacing: 28px;\n}\n.login-box-list > h3 {\n  font-size: 20px;\n  color: rgba(0, 0, 0, 0.87);\n  height: 29px;\n  line-height: 29px;\n  margin-top: 35px;\n  margin-left: 28px;\n  margin-bottom: 41px;\n  font-weight: bold;\n}\n.login-input-box {\n  margin-left: 31px;\n  margin-bottom: 19px;\n  width: 314px;\n  height: 46px;\n  line-height: 46px;\n  background-color: #fff;\n  box-sizing: border-box;\n  padding-left: 45px;\n  font-size: 15px;\n  margin-right: 0;\n  position: relative;\n  border: 1px solid #b7bbd3;\n  border-radius: 2px;\n}\n.login-input-box input {\n  height: 100%;\n  width: 100%;\n  background: none;\n  border-radius: 0;\n  outline: none;\n  padding: 0;\n  margin: 0;\n  float: left;\n  padding-left: 16px;\n  box-sizing: border-box;\n}\n.login-input-box input::-webkit-input-placeholder {\n  color: #bdbdbd !important;\n}\n.login-input-box input:-moz-placeholder {\n  color: #bdbdbd !important;\n}\n.login-input-box input::-moz-placeholder {\n  color: #bdbdbd !important;\n}\n/* for the future */\n.login-input-box input:-ms-input-placeholder {\n  color: #bdbdbd !important;\n}\n.login-input-box > .imgbox {\n  width: 46px;\n  position: absolute;\n  left: 0px;\n  top: 0;\n  height: 100%;\n  background: #b7bbd3;\n}\n.login-input-box > .imgbox > img {\n  display: block;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  -o-transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  -moz-transform: translate(-50%, -50%);\n  -webkit-transform: translate(-50%, -50%);\n}\n.login-submit {\n  margin-top: 32px;\n  margin-left: 31px;\n  text-align: center;\n  color: #fff;\n  opacity: 0.9;\n  filter: alpha(opacity=90);\n  background-color: #51b2ff;\n  height: 50px;\n  line-height: 50px;\n  width: 314px;\n  font-size: 20px;\n  letter-spacing: 5px;\n  cursor: pointer;\n  border-radius: 2px;\n  margin-bottom: 10px;\n}\n.login-forget {\n  width: 314px;\n  margin-left: 31px;\n  height: 20px;\n  margin-top: 10px;\n}\n.login-forget span {\n  float: right;\n  font-size: 13px;\n  line-height: 17px;\n  cursor: pointer;\n  color: #757575;\n}\n/*.login-forget i{\n    display: block;\n    border: 1px solid rgba(0,0,0,.54);\n    font-style: normal;\n    font-size: 12px;\n    height: 16px;\n    width: 16px;\n    text-align: center;\n    line-height: 14px;\n    border-radius: 8px;\n    float: right;\n    margin-right: 8px;\n    color: rgba(0,0,0,.54);\n    box-sizing: border-box;\n}*/\n@media screen and (max-height: 766px) {\n  .login-bg {\n    height: 416px;\n    background-image: url('bg-3.png');\n  }\n\n  .login-box {\n    padding-top: 14px;\n  }\n}\n@media screen and (max-width: 420px) {\n  .login-bg {\n    height: 416px;\n    background-image: url('bg-3.png');\n  }\n\n  .login-box {\n    padding-top: 14px;\n  }\n\n  body, ol, ul, h1, h2, h3, h4, h5, h6, p, th, td, dl, dd, form, fieldset, legend, input, textarea, select {\n    margin: 0;\n    padding: 0;\n    border: 0;\n  }\n\n  body {\n    font: 16px \"DroidSansFallback\";\n    background: #fff;\n    -webkit-text-size-adjust: 100%;\n  }\n\n  a {\n    color: #444444;\n    text-decoration: none;\n  }\n\n  a:hover {\n    color: #444444;\n  }\n\n  a:link {\n    color: #444444;\n  }\n\n  em {\n    font-style: normal;\n  }\n\n  li {\n    list-style: none;\n  }\n\n  img {\n    border: 0;\n    vertical-align: middle;\n  }\n\n  table {\n    border-collapse: collapse;\n    border-spacing: 0;\n  }\n\n  p {\n    word-wrap: break-word;\n    padding: 0;\n    margin: 0;\n  }\n\n  input {\n    outline: none;\n  }\n\n  input::input-placeholder, textarea::input-placeholder {\n    color: #ccc;\n  }\n\n  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {\n    color: #ccc;\n  }\n\n  input:-moz-placeholder, textarea:-moz-placeholder {\n    color: #ccc;\n  }\n\n  input::-moz-placeholder, textarea::-moz-placeholder {\n    color: #ccc;\n  }\n\n  input:-ms-input-placeholder, textarea:-ms-input-placeholder {\n    color: #ccc;\n  }\n\n  html, body {\n    height: 100%;\n    width: 100%;\n  }\n\n  .top {\n    margin-top: 60px;\n    text-align: center;\n  }\n\n  .top h1 {\n    font-size: 16px;\n    margin-top: 20px;\n    line-height: 16px;\n    height: 16px;\n    color: #444;\n  }\n\n  .top p {\n    line-height: 24px;\n    font-size: 12px;\n    height: 24px;\n    color: #eee;\n  }\n\n  .form {\n    width: 91%;\n    margin: 0 auto;\n  }\n\n  .form > div {\n    margin-top: 25px;\n    border-bottom: 1px solid #a3b1ff;\n    height: 40px;\n    position: relative;\n  }\n\n  .form input {\n    width: 100%;\n    height: 100%;\n    line-height: 40px;\n    font-size: 16px;\n    text-indent: 10px;\n  }\n\n  .button {\n    border: 0;\n    border-radius: 25px;\n    height: 44px;\n    width: 100%;\n    margin-top: 47px;\n    color: #fff;\n    background-color: rgba(63, 81, 181, 0.9);\n    outline: none;\n    font-size: 16px;\n  }\n\n  .button:active {\n    background-color: rgba(63, 81, 181, 0.8);\n  }\n\n  .password i {\n    position: absolute;\n    display: block;\n    top: 0;\n    right: 0;\n    height: 100%;\n    width: 34px;\n  }\n\n  .find_password {\n    float: right;\n    font-size: 12px;\n    line-height: 28px;\n    color: #ccc;\n  }\n\n  .find_password:link {\n    color: #ccc;\n  }\n\n  .find_password:hover {\n    color: #ededed;\n  }\n}\n.prod {\n  margin-left: 120px;\n  color: #bfbfbf;\n  font-size: 14px;\n}\n.middle {\n  display: flex;\n  flex-direction: column;\n  position: absolute;\n  top: 20px;\n  right: 12px;\n  margin-left: 20px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZS9sYXcvbG9naW4vbG9naW4uY29tcG9uZW50LnNjc3MiLCIvVXNlcnMvYXBwbGUvRGVza3RvcC93b3JrNC9oZGlvY05ldy9oZGNnaW9jL3NyYy9tYWluL215LWFwcC9zcmMvYXBwL3BhZ2UvbGF3L2xvZ2luL2xvZ2luLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGdCQUFnQjtBQ0FaO0VBQXlGLFNBQUE7RUFBUyxVQUFBO0VBQVUsU0FBQTtFQUFTLG1CQUFBO0FETXpIO0FDTEk7RUFBSyxpQkFBQTtFQUFnQixnQkFBQTtFQUFnQiw4QkFBQTtBRFd6QztBQ1ZJO0VBQUUsY0FBQTtFQUFjLHFCQUFBO0FEZXBCO0FDZEk7RUFBUSxjQUFBO0FEa0JaO0FDakJJO0VBQU8sY0FBQTtBRHFCWDtBQ3BCSTtFQUFHLGtCQUFBO0FEd0JQO0FDdkJJO0VBQUcsZ0JBQUE7QUQyQlA7QUMxQkk7RUFBSSxTQUFBO0VBQVMsc0JBQUE7QUQrQmpCO0FDOUJJO0VBQU0seUJBQUE7RUFBeUIsaUJBQUE7QURtQ25DO0FDbENJO0VBQUUscUJBQUE7RUFBcUIsVUFBQTtFQUFVLFNBQUE7QUR3Q3JDO0FDdkNJO0VBQXVELFdBQUE7QUQyQzNEO0FDMUNJO0VBQXVFLFdBQUE7QUQ4QzNFO0FDN0NJO0VBQW1ELFdBQUE7QURpRHZEO0FDaERJO0VBQXFELFdBQUE7QURvRHpEO0FDbkRJO0VBQTZELFdBQUE7QUR1RGpFO0FDdERJO0VBQU8sU0FBQTtFQUFVLFVBQUE7RUFBVyxTQUFBO0VBQVUsZ0JBQUE7RUFBaUIsYUFBQTtBRDhEM0Q7QUM3REk7RUFBSSxlQUFBO0FEaUVSO0FDaEVJO0VBQ0ksYUFBQTtFQUNBLGNBQUE7RUFDQSxhQUFBO0VBQ0Esa0JBQUE7RUFDQSxzQkFBQTtFQUNBLFNBQUE7RUFDQSxtQkFBQTtBRG1FUjtBQ2pFSTtFQUNJLGtCQUFBO0VBQ0EsTUFBQTtBRG9FUjtBQ2pFSTtFQUNJLFdBQUE7RUFDQSx3QkFBQTtBRG9FUjtBQ2xFSTtFQUNJLFdBQUE7RUFDQSxlQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7RUFDQSwyQkFBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7RUFDQSxrQkFBQTtFQUNBLGtCQUFBO0FEcUVSO0FDM0RJO0VBQ0ksWUFBQTtFQUNBLFdBQUE7RUFDQSxjQUFBO0FEOERSO0FDNURJO0VBQ0ksWUFBQTtFQUNBLGFBQUE7RUFDQSxVQUFBO0VBQ0EsY0FBQTtFQUNBLGtCQUFBO0FEK0RSO0FDN0RJO0VBQ0ksa0JBQUE7RUFDQSxTQUFBO0VBQ0EsUUFBQTtFQUNBLDJCQUFBO0VBQ0EsK0JBQUE7RUFDQSxnQ0FBQTtFQUNBLG1DQUFBO0VBQ0EsOEJBQUE7QURnRVI7QUM5REk7RUFDSSxrQkFBQTtFQUNBLGFBQUE7RUFDQSxXQUFBO0VBQ0EsNENBQUE7RUFDQSxpQkFBQTtBRGlFUjtBQy9ESTtFQUNJLGFBQUE7RUFDQSxjQUFBO0VBQ0EsYUFBQTtFQUNBLGlCQUFBO0VBQ0EsdUJBQUE7RUFDQSxrQkFBQTtFQUNBLFlBQUE7QURrRVI7QUNoRUk7RUFDSSxrQkFBQTtFQUNBLFlBQUE7RUFDQSxZQUFBO0VBQ0EsWUFBQTtFQUNBLDBDQUFBO0FEbUVSO0FDakVJO0VBQ0ksWUFBQTtFQUNBLGlCQUFBO0VBQ0EsaUJBQUE7RUFDQSxhQUFBO0VBQ0Esa0JBQUE7RUFDQSxlQUFBO0VBQ0EsMEJBQUE7RUFDQSxrQkFBQTtBRG9FUjtBQ2xFSTtFQUNJLGVBQUE7RUFDQSwwQkFBQTtFQUNBLFlBQUE7RUFDQSxpQkFBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7RUFDQSxtQkFBQTtFQUNBLGlCQUFBO0FEcUVSO0FDbkVJO0VBQ0ksaUJBQUE7RUFDQSxtQkFBQTtFQUNBLFlBQUE7RUFDQSxZQUFBO0VBQ0EsaUJBQUE7RUFDQSxzQkFBQTtFQUNBLHNCQUFBO0VBQ0Esa0JBQUE7RUFDQSxlQUFBO0VBQ0EsZUFBQTtFQUNBLGtCQUFBO0VBQ0EseUJBQUE7RUFDQSxrQkFBQTtBRHNFUjtBQ3BFSTtFQUNJLFlBQUE7RUFDQSxXQUFBO0VBQ0EsZ0JBQUE7RUFDQSxnQkFBQTtFQUNBLGFBQUE7RUFDQSxVQUFBO0VBQ0EsU0FBQTtFQUNBLFdBQUE7RUFDQSxrQkFBQTtFQUNBLHNCQUFBO0FEdUVSO0FDckVJO0VBQ0kseUJBQUE7QUR3RVI7QUN0RUk7RUFDSSx5QkFBQTtBRHlFUjtBQ3ZFSTtFQUNJLHlCQUFBO0FEMEVSO0FDekVNLG1CQUFBO0FBQ0Y7RUFDSSx5QkFBQTtBRDRFUjtBQzFFSTtFQUNJLFdBQUE7RUFDQSxrQkFBQTtFQUNBLFNBQUE7RUFDQSxNQUFBO0VBQ0EsWUFBQTtFQUNBLG1CQUFBO0FENkVSO0FDM0VJO0VBQ0ksY0FBQTtFQUNBLGtCQUFBO0VBQ0EsU0FBQTtFQUNBLFFBQUE7RUFDQSxnQ0FBQTtFQUNBLG1DQUFBO0VBQ0Esb0NBQUE7RUFDQSxxQ0FBQTtFQUNBLHdDQUFBO0FEOEVSO0FDNUVJO0VBQ0ksZ0JBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7RUFDQSx5QkFBQTtFQUNBLHlCQUFBO0VBQ0EsWUFBQTtFQUNBLGlCQUFBO0VBQ0EsWUFBQTtFQUNBLGVBQUE7RUFDQSxtQkFBQTtFQUNBLGVBQUE7RUFDQSxrQkFBQTtFQUNBLG1CQUFBO0FEK0VSO0FDN0VJO0VBQ0ksWUFBQTtFQUNBLGlCQUFBO0VBQ0EsWUFBQTtFQUNBLGdCQUFBO0FEZ0ZSO0FDOUVJO0VBQ0ksWUFBQTtFQUNBLGVBQUE7RUFDQSxpQkFBQTtFQUNBLGVBQUE7RUFDQSxjQUFBO0FEaUZSO0FDL0VJOzs7Ozs7Ozs7Ozs7OztFQUFBO0FBZUE7RUFDSTtJQUNJLGFBQUE7SUFDQSxpQ0FBQTtFRGtGVjs7RUNoRk07SUFDSSxpQkFBQTtFRG1GVjtBQUNGO0FDakZJO0VBQ0k7SUFDSSxhQUFBO0lBQ0EsaUNBQUE7RURtRlY7O0VDakZNO0lBQ0ksaUJBQUE7RURvRlY7O0VDbEZTO0lBQXNGLFNBQUE7SUFBUyxVQUFBO0lBQVUsU0FBQTtFRHdGbEg7O0VDdkZFO0lBQUssOEJBQUE7SUFBNkIsZ0JBQUE7SUFBZ0IsOEJBQUE7RUQ2RnBEOztFQzVGRTtJQUFFLGNBQUE7SUFBYyxxQkFBQTtFRGlHbEI7O0VDaEdFO0lBQVEsY0FBQTtFRG9HVjs7RUNuR0U7SUFBTyxjQUFBO0VEdUdUOztFQ3RHRTtJQUFHLGtCQUFBO0VEMEdMOztFQ3pHRTtJQUFHLGdCQUFBO0VENkdMOztFQzVHRTtJQUFJLFNBQUE7SUFBUyxzQkFBQTtFRGlIZjs7RUNoSEU7SUFBTSx5QkFBQTtJQUF5QixpQkFBQTtFRHFIakM7O0VDcEhFO0lBQUUscUJBQUE7SUFBcUIsVUFBQTtJQUFVLFNBQUE7RUQwSG5DOztFQ3pIRTtJQUFNLGFBQUE7RUQ2SFI7O0VDNUhFO0lBQ0EsV0FBQTtFRCtIRjs7RUM3SEU7SUFDQSxXQUFBO0VEZ0lGOztFQzlIRTtJQUNBLFdBQUE7RURpSUY7O0VDL0hFO0lBQ0EsV0FBQTtFRGtJRjs7RUNoSUU7SUFDQSxXQUFBO0VEbUlGOztFQ2hJRTtJQUNJLFlBQUE7SUFDQSxXQUFBO0VEbUlOOztFQ2hJRTtJQUNJLGdCQUFBO0lBQ0Esa0JBQUE7RURtSU47O0VDaklFO0lBQ0ksZUFBQTtJQUNBLGdCQUFBO0lBQ0EsaUJBQUE7SUFDQSxZQUFBO0lBQ0EsV0FBQTtFRG9JTjs7RUNsSUU7SUFDSSxpQkFBQTtJQUNBLGVBQUE7SUFDQSxZQUFBO0lBQ0EsV0FBQTtFRHFJTjs7RUNuSUU7SUFDSSxVQUFBO0lBQ0EsY0FBQTtFRHNJTjs7RUNwSUU7SUFDSSxnQkFBQTtJQUNBLGdDQUFBO0lBQ0EsWUFBQTtJQUNBLGtCQUFBO0VEdUlOOztFQ3JJRTtJQUNJLFdBQUE7SUFDQSxZQUFBO0lBQ0EsaUJBQUE7SUFDQSxlQUFBO0lBQ0EsaUJBQUE7RUR3SU47O0VDdElFO0lBQ0ksU0FBQTtJQUNBLG1CQUFBO0lBQ0EsWUFBQTtJQUNBLFdBQUE7SUFDQSxnQkFBQTtJQUNBLFdBQUE7SUFDQSx3Q0FBQTtJQUNBLGFBQUE7SUFDQSxlQUFBO0VEeUlOOztFQ3ZJRTtJQUNJLHdDQUFBO0VEMElOOztFQ3hJRTtJQUNJLGtCQUFBO0lBQ0EsY0FBQTtJQUNBLE1BQUE7SUFDQSxRQUFBO0lBQ0EsWUFBQTtJQUNBLFdBQUE7RUQySU47O0VDeElFO0lBQ0ksWUFBQTtJQUNBLGVBQUE7SUFDQSxpQkFBQTtJQUNBLFdBQUE7RUQySU47O0VDeklFO0lBQ0ksV0FBQTtFRDRJTjs7RUMxSUU7SUFDSSxjQUFBO0VENklOO0FBQ0Y7QUN4SUk7RUFDUSxrQkFBQTtFQUNBLGNBQUE7RUFDQSxlQUFBO0FEMElaO0FDeElJO0VBQ1EsYUFBQTtFQUNBLHNCQUFBO0VBQ0Esa0JBQUE7RUFDQSxTQUFBO0VBQ0EsV0FBQTtFQUNBLGlCQUFBO0FEMklaIiwiZmlsZSI6InNyYy9hcHAvcGFnZS9sYXcvbG9naW4vbG9naW4uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAY2hhcnNldCBcIlVURi04XCI7XG5ib2R5LCBvbCwgdWwsIGxpLCBoMSwgaDIsIGgzLCBoNCwgaDUsIGg2LCBwLCB0aCwgdGQsIGRsLCBkZCwgZm9ybSwgZmllbGRzZXQsIGxlZ2VuZCwgaW5wdXQsIHRleHRhcmVhLCBzZWxlY3Qge1xuICBtYXJnaW46IDA7XG4gIHBhZGRpbmc6IDA7XG4gIGJvcmRlcjogMDtcbiAgZm9udC13ZWlnaHQ6IG5vcm1hbDtcbn1cblxuYm9keSB7XG4gIGZvbnQ6IDE2cHggXCLlvq7ova/pm4Xpu5FcIjtcbiAgYmFja2dyb3VuZDogI2ZmZjtcbiAgLXdlYmtpdC10ZXh0LXNpemUtYWRqdXN0OiAxMDAlO1xufVxuXG5hIHtcbiAgY29sb3I6ICM0NDQ0NDQ7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbn1cblxuYTpob3ZlciB7XG4gIGNvbG9yOiAjNDQ0NDQ0O1xufVxuXG5hOmxpbmsge1xuICBjb2xvcjogIzQ0NDQ0NDtcbn1cblxuZW0ge1xuICBmb250LXN0eWxlOiBub3JtYWw7XG59XG5cbmxpIHtcbiAgbGlzdC1zdHlsZTogbm9uZTtcbn1cblxuaW1nIHtcbiAgYm9yZGVyOiAwO1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuXG50YWJsZSB7XG4gIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7XG4gIGJvcmRlci1zcGFjaW5nOiAwO1xufVxuXG5wIHtcbiAgd29yZC13cmFwOiBicmVhay13b3JkO1xuICBwYWRkaW5nOiAwO1xuICBtYXJnaW46IDA7XG59XG5cbmlucHV0OjppbnB1dC1wbGFjZWhvbGRlciwgdGV4dGFyZWE6OmlucHV0LXBsYWNlaG9sZGVyIHtcbiAgY29sb3I6ICM5OTk7XG59XG5cbmlucHV0Ojotd2Via2l0LWlucHV0LXBsYWNlaG9sZGVyLCB0ZXh0YXJlYTo6LXdlYmtpdC1pbnB1dC1wbGFjZWhvbGRlciB7XG4gIGNvbG9yOiAjOTk5O1xufVxuXG5pbnB1dDotbW96LXBsYWNlaG9sZGVyLCB0ZXh0YXJlYTotbW96LXBsYWNlaG9sZGVyIHtcbiAgY29sb3I6ICM5OTk7XG59XG5cbmlucHV0OjotbW96LXBsYWNlaG9sZGVyLCB0ZXh0YXJlYTo6LW1vei1wbGFjZWhvbGRlciB7XG4gIGNvbG9yOiAjOTk5O1xufVxuXG5pbnB1dDotbXMtaW5wdXQtcGxhY2Vob2xkZXIsIHRleHRhcmVhOi1tcy1pbnB1dC1wbGFjZWhvbGRlciB7XG4gIGNvbG9yOiAjOTk5O1xufVxuXG5idXR0b24ge1xuICBib3JkZXI6IDA7XG4gIHBhZGRpbmc6IDA7XG4gIG1hcmdpbjogMDtcbiAgYmFja2dyb3VuZDogbm9uZTtcbiAgb3V0bGluZTogbm9uZTtcbn1cblxuaSwgYSB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuLmxvZ2luaGVhZGVyLCAuZm9vdGVyIHtcbiAgd2lkdGg6IDEwMjRweDtcbiAgbWFyZ2luOiAwIGF1dG87XG4gIGhlaWdodDogMTAwcHg7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZjtcbiAgbGVmdDogNTAlO1xuICBtYXJnaW4tbGVmdDogLTUxMnB4O1xufVxuXG4ubG9naW5oZWFkZXIge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHRvcDogMDtcbn1cblxuLmxvZ2luaGVhZGVyIGltZyB7XG4gIGZsb2F0OiBsZWZ0O1xuICBtYXJnaW46IDEwcHggNTBweCAwIDEwcHg7XG59XG5cbi5sb2dpbmhlYWRlciBwIHtcbiAgZmxvYXQ6IGxlZnQ7XG4gIGZvbnQtc2l6ZTogMzBweDtcbiAgY29sb3I6ICM0NDQ7XG4gIGhlaWdodDogMjVweDtcbiAgYm9yZGVyLWxlZnQ6IDJweCBzb2xpZCAjNDQ0O1xuICBtYXJnaW4tdG9wOiAzNXB4O1xuICBsaW5lLWhlaWdodDogMjJweDtcbiAgcGFkZGluZy1sZWZ0OiA0MHB4O1xuICBtYXJnaW4tcmlnaHQ6IDIwcHg7XG59XG5cbi5sb2dpbi1ib2R5IHtcbiAgaGVpZ2h0OiAxMDAlO1xuICB3aWR0aDogMTAwJTtcbiAgb3ZlcmZsb3c6IGF1dG87XG59XG5cbi5sb2dpbi10b3Age1xuICBoZWlnaHQ6IDk5cHg7XG4gIHdpZHRoOiAxMTEycHg7XG4gIHBhZGRpbmc6IDA7XG4gIG1hcmdpbjogMCBhdXRvO1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG5cbi5sb2dpbi10b3AgPiBpbWcge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGxlZnQ6IDBweDtcbiAgdG9wOiA1MCU7XG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTtcbiAgLW1zLXRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTtcbiAgLW1vei10cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTUwJSk7XG4gIC13ZWJraXQtdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC01MCUpO1xuICAtby10cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTUwJSk7XG59XG5cbi5sb2dpbi1iZyB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgaGVpZ2h0OiA1MzZweDtcbiAgd2lkdGg6IDEwMCU7XG4gIGJhY2tncm91bmQ6IHVybCguLi8uLi8uLi8uLi9hc3NldHMvaW1hZ2UvYmctMy5wbmcpIGNlbnRlciBuby1yZXBlYXQ7XG4gIG1pbi13aWR0aDogMTExMnB4O1xufVxuXG4ubG9naW4tYm94IHtcbiAgd2lkdGg6IDExMTJweDtcbiAgbWFyZ2luOiAwIGF1dG87XG4gIGhlaWdodDogMzg5cHg7XG4gIHBhZGRpbmctdG9wOiA3NHB4O1xuICBib3gtc2l6aW5nOiBjb250ZW50LWJveDtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICByaWdodDogMTAwcHg7XG59XG5cbi5sb2dpbi1ib3gtbGlzdCB7XG4gIG1hcmdpbi1yaWdodDogNTRweDtcbiAgd2lkdGg6IDM4MHB4O1xuICBoZWlnaHQ6IDEwMCU7XG4gIGZsb2F0OiByaWdodDtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjgpO1xufVxuXG4ubG9naW4tY29weXJpZ2h0IHtcbiAgaGVpZ2h0OiAxN3B4O1xuICBsaW5lLWhlaWdodDogMTdweDtcbiAgbWFyZ2luOiAzNnB4IGF1dG87XG4gIHdpZHRoOiAxMTEycHg7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1zaXplOiAxNnB4O1xuICBjb2xvcjogcmdiYSgwLCAwLCAwLCAwLjU0KTtcbiAgd29yZC1zcGFjaW5nOiAyOHB4O1xufVxuXG4ubG9naW4tYm94LWxpc3QgPiBoMyB7XG4gIGZvbnQtc2l6ZTogMjBweDtcbiAgY29sb3I6IHJnYmEoMCwgMCwgMCwgMC44Nyk7XG4gIGhlaWdodDogMjlweDtcbiAgbGluZS1oZWlnaHQ6IDI5cHg7XG4gIG1hcmdpbi10b3A6IDM1cHg7XG4gIG1hcmdpbi1sZWZ0OiAyOHB4O1xuICBtYXJnaW4tYm90dG9tOiA0MXB4O1xuICBmb250LXdlaWdodDogYm9sZDtcbn1cblxuLmxvZ2luLWlucHV0LWJveCB7XG4gIG1hcmdpbi1sZWZ0OiAzMXB4O1xuICBtYXJnaW4tYm90dG9tOiAxOXB4O1xuICB3aWR0aDogMzE0cHg7XG4gIGhlaWdodDogNDZweDtcbiAgbGluZS1oZWlnaHQ6IDQ2cHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICNmZmY7XG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIHBhZGRpbmctbGVmdDogNDVweDtcbiAgZm9udC1zaXplOiAxNXB4O1xuICBtYXJnaW4tcmlnaHQ6IDA7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgYm9yZGVyOiAxcHggc29saWQgI2I3YmJkMztcbiAgYm9yZGVyLXJhZGl1czogMnB4O1xufVxuXG4ubG9naW4taW5wdXQtYm94IGlucHV0IHtcbiAgaGVpZ2h0OiAxMDAlO1xuICB3aWR0aDogMTAwJTtcbiAgYmFja2dyb3VuZDogbm9uZTtcbiAgYm9yZGVyLXJhZGl1czogMDtcbiAgb3V0bGluZTogbm9uZTtcbiAgcGFkZGluZzogMDtcbiAgbWFyZ2luOiAwO1xuICBmbG9hdDogbGVmdDtcbiAgcGFkZGluZy1sZWZ0OiAxNnB4O1xuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xufVxuXG4ubG9naW4taW5wdXQtYm94IGlucHV0Ojotd2Via2l0LWlucHV0LXBsYWNlaG9sZGVyIHtcbiAgY29sb3I6ICNiZGJkYmQgIWltcG9ydGFudDtcbn1cblxuLmxvZ2luLWlucHV0LWJveCBpbnB1dDotbW96LXBsYWNlaG9sZGVyIHtcbiAgY29sb3I6ICNiZGJkYmQgIWltcG9ydGFudDtcbn1cblxuLmxvZ2luLWlucHV0LWJveCBpbnB1dDo6LW1vei1wbGFjZWhvbGRlciB7XG4gIGNvbG9yOiAjYmRiZGJkICFpbXBvcnRhbnQ7XG59XG5cbi8qIGZvciB0aGUgZnV0dXJlICovXG4ubG9naW4taW5wdXQtYm94IGlucHV0Oi1tcy1pbnB1dC1wbGFjZWhvbGRlciB7XG4gIGNvbG9yOiAjYmRiZGJkICFpbXBvcnRhbnQ7XG59XG5cbi5sb2dpbi1pbnB1dC1ib3ggPiAuaW1nYm94IHtcbiAgd2lkdGg6IDQ2cHg7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgbGVmdDogMHB4O1xuICB0b3A6IDA7XG4gIGhlaWdodDogMTAwJTtcbiAgYmFja2dyb3VuZDogI2I3YmJkMztcbn1cblxuLmxvZ2luLWlucHV0LWJveCA+IC5pbWdib3ggPiBpbWcge1xuICBkaXNwbGF5OiBibG9jaztcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBsZWZ0OiA1MCU7XG4gIHRvcDogNTAlO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgLW8tdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gIC1tcy10cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgLW1vei10cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgLXdlYmtpdC10cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbn1cblxuLmxvZ2luLXN1Ym1pdCB7XG4gIG1hcmdpbi10b3A6IDMycHg7XG4gIG1hcmdpbi1sZWZ0OiAzMXB4O1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIGNvbG9yOiAjZmZmO1xuICBvcGFjaXR5OiAwLjk7XG4gIGZpbHRlcjogYWxwaGEob3BhY2l0eT05MCk7XG4gIGJhY2tncm91bmQtY29sb3I6ICM1MWIyZmY7XG4gIGhlaWdodDogNTBweDtcbiAgbGluZS1oZWlnaHQ6IDUwcHg7XG4gIHdpZHRoOiAzMTRweDtcbiAgZm9udC1zaXplOiAyMHB4O1xuICBsZXR0ZXItc3BhY2luZzogNXB4O1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIGJvcmRlci1yYWRpdXM6IDJweDtcbiAgbWFyZ2luLWJvdHRvbTogMTBweDtcbn1cblxuLmxvZ2luLWZvcmdldCB7XG4gIHdpZHRoOiAzMTRweDtcbiAgbWFyZ2luLWxlZnQ6IDMxcHg7XG4gIGhlaWdodDogMjBweDtcbiAgbWFyZ2luLXRvcDogMTBweDtcbn1cblxuLmxvZ2luLWZvcmdldCBzcGFuIHtcbiAgZmxvYXQ6IHJpZ2h0O1xuICBmb250LXNpemU6IDEzcHg7XG4gIGxpbmUtaGVpZ2h0OiAxN3B4O1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIGNvbG9yOiAjNzU3NTc1O1xufVxuXG4vKi5sb2dpbi1mb3JnZXQgaXtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBib3JkZXI6IDFweCBzb2xpZCByZ2JhKDAsMCwwLC41NCk7XG4gICAgZm9udC1zdHlsZTogbm9ybWFsO1xuICAgIGZvbnQtc2l6ZTogMTJweDtcbiAgICBoZWlnaHQ6IDE2cHg7XG4gICAgd2lkdGg6IDE2cHg7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIGxpbmUtaGVpZ2h0OiAxNHB4O1xuICAgIGJvcmRlci1yYWRpdXM6IDhweDtcbiAgICBmbG9hdDogcmlnaHQ7XG4gICAgbWFyZ2luLXJpZ2h0OiA4cHg7XG4gICAgY29sb3I6IHJnYmEoMCwwLDAsLjU0KTtcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xufSovXG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LWhlaWdodDogNzY2cHgpIHtcbiAgLmxvZ2luLWJnIHtcbiAgICBoZWlnaHQ6IDQxNnB4O1xuICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybCguLi8uLi8uLi8uLi9hc3NldHMvaW1hZ2UvYmctMy5wbmcpO1xuICB9XG5cbiAgLmxvZ2luLWJveCB7XG4gICAgcGFkZGluZy10b3A6IDE0cHg7XG4gIH1cbn1cbkBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDQyMHB4KSB7XG4gIC5sb2dpbi1iZyB7XG4gICAgaGVpZ2h0OiA0MTZweDtcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoLi4vLi4vLi4vLi4vYXNzZXRzL2ltYWdlL2JnLTMucG5nKTtcbiAgfVxuXG4gIC5sb2dpbi1ib3gge1xuICAgIHBhZGRpbmctdG9wOiAxNHB4O1xuICB9XG5cbiAgYm9keSwgb2wsIHVsLCBoMSwgaDIsIGgzLCBoNCwgaDUsIGg2LCBwLCB0aCwgdGQsIGRsLCBkZCwgZm9ybSwgZmllbGRzZXQsIGxlZ2VuZCwgaW5wdXQsIHRleHRhcmVhLCBzZWxlY3Qge1xuICAgIG1hcmdpbjogMDtcbiAgICBwYWRkaW5nOiAwO1xuICAgIGJvcmRlcjogMDtcbiAgfVxuXG4gIGJvZHkge1xuICAgIGZvbnQ6IDE2cHggXCJEcm9pZFNhbnNGYWxsYmFja1wiO1xuICAgIGJhY2tncm91bmQ6ICNmZmY7XG4gICAgLXdlYmtpdC10ZXh0LXNpemUtYWRqdXN0OiAxMDAlO1xuICB9XG5cbiAgYSB7XG4gICAgY29sb3I6ICM0NDQ0NDQ7XG4gICAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xuICB9XG5cbiAgYTpob3ZlciB7XG4gICAgY29sb3I6ICM0NDQ0NDQ7XG4gIH1cblxuICBhOmxpbmsge1xuICAgIGNvbG9yOiAjNDQ0NDQ0O1xuICB9XG5cbiAgZW0ge1xuICAgIGZvbnQtc3R5bGU6IG5vcm1hbDtcbiAgfVxuXG4gIGxpIHtcbiAgICBsaXN0LXN0eWxlOiBub25lO1xuICB9XG5cbiAgaW1nIHtcbiAgICBib3JkZXI6IDA7XG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgfVxuXG4gIHRhYmxlIHtcbiAgICBib3JkZXItY29sbGFwc2U6IGNvbGxhcHNlO1xuICAgIGJvcmRlci1zcGFjaW5nOiAwO1xuICB9XG5cbiAgcCB7XG4gICAgd29yZC13cmFwOiBicmVhay13b3JkO1xuICAgIHBhZGRpbmc6IDA7XG4gICAgbWFyZ2luOiAwO1xuICB9XG5cbiAgaW5wdXQge1xuICAgIG91dGxpbmU6IG5vbmU7XG4gIH1cblxuICBpbnB1dDo6aW5wdXQtcGxhY2Vob2xkZXIsIHRleHRhcmVhOjppbnB1dC1wbGFjZWhvbGRlciB7XG4gICAgY29sb3I6ICNjY2M7XG4gIH1cblxuICBpbnB1dDo6LXdlYmtpdC1pbnB1dC1wbGFjZWhvbGRlciwgdGV4dGFyZWE6Oi13ZWJraXQtaW5wdXQtcGxhY2Vob2xkZXIge1xuICAgIGNvbG9yOiAjY2NjO1xuICB9XG5cbiAgaW5wdXQ6LW1vei1wbGFjZWhvbGRlciwgdGV4dGFyZWE6LW1vei1wbGFjZWhvbGRlciB7XG4gICAgY29sb3I6ICNjY2M7XG4gIH1cblxuICBpbnB1dDo6LW1vei1wbGFjZWhvbGRlciwgdGV4dGFyZWE6Oi1tb3otcGxhY2Vob2xkZXIge1xuICAgIGNvbG9yOiAjY2NjO1xuICB9XG5cbiAgaW5wdXQ6LW1zLWlucHV0LXBsYWNlaG9sZGVyLCB0ZXh0YXJlYTotbXMtaW5wdXQtcGxhY2Vob2xkZXIge1xuICAgIGNvbG9yOiAjY2NjO1xuICB9XG5cbiAgaHRtbCwgYm9keSB7XG4gICAgaGVpZ2h0OiAxMDAlO1xuICAgIHdpZHRoOiAxMDAlO1xuICB9XG5cbiAgLnRvcCB7XG4gICAgbWFyZ2luLXRvcDogNjBweDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIH1cblxuICAudG9wIGgxIHtcbiAgICBmb250LXNpemU6IDE2cHg7XG4gICAgbWFyZ2luLXRvcDogMjBweDtcbiAgICBsaW5lLWhlaWdodDogMTZweDtcbiAgICBoZWlnaHQ6IDE2cHg7XG4gICAgY29sb3I6ICM0NDQ7XG4gIH1cblxuICAudG9wIHAge1xuICAgIGxpbmUtaGVpZ2h0OiAyNHB4O1xuICAgIGZvbnQtc2l6ZTogMTJweDtcbiAgICBoZWlnaHQ6IDI0cHg7XG4gICAgY29sb3I6ICNlZWU7XG4gIH1cblxuICAuZm9ybSB7XG4gICAgd2lkdGg6IDkxJTtcbiAgICBtYXJnaW46IDAgYXV0bztcbiAgfVxuXG4gIC5mb3JtID4gZGl2IHtcbiAgICBtYXJnaW4tdG9wOiAyNXB4O1xuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjYTNiMWZmO1xuICAgIGhlaWdodDogNDBweDtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIH1cblxuICAuZm9ybSBpbnB1dCB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiAxMDAlO1xuICAgIGxpbmUtaGVpZ2h0OiA0MHB4O1xuICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICB0ZXh0LWluZGVudDogMTBweDtcbiAgfVxuXG4gIC5idXR0b24ge1xuICAgIGJvcmRlcjogMDtcbiAgICBib3JkZXItcmFkaXVzOiAyNXB4O1xuICAgIGhlaWdodDogNDRweDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBtYXJnaW4tdG9wOiA0N3B4O1xuICAgIGNvbG9yOiAjZmZmO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoNjMsIDgxLCAxODEsIDAuOSk7XG4gICAgb3V0bGluZTogbm9uZTtcbiAgICBmb250LXNpemU6IDE2cHg7XG4gIH1cblxuICAuYnV0dG9uOmFjdGl2ZSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSg2MywgODEsIDE4MSwgMC44KTtcbiAgfVxuXG4gIC5wYXNzd29yZCBpIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgdG9wOiAwO1xuICAgIHJpZ2h0OiAwO1xuICAgIGhlaWdodDogMTAwJTtcbiAgICB3aWR0aDogMzRweDtcbiAgfVxuXG4gIC5maW5kX3Bhc3N3b3JkIHtcbiAgICBmbG9hdDogcmlnaHQ7XG4gICAgZm9udC1zaXplOiAxMnB4O1xuICAgIGxpbmUtaGVpZ2h0OiAyOHB4O1xuICAgIGNvbG9yOiAjY2NjO1xuICB9XG5cbiAgLmZpbmRfcGFzc3dvcmQ6bGluayB7XG4gICAgY29sb3I6ICNjY2M7XG4gIH1cblxuICAuZmluZF9wYXNzd29yZDpob3ZlciB7XG4gICAgY29sb3I6ICNlZGVkZWQ7XG4gIH1cbn1cbi5wcm9kIHtcbiAgbWFyZ2luLWxlZnQ6IDEyMHB4O1xuICBjb2xvcjogI2JmYmZiZjtcbiAgZm9udC1zaXplOiAxNHB4O1xufVxuXG4ubWlkZGxlIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDIwcHg7XG4gIHJpZ2h0OiAxMnB4O1xuICBtYXJnaW4tbGVmdDogMjBweDtcbn0iLCIgICAgYm9keSxvbCx1bCxsaSxoMSxoMixoMyxoNCxoNSxoNixwLHRoLHRkLGRsLGRkLGZvcm0sZmllbGRzZXQsbGVnZW5kLGlucHV0LHRleHRhcmVhLHNlbGVjdHttYXJnaW46MDtwYWRkaW5nOjA7Ym9yZGVyOjA7Zm9udC13ZWlnaHQ6bm9ybWFsO31cbiAgICBib2R5e2ZvbnQ6MTZweFwi5b6u6L2v6ZuF6buRXCI7YmFja2dyb3VuZDojZmZmOy13ZWJraXQtdGV4dC1zaXplLWFkanVzdDoxMDAlO31cbiAgICBhe2NvbG9yOiM0NDQ0NDQ7dGV4dC1kZWNvcmF0aW9uOm5vbmV9XG4gICAgYTpob3Zlcntjb2xvcjojNDQ0NDQ0fVxuICAgIGE6bGlua3tjb2xvcjojNDQ0NDQ0fVxuICAgIGVte2ZvbnQtc3R5bGU6bm9ybWFsfVxuICAgIGxpe2xpc3Qtc3R5bGU6bm9uZX1cbiAgICBpbWd7Ym9yZGVyOjA7dmVydGljYWwtYWxpZ246bWlkZGxlfVxuICAgIHRhYmxle2JvcmRlci1jb2xsYXBzZTpjb2xsYXBzZTtib3JkZXItc3BhY2luZzowfVxuICAgIHB7d29yZC13cmFwOmJyZWFrLXdvcmQ7cGFkZGluZzowO21hcmdpbjowO31cbiAgICBpbnB1dDo6aW5wdXQtcGxhY2Vob2xkZXIsIHRleHRhcmVhOjppbnB1dC1wbGFjZWhvbGRlciB7Y29sb3I6ICM5OTk7fVxuICAgIGlucHV0Ojotd2Via2l0LWlucHV0LXBsYWNlaG9sZGVyLCB0ZXh0YXJlYTo6LXdlYmtpdC1pbnB1dC1wbGFjZWhvbGRlciB7Y29sb3I6ICM5OTk7fVxuICAgIGlucHV0Oi1tb3otcGxhY2Vob2xkZXIsIHRleHRhcmVhOi1tb3otcGxhY2Vob2xkZXIge2NvbG9yOiAjOTk5O31cbiAgICBpbnB1dDo6LW1vei1wbGFjZWhvbGRlciwgdGV4dGFyZWE6Oi1tb3otcGxhY2Vob2xkZXIge2NvbG9yOiAjOTk5O31cbiAgICBpbnB1dDotbXMtaW5wdXQtcGxhY2Vob2xkZXIsIHRleHRhcmVhOi1tcy1pbnB1dC1wbGFjZWhvbGRlciB7Y29sb3I6ICM5OTk7fVxuICAgIGJ1dHRvbntib3JkZXI6IDA7cGFkZGluZzogMDttYXJnaW46IDA7YmFja2dyb3VuZDogbm9uZTtvdXRsaW5lOiBub25lO31cbiAgICBpLGF7Y3Vyc29yOiBwb2ludGVyO31cbiAgICAubG9naW5oZWFkZXIsLmZvb3RlcntcbiAgICAgICAgd2lkdGg6IDEwMjRweDtcbiAgICAgICAgbWFyZ2luOiAwIGF1dG87XG4gICAgICAgIGhlaWdodDogMTAwcHg7XG4gICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZjtcbiAgICAgICAgbGVmdDogNTAlO1xuICAgICAgICBtYXJnaW4tbGVmdDogLTUxMnB4O1xuICAgIH1cbiAgICAubG9naW5oZWFkZXJ7XG4gICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgICAgdG9wOiAwO1xuICAgIH1cbiAgICBcbiAgICAubG9naW5oZWFkZXIgaW1ne1xuICAgICAgICBmbG9hdDogbGVmdDtcbiAgICAgICAgbWFyZ2luOiAxMHB4IDUwcHggMCAxMHB4O1xuICAgIH1cbiAgICAubG9naW5oZWFkZXIgcHtcbiAgICAgICAgZmxvYXQ6IGxlZnQ7XG4gICAgICAgIGZvbnQtc2l6ZTogMzBweDtcbiAgICAgICAgY29sb3I6ICM0NDQ7XG4gICAgICAgIGhlaWdodDogMjVweDtcbiAgICAgICAgYm9yZGVyLWxlZnQ6IDJweCBzb2xpZCAjNDQ0O1xuICAgICAgICBtYXJnaW4tdG9wOiAzNXB4O1xuICAgICAgICBsaW5lLWhlaWdodDogMjJweDtcbiAgICAgICAgcGFkZGluZy1sZWZ0OiA0MHB4O1xuICAgICAgICBtYXJnaW4tcmlnaHQ6IDIwcHg7XG4gICAgfVxuICAgIC8vIC5oZWFkZXIgc3BhbntcbiAgICAvLyBcdGZsb2F0OiBsZWZ0O1xuICAgIC8vIFx0Zm9udC1zaXplOiAyMHB4O1xuICAgIC8vIFx0ZGlzcGxheTogYmxvY2s7XG4gICAgLy8gXHRtYXJnaW4tdG9wOiA4OHB4O1xuICAgIC8vIFx0bGluZS1oZWlnaHQ6IDIwcHg7XG4gICAgLy8gXHRjb2xvcjogI2JmYmZiZjtcbiAgICAvLyB9XG4gICAgLmxvZ2luLWJvZHl7XG4gICAgICAgIGhlaWdodDogMTAwJTtcbiAgICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICAgIG92ZXJmbG93OiBhdXRvO1xuICAgIH1cbiAgICAubG9naW4tdG9we1xuICAgICAgICBoZWlnaHQ6IDk5cHg7XG4gICAgICAgIHdpZHRoOiAxMTEycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIG1hcmdpbjogMCBhdXRvO1xuICAgICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgfVxuICAgIC5sb2dpbi10b3A+aW1ne1xuICAgICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICAgIGxlZnQ6IDBweDtcbiAgICAgICAgdG9wOiA1MCU7XG4gICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTtcbiAgICAgICAgLW1zLXRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTtcbiAgICAgICAgLW1vei10cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTUwJSk7XG4gICAgICAgIC13ZWJraXQtdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC01MCUpO1xuICAgICAgICAtby10cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTUwJSk7XG4gICAgfVxuICAgIC5sb2dpbi1iZ3tcbiAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgICBoZWlnaHQ6IDUzNnB4O1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgYmFja2dyb3VuZDogIHVybCguLi8uLi8uLi8uLi9hc3NldHMvaW1hZ2UvYmctMy5wbmcpIGNlbnRlciBuby1yZXBlYXQ7XG4gICAgICAgIG1pbi13aWR0aDogMTExMnB4O1xuICAgIH1cbiAgICAubG9naW4tYm94e1xuICAgICAgICB3aWR0aDoxMTEycHg7XG4gICAgICAgIG1hcmdpbjogMCBhdXRvIDtcbiAgICAgICAgaGVpZ2h0OiAzODlweDtcbiAgICAgICAgcGFkZGluZy10b3A6IDc0cHg7XG4gICAgICAgIGJveC1zaXppbmc6IGNvbnRlbnQtYm94O1xuICAgICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICAgIHJpZ2h0OiAxMDBweDtcbiAgICB9XG4gICAgLmxvZ2luLWJveC1saXN0e1xuICAgICAgICBtYXJnaW4tcmlnaHQ6IDU0cHg7XG4gICAgICAgIHdpZHRoOiAzODBweDtcbiAgICAgICAgaGVpZ2h0OiAxMDAlO1xuICAgICAgICBmbG9hdDogcmlnaHQ7XG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LDI1NSwyNTUsLjgpO1xuICAgIH1cbiAgICAubG9naW4tY29weXJpZ2h0e1xuICAgICAgICBoZWlnaHQ6IDE3cHg7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiAxN3B4O1xuICAgICAgICBtYXJnaW46IDM2cHggYXV0bztcbiAgICAgICAgd2lkdGg6IDExMTJweDtcbiAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgIGNvbG9yOiByZ2JhKDAsMCwwLDAuNTQpO1xuICAgICAgICB3b3JkLXNwYWNpbmc6MjhweDtcbiAgICB9XG4gICAgLmxvZ2luLWJveC1saXN0Pmgze1xuICAgICAgICBmb250LXNpemU6IDIwcHg7XG4gICAgICAgIGNvbG9yOiByZ2JhKDAsMCwwLDAuODcpO1xuICAgICAgICBoZWlnaHQ6IDI5cHg7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiAyOXB4O1xuICAgICAgICBtYXJnaW4tdG9wOiAzNXB4O1xuICAgICAgICBtYXJnaW4tbGVmdDogMjhweDtcbiAgICAgICAgbWFyZ2luLWJvdHRvbTogNDFweDtcbiAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgfVxuICAgIC5sb2dpbi1pbnB1dC1ib3h7XG4gICAgICAgIG1hcmdpbi1sZWZ0OiAzMXB4O1xuICAgICAgICBtYXJnaW4tYm90dG9tOiAxOXB4O1xuICAgICAgICB3aWR0aDogMzE0cHg7XG4gICAgICAgIGhlaWdodDogNDZweDtcbiAgICAgICAgbGluZS1oZWlnaHQ6IDQ2cHg7XG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6ICNmZmY7XG4gICAgICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gICAgICAgIHBhZGRpbmctbGVmdDogNDVweDtcbiAgICAgICAgZm9udC1zaXplOiAxNXB4O1xuICAgICAgICBtYXJnaW4tcmlnaHQ6IDA7XG4gICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgICAgYm9yZGVyOiAxcHggc29saWQgI2I3YmJkMztcbiAgICAgICAgYm9yZGVyLXJhZGl1czogMnB4O1xuICAgIH1cbiAgICAubG9naW4taW5wdXQtYm94IGlucHV0e1xuICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICBiYWNrZ3JvdW5kOiBub25lO1xuICAgICAgICBib3JkZXItcmFkaXVzOiAwO1xuICAgICAgICBvdXRsaW5lOiBub25lO1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGZsb2F0OiBsZWZ0O1xuICAgICAgICBwYWRkaW5nLWxlZnQ6IDE2cHg7XG4gICAgICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gICAgfVxuICAgIC5sb2dpbi1pbnB1dC1ib3ggaW5wdXQ6Oi13ZWJraXQtaW5wdXQtcGxhY2Vob2xkZXIgeyBcbiAgICAgICAgY29sb3I6ICNiZGJkYmQgIWltcG9ydGFudDtcbiAgICB9IFxuICAgIC5sb2dpbi1pbnB1dC1ib3ggaW5wdXQ6LW1vei1wbGFjZWhvbGRlciB7IFxuICAgICAgICBjb2xvcjogI2JkYmRiZCAhaW1wb3J0YW50O1xuICAgIH0gXG4gICAgLmxvZ2luLWlucHV0LWJveCBpbnB1dDo6LW1vei1wbGFjZWhvbGRlciB7IFxuICAgICAgICBjb2xvcjogI2JkYmRiZCAhaW1wb3J0YW50O1xuICAgIH0gLyogZm9yIHRoZSBmdXR1cmUgKi8gXG4gICAgLmxvZ2luLWlucHV0LWJveCBpbnB1dDotbXMtaW5wdXQtcGxhY2Vob2xkZXIgeyBcbiAgICAgICAgY29sb3I6ICNiZGJkYmQgIWltcG9ydGFudDtcbiAgICB9XG4gICAgLmxvZ2luLWlucHV0LWJveD4uaW1nYm94e1xuICAgICAgICB3aWR0aDogNDZweDtcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICBsZWZ0OiAwcHg7XG4gICAgICAgIHRvcDogMDtcbiAgICAgICAgaGVpZ2h0OiAxMDAlO1xuICAgICAgICBiYWNrZ3JvdW5kOiAjYjdiYmQzO1xuICAgIH1cbiAgICAubG9naW4taW5wdXQtYm94Pi5pbWdib3g+aW1ne1xuICAgICAgICBkaXNwbGF5OiBibG9jaztcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICBsZWZ0OiA1MCU7XG4gICAgICAgIHRvcDogNTAlO1xuICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLC01MCUpO1xuICAgICAgICAtby10cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLC01MCUpO1xuICAgICAgICAtbXMtdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwtNTAlKTtcbiAgICAgICAgLW1vei10cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLC01MCUpO1xuICAgICAgICAtd2Via2l0LXRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsLTUwJSk7XG4gICAgfVxuICAgIC5sb2dpbi1zdWJtaXR7XG4gICAgICAgIG1hcmdpbi10b3A6IDMycHg7XG4gICAgICAgIG1hcmdpbi1sZWZ0OiAzMXB4O1xuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgICAgIGNvbG9yOiAjZmZmO1xuICAgICAgICBvcGFjaXR5OiAwLjk7XG4gICAgICAgIGZpbHRlcjogYWxwaGEob3BhY2l0eT05MCk7XG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6ICM1MWIyZmY7XG4gICAgICAgIGhlaWdodDogNTBweDtcbiAgICAgICAgbGluZS1oZWlnaHQ6IDUwcHg7XG4gICAgICAgIHdpZHRoOiAzMTRweDtcbiAgICAgICAgZm9udC1zaXplOiAyMHB4O1xuICAgICAgICBsZXR0ZXItc3BhY2luZzo1cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogMnB4O1xuICAgICAgICBtYXJnaW4tYm90dG9tOiAxMHB4O1xuICAgIH1cbiAgICAubG9naW4tZm9yZ2V0e1xuICAgICAgICB3aWR0aDogMzE0cHg7XG4gICAgICAgIG1hcmdpbi1sZWZ0OiAzMXB4O1xuICAgICAgICBoZWlnaHQ6IDIwcHg7XG4gICAgICAgIG1hcmdpbi10b3A6IDEwcHg7XG4gICAgfVxuICAgIC5sb2dpbi1mb3JnZXQgc3BhbntcbiAgICAgICAgZmxvYXQ6IHJpZ2h0O1xuICAgICAgICBmb250LXNpemU6IDEzcHg7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiAxN3B4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGNvbG9yOiAjNzU3NTc1O1xuICAgIH1cbiAgICAvKi5sb2dpbi1mb3JnZXQgaXtcbiAgICAgICAgZGlzcGxheTogYmxvY2s7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHJnYmEoMCwwLDAsLjU0KTtcbiAgICAgICAgZm9udC1zdHlsZTogbm9ybWFsO1xuICAgICAgICBmb250LXNpemU6IDEycHg7XG4gICAgICAgIGhlaWdodDogMTZweDtcbiAgICAgICAgd2lkdGg6IDE2cHg7XG4gICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICAgICAgbGluZS1oZWlnaHQ6IDE0cHg7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDhweDtcbiAgICAgICAgZmxvYXQ6IHJpZ2h0O1xuICAgICAgICBtYXJnaW4tcmlnaHQ6IDhweDtcbiAgICAgICAgY29sb3I6IHJnYmEoMCwwLDAsLjU0KTtcbiAgICAgICAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgICB9Ki9cbiAgICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LWhlaWdodDogNzY2cHgpIHtcbiAgICAgICAgLmxvZ2luLWJne1xuICAgICAgICAgICAgaGVpZ2h0OiA0MTZweDtcbiAgICAgICAgICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybCguLi8uLi8uLi8uLi9hc3NldHMvaW1hZ2UvYmctMy5wbmcpO1xuICAgICAgICB9XG4gICAgICAgIC5sb2dpbi1ib3h7XG4gICAgICAgICAgICBwYWRkaW5nLXRvcDogMTRweDtcbiAgICAgICAgfVxuICAgIH1cbiAgICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA0MjBweCkge1xuICAgICAgICAubG9naW4tYmd7XG4gICAgICAgICAgICBoZWlnaHQ6IDQxNnB4O1xuICAgICAgICAgICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKC4uLy4uLy4uLy4uL2Fzc2V0cy9pbWFnZS9iZy0zLnBuZyk7XG4gICAgICAgIH1cbiAgICAgICAgLmxvZ2luLWJveHtcbiAgICAgICAgICAgIHBhZGRpbmctdG9wOiAxNHB4O1xuICAgICAgICB9XG4gICAgICAgICAgIGJvZHksb2wsdWwsaDEsaDIsaDMsaDQsaDUsaDYscCx0aCx0ZCxkbCxkZCxmb3JtLGZpZWxkc2V0LGxlZ2VuZCxpbnB1dCx0ZXh0YXJlYSxzZWxlY3R7bWFyZ2luOjA7cGFkZGluZzowO2JvcmRlcjowO31cbiAgICBib2R5e2ZvbnQ6MTZweFwiRHJvaWRTYW5zRmFsbGJhY2tcIjtiYWNrZ3JvdW5kOiNmZmY7LXdlYmtpdC10ZXh0LXNpemUtYWRqdXN0OjEwMCU7fVxuICAgIGF7Y29sb3I6IzQ0NDQ0NDt0ZXh0LWRlY29yYXRpb246bm9uZX1cbiAgICBhOmhvdmVye2NvbG9yOiM0NDQ0NDR9XG4gICAgYTpsaW5re2NvbG9yOiM0NDQ0NDR9XG4gICAgZW17Zm9udC1zdHlsZTpub3JtYWx9XG4gICAgbGl7bGlzdC1zdHlsZTpub25lfVxuICAgIGltZ3tib3JkZXI6MDt2ZXJ0aWNhbC1hbGlnbjptaWRkbGV9XG4gICAgdGFibGV7Ym9yZGVyLWNvbGxhcHNlOmNvbGxhcHNlO2JvcmRlci1zcGFjaW5nOjB9XG4gICAgcHt3b3JkLXdyYXA6YnJlYWstd29yZDtwYWRkaW5nOjA7bWFyZ2luOjA7fVxuICAgIGlucHV0e291dGxpbmU6IG5vbmU7fVxuICAgIGlucHV0OjppbnB1dC1wbGFjZWhvbGRlciwgdGV4dGFyZWE6OmlucHV0LXBsYWNlaG9sZGVyIHtcbiAgICBjb2xvcjogI2NjYztcbiAgICB9XG4gICAgaW5wdXQ6Oi13ZWJraXQtaW5wdXQtcGxhY2Vob2xkZXIsIHRleHRhcmVhOjotd2Via2l0LWlucHV0LXBsYWNlaG9sZGVyIHtcbiAgICBjb2xvcjogI2NjYztcbiAgICB9XG4gICAgaW5wdXQ6LW1vei1wbGFjZWhvbGRlciwgdGV4dGFyZWE6LW1vei1wbGFjZWhvbGRlciB7XG4gICAgY29sb3I6ICNjY2M7XG4gICAgfVxuICAgIGlucHV0OjotbW96LXBsYWNlaG9sZGVyLCB0ZXh0YXJlYTo6LW1vei1wbGFjZWhvbGRlciB7XG4gICAgY29sb3I6ICNjY2M7XG4gICAgfVxuICAgIGlucHV0Oi1tcy1pbnB1dC1wbGFjZWhvbGRlciwgdGV4dGFyZWE6LW1zLWlucHV0LXBsYWNlaG9sZGVyIHtcbiAgICBjb2xvcjogI2NjYztcbiAgICB9XG4gICAgXG4gICAgaHRtbCxib2R5e1xuICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgIH1cbiAgICBcbiAgICAudG9we1xuICAgICAgICBtYXJnaW4tdG9wOiA2MHB4O1xuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgfVxuICAgIC50b3AgaDF7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgbWFyZ2luLXRvcDogMjBweDtcbiAgICAgICAgbGluZS1oZWlnaHQ6IDE2cHg7XG4gICAgICAgIGhlaWdodDogMTZweDtcbiAgICAgICAgY29sb3I6ICM0NDQ7XG4gICAgfVxuICAgIC50b3AgcHtcbiAgICAgICAgbGluZS1oZWlnaHQ6IDI0cHg7XG4gICAgICAgIGZvbnQtc2l6ZTogMTJweDtcbiAgICAgICAgaGVpZ2h0OiAyNHB4O1xuICAgICAgICBjb2xvcjogI2VlZTtcbiAgICB9XG4gICAgLmZvcm17XG4gICAgICAgIHdpZHRoOiA5MSU7XG4gICAgICAgIG1hcmdpbjogMCBhdXRvO1xuICAgIH1cbiAgICAuZm9ybT5kaXZ7XG4gICAgICAgIG1hcmdpbi10b3A6IDI1cHg7XG4gICAgICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjYTNiMWZmO1xuICAgICAgICBoZWlnaHQ6IDQwcHg7XG4gICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICB9XG4gICAgLmZvcm0gaW5wdXR7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiA0MHB4O1xuICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgIHRleHQtaW5kZW50OiAxMHB4O1xuICAgIH1cbiAgICAuYnV0dG9ue1xuICAgICAgICBib3JkZXI6IDA7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDI1cHg7XG4gICAgICAgIGhlaWdodDogNDRweDtcbiAgICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICAgIG1hcmdpbi10b3A6IDQ3cHg7XG4gICAgICAgIGNvbG9yOiAjZmZmO1xuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDYzLDgxLDE4MSwuOSk7XG4gICAgICAgIG91dGxpbmU6IG5vbmU7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICB9XG4gICAgLmJ1dHRvbjphY3RpdmV7XG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoNjMsODEsMTgxLC44KTtcbiAgICB9XG4gICAgLnBhc3N3b3JkIGl7XG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgZGlzcGxheTogYmxvY2s7XG4gICAgICAgIHRvcDogMDtcbiAgICAgICAgcmlnaHQ6IDA7XG4gICAgICAgIGhlaWdodDogMTAwJTtcbiAgICAgICAgd2lkdGg6IDM0cHg7XG4gICAgICAgIC8vIGJhY2tncm91bmQ6IHVybCguLi9hc3NldHMvaW1hZ2UvcGFzc3dvcmQtc2hvdy5wbmcpIGNlbnRlciBuby1yZXBlYXQ7XG4gICAgfVxuICAgIC5maW5kX3Bhc3N3b3Jke1xuICAgICAgICBmbG9hdDogcmlnaHQ7XG4gICAgICAgIGZvbnQtc2l6ZTogMTJweDtcbiAgICAgICAgbGluZS1oZWlnaHQ6IDI4cHg7XG4gICAgICAgIGNvbG9yOiAjY2NjO1xuICAgIH1cbiAgICAuZmluZF9wYXNzd29yZDpsaW5re1xuICAgICAgICBjb2xvcjogI2NjYztcbiAgICB9XG4gICAgLmZpbmRfcGFzc3dvcmQ6aG92ZXJ7XG4gICAgICAgIGNvbG9yOiAjZWRlZGVkO1xuICAgIH1cbiAgICBcbiAgICBcbiAgICBcbiAgICB9XG4gICAgLnByb2R7XG4gICAgICAgICAgICBtYXJnaW4tbGVmdDoxMjBweDtcbiAgICAgICAgICAgIGNvbG9yOiAjYmZiZmJmO1xuICAgICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgLm1pZGRsZXtcbiAgICAgICAgICAgIGRpc3BsYXk6ZmxleDtcbiAgICAgICAgICAgIGZsZXgtZGlyZWN0aW9uOmNvbHVtbjtcbiAgICAgICAgICAgIHBvc2l0aW9uOmFic29sdXRlO1xuICAgICAgICAgICAgdG9wOjIwcHg7XG4gICAgICAgICAgICByaWdodDoxMnB4O1xuICAgICAgICAgICAgbWFyZ2luLWxlZnQ6IDIwcHg7XG4gICAgICAgIH1cbiAgICBcbiAgICBcbiAgICBcbiAgICBcbiAgICBcbiAgICBcbiAgICBcbiAgICBcbiAgICBcbiAgICAiXX0= */");
+
+/***/ }),
+
+/***/ "./src/app/page/law/login/login.component.ts":
+/*!***************************************************!*\
+  !*** ./src/app/page/law/login/login.component.ts ***!
+  \***************************************************/
+/*! exports provided: LoginComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/fesm2015/ng-zorro-antd.js");
+
+
+
+let LoginComponent = class LoginComponent {
+    constructor(modal) {
+        this.modal = modal;
+        this.nzChangeLogin = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.login = {};
+    }
+    ngOnInit() {
+        // sessionStorage.get("username").then((val) => {
+        //   this.login.username = val;
+        // });
+        // sessionStorage.get("password").then((val) => {
+        //   this.login.password = val;
+        // });
+    }
+    doLogin() {
+        var login = true;
+        console.log("this.login", this.login);
+        if (this.login.username != 'admin') {
+            login = false;
+        }
+        if (this.login.password != 'admin') {
+            login = false;
+        }
+        if (login) {
+            this.nzChangeLogin.emit("success");
+            sessionStorage.setItem("user", this.login.username);
+            sessionStorage.setItem("password", this.login.password);
+        }
+        else {
+            this.showConfirm();
+        }
+    }
+    showConfirm() {
+        this.modal.confirm({
+            nzTitle: '用户名或密码输入错误,请重新输入',
+            nzOnOk: () => { }
+        });
+    }
+    myKeyup(e) {
+        let keycode = window.event ? e.keyCode : e.which;
+        if (keycode == 13) {
+            this.doLogin();
+        }
+    }
+};
+LoginComponent.ctorParameters = () => [
+    { type: ng_zorro_antd__WEBPACK_IMPORTED_MODULE_2__["NzModalService"] }
+];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+], LoginComponent.prototype, "nzChangeLogin", void 0);
+LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-login',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./login.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/page/law/login/login.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./login.component.scss */ "./src/app/page/law/login/login.component.scss")).default]
+    })
+], LoginComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/page/law/no-penalty/no-penalty.component.scss":
+/*!***************************************************************!*\
+  !*** ./src/app/page/law/no-penalty/no-penalty.component.scss ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".screens {\n  border-bottom: 1px dashed #ccc;\n}\n\n.temp-kinds-main {\n  display: flex;\n}\n\n.temp-kinds-title {\n  min-width: 60px;\n}\n\n.temp-kinds-list {\n  display: flex;\n  list-style: none;\n  padding-left: 12px;\n  flex-flow: row wrap;\n  max-height: 150px;\n  overflow: auto;\n}\n\n.temp-kinds-list li {\n  padding-left: 8px;\n  padding-right: 8px;\n  cursor: pointer;\n  margin: 0 4px 6px;\n  border: 1px solid #ccc;\n}\n\n.temp-kinds-list li.active {\n  color: #3895FF;\n  border: 1px solid #3895FF;\n}\n\n.age-chart-width {\n  width: 100%;\n  margin-top: 24px;\n  border-bottom: 1px dashed #ccc;\n  margin-bottom: 24px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hcHBsZS9EZXNrdG9wL3dvcms0L2hkaW9jTmV3L2hkY2dpb2Mvc3JjL21haW4vbXktYXBwL3NyYy9hcHAvcGFnZS9sYXcvbm8tcGVuYWx0eS9uby1wZW5hbHR5LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9wYWdlL2xhdy9uby1wZW5hbHR5L25vLXBlbmFsdHkuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSw4QkFBQTtBQ0NKOztBRENBO0VBQ0ksYUFBQTtBQ0VKOztBREFBO0VBQ0ksZUFBQTtBQ0dKOztBRERBO0VBQ0ksYUFBQTtFQUNBLGdCQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtFQUNBLGlCQUFBO0VBQ0EsY0FBQTtBQ0lKOztBREZBO0VBQ0ksaUJBQUE7RUFDQSxrQkFBQTtFQUNBLGVBQUE7RUFDQSxpQkFBQTtFQUNBLHNCQUFBO0FDS0o7O0FERkE7RUFDSSxjQUFBO0VBQ0EseUJBQUE7QUNLSjs7QURIQTtFQUNJLFdBQUE7RUFDQSxnQkFBQTtFQUNBLDhCQUFBO0VBQ0EsbUJBQUE7QUNNSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2UvbGF3L25vLXBlbmFsdHkvbm8tcGVuYWx0eS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zY3JlZW5ze1xuICAgIGJvcmRlci1ib3R0b206IDFweCBkYXNoZWQgI2NjYztcbn1cbi50ZW1wLWtpbmRzLW1haW57XG4gICAgZGlzcGxheTogZmxleDtcbn1cbi50ZW1wLWtpbmRzLXRpdGxle1xuICAgIG1pbi13aWR0aDogNjBweDtcbn1cbi50ZW1wLWtpbmRzLWxpc3R7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBsaXN0LXN0eWxlOiBub25lO1xuICAgIHBhZGRpbmctbGVmdDogMTJweDtcbiAgICBmbGV4LWZsb3c6IHJvdyB3cmFwO1xuICAgIG1heC1oZWlnaHQ6IDE1MHB4O1xuICAgIG92ZXJmbG93OiBhdXRvO1xufVxuLnRlbXAta2luZHMtbGlzdCBsaXtcbiAgICBwYWRkaW5nLWxlZnQ6IDhweDtcbiAgICBwYWRkaW5nLXJpZ2h0OiA4cHg7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIG1hcmdpbjogMCA0cHggNnB4O1xuICAgIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XG59XG5cbi50ZW1wLWtpbmRzLWxpc3QgbGkuYWN0aXZle1xuICAgIGNvbG9yOiAgIzM4OTVGRjtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjMzg5NUZGO1xufVxuLmFnZS1jaGFydC13aWR0aHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBtYXJnaW4tdG9wOiAyNHB4O1xuICAgIGJvcmRlci1ib3R0b206IDFweCBkYXNoZWQgI2NjYztcbiAgICBtYXJnaW4tYm90dG9tOiAyNHB4O1xufVxuIiwiLnNjcmVlbnMge1xuICBib3JkZXItYm90dG9tOiAxcHggZGFzaGVkICNjY2M7XG59XG5cbi50ZW1wLWtpbmRzLW1haW4ge1xuICBkaXNwbGF5OiBmbGV4O1xufVxuXG4udGVtcC1raW5kcy10aXRsZSB7XG4gIG1pbi13aWR0aDogNjBweDtcbn1cblxuLnRlbXAta2luZHMtbGlzdCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGxpc3Qtc3R5bGU6IG5vbmU7XG4gIHBhZGRpbmctbGVmdDogMTJweDtcbiAgZmxleC1mbG93OiByb3cgd3JhcDtcbiAgbWF4LWhlaWdodDogMTUwcHg7XG4gIG92ZXJmbG93OiBhdXRvO1xufVxuXG4udGVtcC1raW5kcy1saXN0IGxpIHtcbiAgcGFkZGluZy1sZWZ0OiA4cHg7XG4gIHBhZGRpbmctcmlnaHQ6IDhweDtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICBtYXJnaW46IDAgNHB4IDZweDtcbiAgYm9yZGVyOiAxcHggc29saWQgI2NjYztcbn1cblxuLnRlbXAta2luZHMtbGlzdCBsaS5hY3RpdmUge1xuICBjb2xvcjogIzM4OTVGRjtcbiAgYm9yZGVyOiAxcHggc29saWQgIzM4OTVGRjtcbn1cblxuLmFnZS1jaGFydC13aWR0aCB7XG4gIHdpZHRoOiAxMDAlO1xuICBtYXJnaW4tdG9wOiAyNHB4O1xuICBib3JkZXItYm90dG9tOiAxcHggZGFzaGVkICNjY2M7XG4gIG1hcmdpbi1ib3R0b206IDI0cHg7XG59Il19 */");
+
+/***/ }),
+
+/***/ "./src/app/page/law/no-penalty/no-penalty.component.ts":
+/*!*************************************************************!*\
+  !*** ./src/app/page/law/no-penalty/no-penalty.component.ts ***!
+  \*************************************************************/
+/*! exports provided: NoPenaltyComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NoPenaltyComponent", function() { return NoPenaltyComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _law_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../law.service */ "./src/app/page/law/law.service.ts");
+
+
+
+
+let NoPenaltyComponent = class NoPenaltyComponent {
+    constructor(lawSerivce, router) {
+        this.lawSerivce = lawSerivce;
+        this.router = router;
+        this.classValueList = []; //类最
+        this.penaltyValueList = []; //个罪
+        // lawStoryList = []; //法定情节
+        this.selectTypeIndex = 0; //类最选择
+        this.selectPenaltyIndex = null; //个罪选择
+        this.selectLawStoryIndex = null; //法定情节选择
+        this.selectTagList = [];
+        // start_age:string;
+        // end_age:string;
+        // age_rang:string;
+        this.pageIndex = 1;
+        this.total = 100;
+        this.listOfData = [];
+        this.echartsXlist = [];
+    }
+    ngOnInit() {
+        this.getClassList();
+    }
+    getClassList() {
+        this.lawSerivce.getNoPenaltyKeyword().subscribe((data) => {
+            data.forEach((element, index) => {
+                if (element != "null" && element != null) {
+                    this.classValueList.push({ code: String(index + 1), value: element });
+                }
+            });
+            this.selectTitle = this.classValueList[this.selectTypeIndex].value;
+            this.loadCateCharts();
+            this.getPenaltyList();
+            // this.getLawStroyList();
+            this.getWenshuByLawStory();
+        });
+    }
+    getPenaltyList() {
+        this.penaltyValueList = [];
+        this.lawSerivce.getNoPenaltyLaws().subscribe((data) => {
+            data.forEach((element, index) => {
+                if (element != "null" && element != null) {
+                    this.penaltyValueList.push({ code: String(index + 1), value: element });
+                }
+            });
+        });
+    }
+    // getLawStroyList() {
+    //   this.lawSerivce.getLawsStory().subscribe((data) => {
+    //     data.forEach((element) => {
+    //       if (element != null) {
+    //         this.lawStoryList.push(element);
+    //       }
+    //     });
+    //   });
+    // }
+    getWenshuByLawStory() {
+        this.lawSerivce
+            .getNoPenaltyWenshu(this.selectTitle, this.selectPenaltyTitle, String(this.pageIndex))
+            .subscribe((data) => {
+            this.total = data.count;
+            var list = [];
+            data.wenshu_list.forEach((element) => {
+                list.push(element);
+            });
+            this.listOfData = list;
+            console.log("listOfData", this.listOfData);
+        });
+    }
+    //点击的类最
+    searchSelectType(index, item) {
+        this.selectTypeIndex = index;
+        this.selectTitle = item.value;
+        //类最切换 条件情况
+        this.selectPenaltyIndex = null;
+        this.selectPenaltyTitle = null;
+        // this.loadCateCharts();
+        //点击类最加载个罪
+        this.getPenaltyList();
+        this.getWenshuByLawStory();
+    }
+    //点击个罪
+    searchPenaltyType(index, item) {
+        console.log("page", index);
+        if (this.selectPenaltyIndex == index) {
+            this.selectPenaltyIndex = null;
+            this.selectPenaltyTitle = null;
+        }
+        else {
+            this.selectPenaltyIndex = index;
+            this.selectPenaltyTitle = item.value;
+        }
+        // this.loadCateCharts();
+        this.getWenshuByLawStory();
+    }
+    //点击法定情节
+    searchLawStory(index, item) {
+        if (this.selectLawStoryIndex == index) {
+            this.selectLawStoryIndex = null;
+            this.selectPLawStoryTitle = null;
+        }
+        else {
+            this.selectLawStoryIndex = index;
+            this.selectPLawStoryTitle = item;
+        }
+        // this.loadCateCharts();
+        this.getWenshuByLawStory();
+    }
+    //删除选择条件
+    deleteFlagType(index, item) {
+        if (index == 1) {
+            this.selectPenaltyIndex = null;
+            this.selectPenaltyTitle = null;
+        }
+        else if (index == 2) {
+            this.selectLawStoryIndex = null;
+            this.selectPLawStoryTitle = null;
+        }
+        this.loadCateCharts();
+        this.getWenshuByLawStory();
+    }
+    //加载柱状图
+    loadCateCharts() {
+        if (this.selectPenaltyIndex != null) {
+            //判断是否点击了个罪
+            this.lawSerivce.getPenaltyAgeList().subscribe((data) => {
+                data.forEach((element) => {
+                    if (element.penalty_class == this.selectTitle) {
+                        // for (var key in element.age_num){
+                        //     if (key != "unkown"){
+                        //         yList.push(element.age_num[key]);
+                        //     }
+                        // }
+                        element.penalty_definite_age.forEach((ele) => {
+                            if (ele.penalty_name_definite == this.selectPenaltyTitle) {
+                                this.loadDataForChart(ele);
+                            }
+                        });
+                    }
+                });
+            });
+        }
+        else {
+            this.lawSerivce.getPenaltyAgeClass().subscribe((data) => {
+                data.forEach((element, index) => {
+                    if (!!element.penalty_class &&
+                        element.penalty_class == this.selectTitle) {
+                        this.loadDataForChart(element.age_num);
+                    }
+                });
+            });
+        }
+    }
+    //控制翻页
+    searchPageIndexData(index) {
+        console.log("page", index);
+        this.pageIndex = index;
+        this.getWenshuByLawStory();
+    }
+    //详情页面
+    gotoDetail(item) {
+        this.router.navigate(["/story/detail"], {
+            skipLocationChange: true,
+            queryParams: {
+                item: JSON.stringify(item),
+                from: "/story",
+            },
+        });
+    }
+    // private echartsClick(index:number){
+    //   console.log("index",index);
+    //   let nums:string = this.echartsXlist[index];
+    //   this.age_rang = nums;
+    //   var age_start = "0";
+    //   var age_end = "120"
+    //   if (nums.indexOf("-") != -1){
+    //    const arr =  nums.split("-");
+    //    age_start = arr[0];
+    //    age_end = arr[1];
+    //   }else{
+    //     if (index == 0){
+    //       age_end = nums;
+    //     }else{
+    //       age_start = nums;
+    //     }
+    //   }
+    //   this.start_age = age_start;
+    //   this.end_age = age_end;
+    //   this.getWenshuByAge();
+    //   console.log("age_start",age_start,"age_end",age_end);
+    // }
+    loadDataForChart(map) {
+        //     var yList = [];
+        //     var xList = ["<14","14-18","18-30","30-40","40-50","50-60","60-70","70-75",">75"]
+        //            for (var key in map){
+        //                if (key != "unkown" && key != "unkonwn" && key != "penalty_name_definite"){
+        //                    yList.push(map[key]);
+        //                }
+        //     }
+        //     this.echartsXlist  = ["14","14-18","18-30","30-40","40-50","50-60","60-70","70-75","75"];
+        //     console.log("xList",xList,"yList",yList);
+        //     var option = {
+        //     tooltip: {
+        //     trigger: 'axis',
+        //     axisPointer: {
+        //         type: 'shadow'
+        //     },
+        //     // formatter: '{b0}<br />{a0}: {c0}亿元<br />{a1}: {c1}%'
+        //     },
+        //     grid: {
+        //     top: '10%',
+        //     right: '3%',
+        //     left: '15%',
+        //     bottom: '15%'
+        //     },
+        //     xAxis: [{
+        //     type: 'category',
+        //     name: '',
+        //     nameTextStyle: {
+        //         color: "#333"
+        //     },
+        //     data: xList,
+        //     axisLine: {
+        //         lineStyle: {
+        //         color: 'rgba(255,255,255,0.52)'
+        //         }
+        //     },
+        //     axisLabel: {
+        //         margin: 10,
+        //         interval:0,
+        //         color: '#000',
+        //         textStyle: {
+        //         fontSize: 11
+        //         },
+        //     },
+        //     }],
+        //     yAxis: [
+        //     {
+        //         type: 'value',
+        //         name: '（个）',
+        //         nameTextStyle: {
+        //         color: "#333"
+        //         },
+        //         axisLabel: {
+        //         formatter: '{value}',
+        //         color: '#333',
+        //         },
+        //         axisLine: {
+        //         show: true,
+        //         lineStyle: {
+        //             color: 'rgba(196,224,245,1)'
+        //         }
+        //         },
+        //         splitLine: {
+        //         show: true,
+        //         lineStyle: {
+        //             type: 'dashed',
+        //             color: 'rgba(196,224,245,1)'
+        //         }
+        //         }
+        //     }],
+        //     series: [{
+        //     type: 'bar',
+        //     data: yList,
+        //     name: '数量',
+        //     barWidth: '16px',
+        //     itemStyle: {
+        //         normal: {
+        //         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+        //             offset: 0,
+        //             color: '#4DDEFE' // 0% 处的颜色
+        //         }, {
+        //             offset: 0.5,
+        //             color: '#57FBFA' // 50% 处的颜色
+        //         }, {
+        //             offset: 1,
+        //             color: '#3D8BFF' // 100% 处的颜色
+        //         }], false),
+        //         barBorderRadius: [2, 2, 0.1, 0.1],
+        //         shadowColor: 'rgba(0,0,0,0)',
+        //         shadowBlur: 4,
+        //         label: {
+        //             show: true, //开启显示
+        //             position: 'top', //在上方显示
+        //             textStyle: { //数值样式
+        //             color: '#111',
+        //             fontSize: 14
+        //             }
+        //         },
+        //         }
+        //     },
+        //     }]
+        // };
+        //     var mychart1 = echarts.init(document.getElementById("type-echart"));
+        //     mychart1.clear();
+        //     mychart1.setOption(option);
+        //     mychart1.getZr().on('click', params => {
+        //       let pointInPixel = [params.offsetX, params.offsetY]
+        //       console.log("params",params);
+        //       if (mychart1.containPixel('grid', pointInPixel)) {
+        //         let xIndex = mychart1.convertFromPixel({ seriesIndex: 0 }, [params.offsetX, params.offsetY])[0]
+        //         console.log("xIndex",xIndex)
+        //         this.echartsClick(xIndex);
+        //       }
+        //     })
+        //     window.onresize = mychart1.resize();
+    }
+};
+NoPenaltyComponent.ctorParameters = () => [
+    { type: _law_service__WEBPACK_IMPORTED_MODULE_3__["LawService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
+NoPenaltyComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-no-penalty',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./no-penalty.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/page/law/no-penalty/no-penalty.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./no-penalty.component.scss */ "./src/app/page/law/no-penalty/no-penalty.component.scss")).default]
+    })
+], NoPenaltyComponent);
 
 
 
@@ -2625,7 +3159,7 @@ let ProvinceComponent = class ProvinceComponent {
         this.total = 100;
         this.listOfData = [];
         this.echartsXlist = [];
-        this.addressValueList = ["发生地", "居住地"];
+        this.addressValueList = ["籍贯", "居住地"];
     }
     ngOnInit() {
         this.getClassList();

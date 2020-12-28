@@ -13,6 +13,8 @@ import { AgeClassComponent } from './page/law/age-class/age-class.component';
 import { DetailComponent } from './page/law/detail/detail.component';
 import { EducationComponent } from './page/law/education/education.component';
 import { LawStoryComponent } from './page/law/law-story/law-story.component';
+import { LoginComponent } from './page/law/login/login.component';
+import { NoPenaltyComponent } from './page/law/no-penalty/no-penalty.component';
 import { PeriodComponent } from './page/law/period/period.component';
 import { ProvinceComponent } from './page/law/province/province.component';
 import { SentenceComponent } from './page/law/sentence/sentence.component';
@@ -20,7 +22,8 @@ import { TypeCaseComponent } from './page/law/type-case/type-case.component';
 
 
 const routes: Routes = [
-  {path:'',redirectTo:'index',pathMatch:'full'},
+  {path:'',redirectTo:'login',pathMatch:'full'},
+  {path:'login',component:LoginComponent},
   {path:'index',component:HeroesComponent},
   {path:'type',component:TypeCaseComponent},
   {path:'sentence',component:SentenceComponent},
@@ -29,6 +32,8 @@ const routes: Routes = [
   {path:'province',component:ProvinceComponent},
   {path:'period',component:PeriodComponent},
   {path:'story',component:LawStoryComponent},
+  {path:'nopenalty',component:NoPenaltyComponent},
+
   {path:'type/detail',component:DetailComponent},
   {path:'agecase/detail',component:DetailComponent},
   {path:'sentence/detail',component:DetailComponent},
@@ -36,7 +41,8 @@ const routes: Routes = [
   {path:'province/detail',component:DetailComponent},
   {path:'period/detail',component:DetailComponent},
   {path:'story/detail',component:DetailComponent},
-
+  {path:'nopenalty/detail',component:DetailComponent},
+  
 ];
 
 @NgModule({

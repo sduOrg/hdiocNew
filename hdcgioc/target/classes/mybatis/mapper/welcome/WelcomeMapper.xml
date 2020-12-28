@@ -297,7 +297,7 @@
     </select>
     <select id="get_noPenalty_key_word" resultType="java.lang.String">
         <![CDATA[
-			select distinct key_word from no_penalty_info
+			select distinct keyword from no_penalty_info
         ]]>
 
     </select>
@@ -314,7 +314,7 @@
                 <when test="keyword != null">
                     AND no_penalty_info.keyword = #{keyword}
                 </when>
-                <when test="law != null ">
+                <when test="law != null">
                     <![CDATA[AND no_penalty_info.law =#{law}]]>
                 </when>
             </choose>

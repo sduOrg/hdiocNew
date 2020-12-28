@@ -1,18 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { element } from "protractor";
 import { LawService } from "../law.service";
-// declare var echarts
-
 @Component({
-  selector: "app-law-story",
-  templateUrl: "./law-story.component.html",
-  styleUrls: ["./law-story.component.scss"],
+  selector: 'app-no-penalty',
+  templateUrl: './no-penalty.component.html',
+  styleUrls: ['./no-penalty.component.scss']
 })
-export class LawStoryComponent implements OnInit {
+export class NoPenaltyComponent implements OnInit {
+
   classValueList = []; //类最
   penaltyValueList = []; //个罪
-  lawStoryList = []; //法定情节
+  // lawStoryList = []; //法定情节
 
   selectTypeIndex: number = 0; //类最选择
   selectTitle: string;
@@ -39,42 +38,43 @@ export class LawStoryComponent implements OnInit {
     this.getClassList();
   }
   private getClassList() {
-    this.lawSerivce.getPenaltyClass().subscribe((data) => {
-      data.penalty_class.forEach((element, index) => {
+    this.lawSerivce.getNoPenaltyKeyword().subscribe((data) => {
+      data.forEach((element, index) => {
         if (element != "null" && element != null) {
           this.classValueList.push({ code: String(index + 1), value: element });
         }
       });
       this.selectTitle = this.classValueList[this.selectTypeIndex].value;
       this.loadCateCharts();
-      this.getPenaltyList(this.selectTitle);
-      this.getLawStroyList();
+      this.getPenaltyList();
+      // this.getLawStroyList();
       this.getWenshuByLawStory();
     });
   }
-  private getPenaltyList(classname: string) {
+  private getPenaltyList() {
     this.penaltyValueList = [];
-    this.lawSerivce.getPenaltyByClass(classname).subscribe((data) => {
-      data.penalty_definite.forEach((element, index) => {
-        this.penaltyValueList.push({ code: String(index + 1), value: element });
-      });
+    this.lawSerivce.getNoPenaltyLaws().subscribe((data) => {
+      data.forEach((element, index) => {
+        if (element != "null" && element != null) {
+          this.penaltyValueList.push({ code: String(index + 1), value: element });
+         }
+        });
     });
   }
-  getLawStroyList() {
-    this.lawSerivce.getLawsStory().subscribe((data) => {
-      data.forEach((element) => {
-        if (element != null) {
-          this.lawStoryList.push(element);
-        }
-      });
-    });
-  }
+  // getLawStroyList() {
+  //   this.lawSerivce.getLawsStory().subscribe((data) => {
+  //     data.forEach((element) => {
+  //       if (element != null) {
+  //         this.lawStoryList.push(element);
+  //       }
+  //     });
+  //   });
+  // }
   private getWenshuByLawStory() {
     this.lawSerivce
-      .getWenshuByStory(
+      .getNoPenaltyWenshu(
         this.selectTitle,
         this.selectPenaltyTitle,
-        this.selectPLawStoryTitle,
         String(this.pageIndex)
       )
       .subscribe((data) => {
@@ -97,11 +97,9 @@ export class LawStoryComponent implements OnInit {
     this.selectPenaltyIndex = null;
     this.selectPenaltyTitle = null;
 
-    this.selectLawStoryIndex = null;
-    this.selectPLawStoryTitle = null;
     // this.loadCateCharts();
     //点击类最加载个罪
-    this.getPenaltyList(this.selectTitle);
+    this.getPenaltyList();
     this.getWenshuByLawStory();
   }
   //点击个罪
@@ -143,7 +141,6 @@ export class LawStoryComponent implements OnInit {
   }
   //加载柱状图
   loadCateCharts() {
-    debugger;
     if (this.selectPenaltyIndex != null) {
       //判断是否点击了个罪
       this.lawSerivce.getPenaltyAgeList().subscribe((data) => {
@@ -330,4 +327,5 @@ export class LawStoryComponent implements OnInit {
     //     })
     //     window.onresize = mychart1.resize();
   }
+
 }

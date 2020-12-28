@@ -80,7 +80,13 @@ export class LawService {
   getLawsStory(){
     return this.http.get(this.url+"get_laws").pipe(map((res:{"laws":[string]})=>res.laws))
   }
+  getNoPenaltyKeyword(){
+    return this.http.get(this.url+"getNoPenaltyKeyword").pipe(map((res:{"keyword":[string]})=>res.keyword))
+  }
 
+  getNoPenaltyLaws(){
+    return this.http.get(this.url+"getNoPenaltyLaws").pipe(map((res:{"laws":[string]})=>res.laws))
+  }
 
   getWenshuByStory(penalty_class:string,penalty_definite?:string,laws?:string,page_no?:string){
     let headers=new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -184,5 +190,19 @@ export class LawService {
   //获取类最对应的文书列表
   getWenshuByClass(className:string){
     return this.http.get("assets/data/service/get_wenshuBy_class.json").pipe(map((res:{"wenshu_list":[any]})=>res))
+  }
+
+  //羁押周期文书
+
+  getNoPenaltyWenshu(keyword:string,law?:string,page_no?:string){
+    let headers=new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let options= {headers: headers};
+    let params= new URLSearchParams();
+    if (keyword)params.append("keyword",keyword);
+    if (law)params.append("law",law);
+    if (page_no)params.append("page_no",page_no);
+    let body=params.toString();
+    return this.http.post(this.url+"getNoPenaltyWenshu",body, options).pipe(map((res:{"wenshu_list":[any],"count":number})=>res));
+    // return this.http.get("assets/data/service/get_wenshuBy_class.json").pipe(map((res:{"wenshu_list":[any]})=>res))
   }
 }
