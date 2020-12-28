@@ -310,14 +310,12 @@
     <select id = "get_noPenaltyFilter" resultType="com.telchina.hdcgioc.welcome.entity.NoPenaltyWenshuInfo" >
         <![CDATA[select distinct no_penalty_info.* from no_penalty_info ]]>
         <where>
-            <choose>
-                <when test="keyword != null">
+                <if test="keyword != null">
                     AND no_penalty_info.keyword = #{keyword}
-                </when>
-                <when test="law != null ">
+                </if>
+                <if test="law != null ">
                     <![CDATA[AND no_penalty_info.law =#{law}]]>
-                </when>
-            </choose>
+                </if>
         </where>
         LIMIT #{page_start},#{page_size}
     </select>
@@ -325,14 +323,12 @@
     <select id = "get_noPenaltyFilterCount" resultType="int" >
         <![CDATA[select count(*) from  no_penalty_info ]]>
         <where>
-            <choose>
-                <when test="keyword != null">
-                    AND no_penalty_info.keyword = #{keyword}
-                </when>
-                <when test="law != null ">
-                    <![CDATA[AND no_penalty_info.law = #{law}]]>
-                </when>
-            </choose>
+            <if test="keyword != null">
+                AND no_penalty_info.keyword = #{keyword}
+            </if>
+            <if test="law != null ">
+                <![CDATA[AND no_penalty_info.law =#{law}]]>
+            </if>
         </where>
     </select>
 </mapper>
